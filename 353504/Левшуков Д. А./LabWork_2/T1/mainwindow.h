@@ -44,5 +44,7 @@ private:
     Date t;
     QShortcut *ctrlo;
     bool showing;
+    std::string s;
+    char ch;
 };
 #endif // MAINWINDOW_H

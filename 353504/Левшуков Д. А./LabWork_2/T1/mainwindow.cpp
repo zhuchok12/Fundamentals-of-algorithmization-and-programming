@@ -13,13 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ctrlo->setKey(Qt::CTRL + Qt::Key_O);
     //ui->Table->column
     connect(ctrlo, SIGNAL(activated()), this, SLOT(on_OpenFileButton_clicked()));
-    /*
-    qDebug()<<birthday->get_date();
-    birthday->Init("01.03.2024");
-    qDebug()<<"Today: "<<birthday->get_date();
-    qDebug()<<"Next day: "<<birthday->NextDay().get_date();
-    qDebug()<<"Previous day: "<<birthday->PreviousDay().get_date()
-    */
+    s="";
     birthday={-1,-1,-1};
     //ShowTable();
     Today();
@@ -35,14 +29,37 @@ void MainWindow::FileRead()
     if(file=="")return;
 
     std::ifstream cin(file.toUtf8().constData());
-    std::string s;
+
     data->clear();
-    while(cin>>s)
+    qDebug()<<"Start reading the file";
+    int last=0,si,n;
+    while(std::getline(cin,s))
     {
-        if(current.Init(s))
-    data->push_back(current);
-    //qDebug()<<s<<" "<<current.get_year();
+        n=s.size();
+        for(int i=0;i<n;i++)
+        {
+            if(isdigit(s[i]))
+            {
+                si=i;
+                while(i<n&&(isdigit(s[i])||s[i]=='.'))
+                {
+                    i++;
+                }
+                //if(i!=n)
+                i--;
+                std::string f=s.substr(si,i-si+1);
+                //qDebug()<<f;
+                if(current.Init(f))
+                {
+                    data->push_back(current,si-last),last=i;
+                    qDebug()<<data->get(data->size()-1).get_date()<<" : posiiton in file:"<<data->get_pos(data->size()-1);
+                }
+            }
+        }
+
+
     }
+    qDebug()<<"Finish reading the file";
     ShowTable();
 }
 
