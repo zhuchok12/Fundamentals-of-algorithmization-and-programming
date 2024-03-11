@@ -113,7 +113,7 @@
     <property name="geometry">
      <rect>
       <x>1410</x>
-      <y>190</y>
+      <y>140</y>
       <width>191</width>
       <height>31</height>
      </rect>
@@ -132,47 +132,20 @@
     <property name="geometry">
      <rect>
       <x>1410</x>
-      <y>150</y>
+      <y>110</y>
       <width>191</width>
-      <height>41</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
-     <string>Write date of your bithday
-Format: DD.MM.YYYY:</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="DeleteLineButton">
-    <property name="geometry">
-     <rect>
-      <x>1410</x>
-      <y>50</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Delete selected line</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="AddLineButton">
-    <property name="geometry">
-     <rect>
-      <x>1410</x>
-      <y>100</y>
-      <width>191</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Add line</string>
+     <string>Write date of your bithday:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>1430</x>
-      <y>230</y>
+      <y>180</y>
       <width>151</width>
       <height>51</height>
      </rect>
@@ -186,7 +159,7 @@ Format: DD.MM.YYYY:</string>
     <property name="geometry">
      <rect>
       <x>1410</x>
-      <y>280</y>
+      <y>230</y>
       <width>181</width>
       <height>31</height>
      </rect>
@@ -209,6 +182,53 @@ Format: DD.MM.YYYY:</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>1410</x>
+      <y>70</y>
+      <width>191</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>1410</x>
+      <y>50</y>
+      <width>191</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Write add for adding:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1410</x>
+      <y>670</y>
+      <width>191</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color:rgb(143, 240, 164);
+color:rgb(0,0,0);</string>
+    </property>
+    <property name="text">
+     <string>For adding/set date push
+Enter/Space after writing
+Format of data: DD.MM.Y
+DD - Day
+MM -  Month
+Y - Any number
+DD and MM ALWAYS
+consists 2 digits </string>
     </property>
    </widget>
   </widget>
