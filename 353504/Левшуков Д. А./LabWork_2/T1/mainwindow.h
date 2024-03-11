@@ -28,6 +28,7 @@ public:
     void FileRead();
     void ShowTable();
     void Today();
+    void FileUpdate(int ind, std::string s, Date nw);
 private slots:
     void on_OpenFileButton_clicked();
 
@@ -44,7 +45,7 @@ private:
     Date t;
     QShortcut *ctrlo;
     bool showing;
-    std::string s;
+    std::string s,file_inside;
     char ch;
 };
 #endif // MAINWINDOW_H

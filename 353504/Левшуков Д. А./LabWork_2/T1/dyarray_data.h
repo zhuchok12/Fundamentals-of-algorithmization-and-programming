@@ -15,6 +15,7 @@ public:
     void update(Date new_value,long long ind);
     int get_pos(long long ind);
 private:
+    void upd(int ind,int delta);
     long long array_size;
     Date *v;
     int *positions;

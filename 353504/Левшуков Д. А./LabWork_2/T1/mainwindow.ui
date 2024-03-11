@@ -179,7 +179,7 @@ Format: DD.MM.YYYY:</string>
     </property>
     <property name="text">
      <string>Date of your birthday
-                    ↓</string>
+↓</string>
     </property>
    </widget>
    <widget class="QLabel" name="birth">
