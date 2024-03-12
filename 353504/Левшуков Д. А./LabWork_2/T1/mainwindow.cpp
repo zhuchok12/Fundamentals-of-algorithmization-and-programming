@@ -76,19 +76,35 @@ void MainWindow::Today()
 void MainWindow::FileUpdate(int ind,std::string s, Date nw)
 {
     std::string new_file_inside=s;
+    std::string del="";
     qDebug()<<"NEW FILE INSIDE:"<<new_file_inside;
     qDebug()<<data->get_pos(ind)<<" "<<data->get(ind).get_date().size();
     new_file_inside+=file_inside.substr(data->get_pos(ind)+data->get(ind).get_date().size(),file_inside.size());
     qDebug()<<"NEW FILE INSIDE [2]:"<<new_file_inside;
-    //std::ifstream fout;
-    //fout.open(file.toUtf8().constData(),ios::app);
+
     FILE *f=fopen(file.toUtf8().constData(),"r+");
-    fseek(f,data->get_pos(ind),0);
+    fseek(f,data->get_pos(ind),SEEK_SET);
+    //fread(check,sizeof(char),sizeof(char)*10,f);
+    //qDebug()<<check;
+    while(data->get_pos(ind)+new_file_inside.size()<file_inside.size())
+        new_file_inside+=" ";
+    qDebug()<<"NEW FILE INSIDE [3]:"<<new_file_inside;
     fwrite(new_file_inside.c_str(),sizeof(char),sizeof(char)*new_file_inside.size(),f);
     fclose(f);
     file_inside=file_inside.substr(0,data->get_pos(ind))+new_file_inside;
+
+    qDebug()<<"FILE INSIDE:"<<file_inside;
     //FileRead();
     data->update(nw,ind);
+}
+
+void MainWindow::FileAdd(std::string s)
+{
+    FILE *f=fopen(file.toUtf8().constData(),"a");
+    qDebug()<<"Try to add "<<s<<" in "<<file;
+    //fseek(f,0,2);
+    fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
+    fclose(f);
 }
 
 
@@ -107,25 +123,25 @@ void MainWindow::ShowTable()
 
     for(int i=0;i<n;i++)
     {
-        qDebug()<<"["<<i<<"] 0";
+        // qDebug()<<"["<<i<<"] 0";
         QTableWidgetItem* real= new QTableWidgetItem;
         real->setTextAlignment(Qt::AlignCenter);
         real->setText(QString::fromStdString(data->get_string(i)));
         ui->Table->setItem(i,0,real);
 
-        qDebug()<<"["<<i<<"] 1";
+        //qDebug()<<"["<<i<<"] 1";
         QTableWidgetItem* prev= new QTableWidgetItem;
         prev->setTextAlignment(Qt::AlignCenter);
         prev->setText(QString::fromStdString(data->get(i).PreviousDay()));
         ui->Table->setItem(i,1,prev);
 
-        qDebug()<<"["<<i<<"] 2";
+        // qDebug()<<"["<<i<<"] 2";
         QTableWidgetItem* next= new QTableWidgetItem;
         next->setTextAlignment(Qt::AlignCenter);
         next->setText(QString::fromStdString(data->get(i).NextDay()));
         ui->Table->setItem(i,2,next);
 
-        qDebug()<<"["<<i<<"] 3";
+        // qDebug()<<"["<<i<<"] 3";
         if(birthday.get_day()!=-1)
         {
         //qDebug()<<(data->get(i).Duration(birthday));
@@ -151,7 +167,7 @@ void MainWindow::ShowTable()
             ui->Table->setItem(i,3,bi);
         }
 
-        qDebug()<<"["<<i<<"] 4";
+        // qDebug()<<"["<<i<<"] 4";
         if(i>0)
         {
         QTableWidgetItem* dur= new QTableWidgetItem;
@@ -169,7 +185,7 @@ void MainWindow::ShowTable()
         ui->Table->setItem(i,4,dur);
         }
 
-        qDebug()<<"["<<i<<"] 5";
+        // qDebug()<<"["<<i<<"] 5";
         QTableWidgetItem* to_today= new QTableWidgetItem;
         to_today->setTextAlignment(Qt::AlignCenter);
         long long d=data->get(i).Duration(t);
@@ -282,7 +298,9 @@ void MainWindow::on_Add_textChanged()
         else
         {
             ui->Add->clear();
-            data->push_back(new_element,1);
+            int last=std::max(data->get_pos(data->size()-2),0);
+            data->push_back(new_element,1+last);
+            FileAdd(" "+new_element.get_date());
             ShowTable();
         }
     }

@@ -48,7 +48,7 @@ Date dyarray::get(long long ind)
 
 int dyarray::get_pos(long long ind)
 {
-    if(ind>=array_size)return (int)1e8;
+    if(ind>=array_size||ind<0)return (int)-1;
     return positions[ind];
 }
 

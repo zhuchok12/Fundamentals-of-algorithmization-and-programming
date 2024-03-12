@@ -29,6 +29,7 @@ public:
     void ShowTable();
     void Today();
     void FileUpdate(int ind, std::string s, Date nw);
+    void FileAdd(std::string s);
 private slots:
     void on_OpenFileButton_clicked();
 
