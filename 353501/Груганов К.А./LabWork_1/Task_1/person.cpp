@@ -73,7 +73,7 @@ void Person::updateRightArmRotation()
         if (rightArm2->rotation() >= maxRotation) {
             isIncreasing = false;
         } else {
-            rightArm2->setRotation(rightArm2->rotation() );
+            rightArm2->setRotation(rightArm2->rotation() + 1);
         }
     } else {
         if (rightArm2->rotation() <= 0) {
