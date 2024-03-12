@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     showing=false;
     //this->showFullScreen();
+    //this->showFullScreen();
     ctrlo= new QShortcut(this);
     ctrlo->setKey(Qt::CTRL + Qt::Key_O);
     //ui->Table->column
@@ -253,3 +254,37 @@ void MainWindow::on_Table_itemChanged(QTableWidgetItem *item)
         ShowTable();
     }
 }
+
+
+void MainWindow::on_Add_textChanged()
+{
+    std::string text=ui->Add->toPlainText().toStdString();
+    Date new_element;
+    if(!isdigit(text.back())&&text.back()!='.'&&text.size()>0)
+    {
+        text.pop_back();
+        //qDebug()<<text<<"[2]";
+        //ui->DateOfBirthday->clear();
+        //ui->DateOfBirthday->setText(QString::fromStdString(text));
+        if(!new_element.Init(text))
+        {
+            ui->Add->clear();
+            ui->Add->setTextColor(Qt::red);
+            //ui->Add->setTe
+            ui->Add->setPlainText("You are dumb <3");
+            //ui->Add->setText("You are retard <3");
+            ui->Add->setTextColor(Qt::white);
+            //timer->start(1e4);
+            ui->Add->repaint();
+            QThread::sleep(1);
+            ui->Add->clear();
+        }
+        else
+        {
+            ui->Add->clear();
+            data->push_back(new_element,1);
+            ShowTable();
+        }
+    }
+}
+

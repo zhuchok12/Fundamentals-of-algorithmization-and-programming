@@ -36,6 +36,8 @@ private slots:
 
     void on_Table_itemChanged(QTableWidgetItem *item);
 
+    void on_Add_textChanged();
+
 private:
     Ui::MainWindow *ui;
     dyarray *data=new dyarray;

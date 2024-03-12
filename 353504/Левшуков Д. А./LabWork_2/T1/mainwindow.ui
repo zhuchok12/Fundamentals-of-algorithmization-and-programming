@@ -184,7 +184,7 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="Add">
     <property name="geometry">
      <rect>
       <x>1410</x>
