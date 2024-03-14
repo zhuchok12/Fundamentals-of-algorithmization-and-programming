@@ -39,13 +39,13 @@
      <string>Open file</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="CourierNumber">
+   <widget class="QComboBox" name="CourierNumberSelect">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>0</y>
-      <width>181</width>
-      <height>21</height>
+      <x>100</x>
+      <y>10</y>
+      <width>461</width>
+      <height>31</height>
      </rect>
     </property>
    </widget>
@@ -54,9 +54,14 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>81</width>
-      <height>21</height>
+      <width>111</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Courier №</string>
@@ -65,15 +70,23 @@
    <widget class="QPushButton" name="ShowCourierOrdersButton">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>30</y>
-      <width>261</width>
-      <height>25</height>
+      <x>1</x>
+      <y>93</y>
+      <width>561</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
     </property>
     <property name="text">
      <string>Show courier orders</string>
     </property>
+    <attribute name="buttonGroup">
+     <string notr="true">CourierInfo</string>
+    </attribute>
    </widget>
    <widget class="QTextBrowser" name="IncompleteOrders">
     <property name="geometry">
@@ -133,6 +146,131 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QPushButton" name="DeleteCourierInfoButton">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>191</y>
+      <width>561</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(224, 27, 36)</string>
+    </property>
+    <property name="text">
+     <string>Delete courier</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">CourierInfo</string>
+    </attribute>
+   </widget>
+   <widget class="QPushButton" name="EditCourierInfoButton">
+    <property name="geometry">
+     <rect>
+      <x>1</x>
+      <y>142</y>
+      <width>561</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Edit courier info</string>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">CourierInfo</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="OrderNumber">
+    <property name="geometry">
+     <rect>
+      <x>-1</x>
+      <y>359</y>
+      <width>111</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Order №</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="OrderNumberSelect">
+    <property name="geometry">
+     <rect>
+      <x>99</x>
+      <y>369</y>
+      <width>461</width>
+      <height>31</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EditOrderInfoButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>421</y>
+      <width>561</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Edit order info</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DeleteOrderInfoButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>470</y>
+      <width>561</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(224, 27, 36)</string>
+    </property>
+    <property name="text">
+     <string>Delete order</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OpenFileButton_2">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>950</y>
+      <width>201</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Save in file</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -147,4 +285,7 @@
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="CourierInfo"/>
+ </buttongroups>
 </ui>
