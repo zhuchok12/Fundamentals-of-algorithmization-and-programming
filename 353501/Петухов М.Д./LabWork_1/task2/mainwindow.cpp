@@ -140,8 +140,9 @@ void MainWindow::selectFigure() {
         ui->graphicsView->setScene(Myscene);
         Myscene->clear();
         Myscene->addItem(figuresArray[selectedFigure]);
+        setInfo();
     }
-    setInfo();
+
 }
 
 void MainWindow::changePolyline(){
