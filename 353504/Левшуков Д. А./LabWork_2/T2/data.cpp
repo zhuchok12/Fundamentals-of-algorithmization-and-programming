@@ -146,6 +146,19 @@ short int Data::Days(short int m,long long y)
     //  1  2  3  4  5  6  7  8  9 10 11 12
 }
 
+bool Data::operator >=(Data b)
+{
+    if(year>b.year)
+        return true;
+    if(year<b.year)
+        return false;
+    if(month>b.month)
+        return true;
+    if(month<b.month)
+        return false;
+    return day>=b.day;
+}
+
 
 short Data::get_day()
 {

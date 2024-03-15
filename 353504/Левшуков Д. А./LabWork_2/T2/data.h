@@ -2,7 +2,6 @@
 #define DataA_H
 
 #include<string>
-#include<ctime>
 
 class Data
 {
@@ -18,6 +17,7 @@ public:
     short int get_month();
     unsigned long long get_year();
     short Days(short m, long long y);
+    bool operator >= (Data b);
 private:
     short int day,month;
     long long year;

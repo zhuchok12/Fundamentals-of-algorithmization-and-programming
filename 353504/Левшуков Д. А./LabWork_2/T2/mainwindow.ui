@@ -258,7 +258,7 @@
      <string>Delete order</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="OpenFileButton_2">
+   <widget class="QPushButton" name="SaveFileButton">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -269,6 +269,74 @@
     </property>
     <property name="text">
      <string>Save in file</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddOrderButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>560</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Add order</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AddOrderButton_2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>750</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>91</width>
+      <height>31</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>12</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Add courier</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>560</y>
+      <width>461</width>
+      <height>171</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>750</y>
+      <width>461</width>
+      <height>171</height>
+     </rect>
     </property>
    </widget>
   </widget>
