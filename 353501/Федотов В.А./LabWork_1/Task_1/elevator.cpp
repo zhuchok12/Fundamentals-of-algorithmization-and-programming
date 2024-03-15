@@ -3,12 +3,18 @@
 Elevator::Elevator() : Rectangle() {
     floor = 1;
 
-    connect(this, &Rectangle::floorChanged, this, &Rectangle::handleFloorChange);
+    connect(this, &Elevator::floorChanged, this, &Elevator::handleFloorChange);
 
+}
+
+QRectF Elevator::boundingRect() const
+{
+    return QRectF(0, shiftY, 100, 250);
 }
 
 void Elevator::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
+
     QRectF rect = boundingRect();
 
     QPen pen(Qt::black);
@@ -17,3 +23,5 @@ void Elevator::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, 
     painter->setPen(pen);
     painter->drawRect(rect);
 }
+
+

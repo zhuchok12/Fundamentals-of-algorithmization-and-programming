@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QPointF>
+#include <QTransform>
 #include <QGraphicsObject>
 #include <QGraphicsScene>
 #include <QtMath>

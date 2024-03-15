@@ -14,17 +14,23 @@ public:
     Rectangle();
 
     int floor;
+    int shiftY;
+    int targetY;
+
+    QTimer *timer;
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 signals:
     void floorChanged(int newFloor);
+    void incrementComplete();
 
 public slots:
     void setFloor(int floor);
 
     void handleFloorChange(int newFloor);
+    void incrementYPosition();
 
 };
 

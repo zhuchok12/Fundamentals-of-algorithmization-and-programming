@@ -94,7 +94,6 @@ void Shape::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     painter->setRenderHint(QPainter::Antialiasing);
     painter->translate(0, -300);
 
-
     shiftDetached = QPointF(lastShiftX, lastShiftY);
 
     painter->translate(shift);
@@ -145,7 +144,7 @@ qreal Shape::area()
 {
     int numPoints = points.size();
     if (numPoints < 3) {
-        return 0.0;  // Not a valid shape
+        return 0.0;
     }
 
     qreal sum = 0.0;
@@ -162,7 +161,7 @@ qreal Shape::perimeter()
 {
     int numPoints = points.size();
     if (numPoints < 2) {
-        return 0.0;  // Not a valid shape
+        return 0.0;
     }
 
     qreal sum = 0.0;

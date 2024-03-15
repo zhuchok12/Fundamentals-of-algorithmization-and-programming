@@ -9,7 +9,7 @@ class Elevator : public Rectangle
 public:
     Elevator();
 
-    // QRectF boundingRect() const override;
+    QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
 };

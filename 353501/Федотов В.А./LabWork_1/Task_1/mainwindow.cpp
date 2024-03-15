@@ -1,5 +1,5 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -33,6 +33,13 @@ MainWindow::MainWindow(QWidget *parent)
     elevator->setZValue(100);
 
     //Коннектим кнопки
+    buttons.append( ui->Floor1);
+    buttons.append( ui->Floor2);
+    buttons.append( ui->Floor3);
+    buttons.append( ui->buttonRed);
+    buttons.append( ui->buttonGreen);
+    buttons.append( ui->buttonBlue);
+
     connect(ui->Floor1, &QPushButton::clicked, this, &MainWindow::handleFloor1Clicked);
     connect(ui->Floor2, &QPushButton::clicked, this, &MainWindow::handleFloor2Clicked);
     connect(ui->Floor3, &QPushButton::clicked, this, &MainWindow::handleFloor3Clicked);
@@ -40,6 +47,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->buttonRed, &QPushButton::clicked, this, &MainWindow::handleRedClicked);
     connect(ui->buttonGreen, &QPushButton::clicked, this, &MainWindow::handleGreenClicked);
     connect(ui->buttonBlue, &QPushButton::clicked, this, &MainWindow::handleBlueClicked);
+
+    connect(rectangle, &Rectangle::incrementComplete, this, &MainWindow::unlockButtons);
+    connect(personRed, &People::incrementComplete, this, &MainWindow::unlockButtons);
+    connect(personGreen, &People::incrementComplete, this, &MainWindow::unlockButtons);
+    connect(personBlue, &People::incrementComplete, this, &MainWindow::unlockButtons);
 
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
@@ -58,6 +70,7 @@ void MainWindow::handleFloor1Clicked()
     personRed->setFloor(1);
     personGreen->setFloor(1);
     personBlue->setFloor(1);
+    lockButtons();
 }
 
 void MainWindow::handleFloor2Clicked()
@@ -67,6 +80,7 @@ void MainWindow::handleFloor2Clicked()
     personRed->setFloor(2);
     personGreen->setFloor(2);
     personBlue->setFloor(2);
+    lockButtons();
 }
 
 void MainWindow::handleFloor3Clicked()
@@ -76,23 +90,43 @@ void MainWindow::handleFloor3Clicked()
     personRed->setFloor(3);
     personGreen->setFloor(3);
     personBlue->setFloor(3);
+    lockButtons();
 }
 
 void MainWindow::handleRedClicked()
 {
-    if(rectangle->floor == personRed->getFloor())
+    if(rectangle->floor == personRed->getFloor()){
         personRed->enter();
+        lockButtons();
+    }
 }
 
 void MainWindow::handleGreenClicked()
 {
-    if(rectangle->floor == personGreen->getFloor())
+    if(rectangle->floor == personGreen->getFloor()){
         personGreen->enter();
+        lockButtons();
+    }
 }
 
 void MainWindow::handleBlueClicked()
 {
-    if(rectangle->floor == personBlue->getFloor())
+    if(rectangle->floor == personBlue->getFloor()){
         personBlue->enter();
+        lockButtons();
+    }
 }
 
+void MainWindow::lockButtons()
+{
+    for (auto &button : buttons){
+        button->setEnabled(false);
+    }
+}
+
+void MainWindow::unlockButtons()
+{
+    for (auto &button : buttons){
+        button->setEnabled(true);
+    }
+}

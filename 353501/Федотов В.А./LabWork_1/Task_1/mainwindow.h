@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QList>
+#include "ui_mainwindow.h"
 #include "people.h"
 #include "elevator.h"
 
@@ -28,6 +30,7 @@ private:
     People *personRed;
     People *personGreen;
     People *personBlue;
+    QList<QPushButton*> buttons;
 
 private slots:
     void handleFloor1Clicked();
@@ -37,6 +40,9 @@ private slots:
     void handleRedClicked();
     void handleGreenClicked();
     void handleBlueClicked();
+
+    void lockButtons();
+    void unlockButtons();
 
 };
 #endif // MAINWINDOW_H

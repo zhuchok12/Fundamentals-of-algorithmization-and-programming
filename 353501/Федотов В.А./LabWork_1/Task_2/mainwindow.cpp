@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    scene = new QGraphicsScene();
+    // scene = new QGraphicsScene();
     customScene = new CustomScene;
 
     circle = new ShapeCircle;
@@ -81,11 +81,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->createShapeButton, &QPushButton::clicked, this, &MainWindow::handleShapeCreated);
 
+    selectShape(0);
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete customScene;
+
+    delete circle;
+    delete triangle;
+    delete square;
+    delete rectangle;
+    delete rhombus;
+    delete star;
+    delete rightPolygon;
+    delete polyline;
 }
 
 //select
@@ -193,6 +205,7 @@ void MainWindow::selectShape(int index)
 
     if (selectedShapeID != 7)
     {
+        ui->detachButton->show();
         disconnect(customScene, &CustomScene::mousePressed, this, &MainWindow::handleMousePressed);
     }
 

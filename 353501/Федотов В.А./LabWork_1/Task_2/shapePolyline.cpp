@@ -7,6 +7,7 @@ ShapePolyline::ShapePolyline() {
 void ShapePolyline::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     shift = QPointF(shiftX, shiftY);
+    // QPolygonF polygon;
 
     painter->setRenderHint(QPainter::Antialiasing);
     painter->translate(0, -300);
@@ -24,14 +25,17 @@ void ShapePolyline::paint(QPainter *painter, const QStyleOptionGraphicsItem *opt
         point += QPointF(0, 300);
         if(detached)
         {
+            // polygon << point * scale + shiftDetached;
             painter->drawEllipse(point * scale + shiftDetached, 5*scale, 5*scale);
         }
         else
         {
+            // polygon << point * scale + shift;
             painter->drawEllipse(point * scale + shift, 5*scale, 5*scale);
         }
     }
 
+    // painter->drawPolygon(polygon);
     painter->drawEllipse(shift, 1, 1);
 }
 
@@ -47,7 +51,7 @@ qreal ShapePolyline::perimeter()
 
 void ShapePolyline::getPoint(QPointF value)
 {
-    if(points.size() < 3000 )
+    if(points.size() < 1500 )
     {
         point = value;
         points.append(point);

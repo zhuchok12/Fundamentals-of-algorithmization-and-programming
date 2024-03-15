@@ -12,6 +12,8 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
 
+    QTimer *timer;
+
     int getFloor();
 
 private:
@@ -20,8 +22,21 @@ private:
     QColor m_color;
     QString m_name;
 
+    int leftLegPos;
+    int rightLegPos;
+    int leftArmPos;
+    int rightArmPos;
+
+    int delta;
+    int shiftY;
+    int shiftX;
+    int targetY;
+    int targetX;
+
 signals:
     void entered(bool inside);
+    void floorChanged(int newFloor);
+    void incrementComplete();
 
 public slots:
     void enter();
@@ -29,6 +44,10 @@ public slots:
 
 private slots:
     void handleEntered(bool inside);
+
+    void handleFloorChange(int newFloor);
+    void incrementYPosition();
+    void incrementXPosition();
 };
 
 #endif // PEOPLE_H
