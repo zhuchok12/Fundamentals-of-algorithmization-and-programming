@@ -499,12 +499,106 @@ void MainWindow::FileAdd(long long pos, std::string s)
     }
     else
     {
-        pos-=(-1+orders_head.size());
+        pos-=(orders_head.size());
         std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
         qDebug()<<s;
         fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
     }
     fclose(f);
+}
+
+bool MainWindow::CheckOrderForm()
+{
+    //Check number
+    std::string number=ui->NumberOrder->toPlainText().toUtf8().constData();
+    if(number.size()==0)return false;
+    for(auto i:number)
+    {
+        if(!isdigit(i))
+        {
+            qDebug()<<"Number has not-digit symbol";
+            return false;
+        }
+    }
+
+    //Check addres
+    std::string addres=ui->AddresOrder->toPlainText().toUtf8().constData();
+    if(addres.size()==0)return false;
+    bool fl=false;
+    for(auto i:addres)
+    {
+        if(i!=' '&&i!='\n')
+        {
+            fl=true;
+            break;
+        }
+    }
+    if(!fl)
+    {
+        qDebug()<<"Bad addres";
+        return false;
+    }
+
+
+    //Check from time
+    std::string t=ui->TimeFromOrder->toPlainText().toUtf8().constData();
+    if(t.size()==0)return false;
+    int from=0;
+    try
+    {
+        from=stoi(t);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:t)
+        if(!isdigit(i))
+            return false;
+    //qDebug()<<"TF";
+    if(from>1440||from<0)return false;
+
+    //Check to time
+    t=ui->TimeToOrder->toPlainText().toUtf8().constData();
+    if(t.size()==0)return false;
+    int to=0;
+    try
+    {
+        to=stoi(t);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:t)
+        if(!isdigit(i))
+            return false;
+    if(to>1440||to<0)return false;
+
+    std::string weight=ui->Weight->toPlainText().toUtf8().constData();
+    if(weight.size()==0)return false;
+    unsigned long long w=0;
+    try
+    {
+        w=stoull(weight);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:weight)
+        if(!isdigit(i))
+            return false;
+    if(from>to)return false;
+    qDebug()<<"TT";
+    Data df,dt;
+    if(!df.Init(ui->DataFrom->toPlainText().toUtf8().constData()))
+        return false;
+    if(!dt.Init(ui->DataTo->toPlainText().toUtf8().constData()))
+        return false;
+    short int tf=from,tt=to;
+    o_from_form={number,addres,df,dt,tf,tt,w};
+    return true;
 }
 
 
@@ -539,6 +633,7 @@ void MainWindow::on_SaveFileButton_clicked()
 
 void MainWindow::on_DeleteCourierButton_clicked()
 {
+    if(c.size()==0)return;
     std::string s=ui->CourierNumberSelect->currentText().toUtf8().constData();
     qDebug()<<"Try to delete:"<<s;
     int n=c.size(),i=0;
@@ -574,6 +669,7 @@ void MainWindow::on_DeleteCourierButton_clicked()
 
 void MainWindow::on_DeleteOrderButton_clicked()
 {
+    if(o.size()<=0)return;
     std::string s=ui->OrderNumberSelect->currentText().toUtf8().constData();
     qDebug()<<"Try to delete:"<<s;
     int n=o.size(),i=0;
@@ -609,13 +705,15 @@ void MainWindow::on_DeleteOrderButton_clicked()
 
 void MainWindow::on_CourierNumberSelect_currentIndexChanged(int index)
 {
+    if(c.size()==0)return;
     ui->NameCurier->setPlainText(QString::fromStdString(c[index].getName()));
     ui->NumberCurier->setPlainText(QString::fromStdString(c[index].getNumber()));
     ui->FromCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_from())));
     ui->ToCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_to())));
     ui->MaxWeight->setPlainText(QString::fromStdString(std::to_string(c[index].getMax_weight())));
-    qDebug()<<"Select "<<index;
+    //qDebug()<<"Select "<<index;
 }
+
 
 
 void MainWindow::on_AddCourierButton_clicked()
@@ -643,6 +741,31 @@ void MainWindow::on_AddCourierButton_clicked()
 }
 
 
+void MainWindow::on_AddOrderButton_clicked()
+{
+    if(!CheckOrderForm())return;
+
+    qDebug()<<"Correct order in Order form";
+    o.push_back(o_from_form);
+
+    select_orders.push_back(QString::fromStdString(o_from_form.get_in_string()));
+    ui->OrderNumberSelect->addItem(select_orders.back());
+
+    std::string c_string="";
+    int u=0;
+
+    u++;
+    c_string+='\n';
+
+    c_string+=o_from_form.get_in_file_format()+"\n";
+    qDebug()<<c_string;
+    order_position_in_file.push_back({orders_in_file.size()+u,c_string.size()-u});
+    orders_in_file+=c_string;
+
+    FileAdd(orders_head.size()+order_position_in_file.back().first,c_string);
+}
+
+
 void MainWindow::on_ClearCourierForm_clicked()
 {
     ui->NameCurier->clear();
@@ -650,5 +773,32 @@ void MainWindow::on_ClearCourierForm_clicked()
     ui->FromCurier->clear();
     ui->ToCurier->clear();
     ui->MaxWeight->clear();
+}
+
+
+void MainWindow::on_ClearOrderForm_clicked()
+{
+    ui->NumberOrder->clear();
+    ui->AddresOrder->clear();
+    ui->TimeFromOrder->clear();
+    ui->TimeToOrder->clear();
+    ui->DataFrom->clear();
+    ui->DataTo->clear();
+    ui->Weight->clear();
+}
+
+
+void MainWindow::on_OrderNumberSelect_currentIndexChanged(int index)
+{
+    if(o.size()==0)return;
+    ui->NumberOrder->setPlainText(QString::fromStdString(o[index].get_number()));
+    ui->AddresOrder->setPlainText(QString::fromStdString(o[index].get_addres()));
+    //ui->TimeFromOrder->setPlainText(QString::fromStdString(o[index].get_time_from_in_string()));
+    ui->TimeFromOrder->setPlainText(QString::fromStdString(std::to_string(o[index].getTime_from())));
+    //ui->TimeToOrder->setPlainText(QString::fromStdString(o[index].get_time_to_in_string()));
+    ui->TimeToOrder->setPlainText(QString::fromStdString(std::to_string(o[index].getTime_to())));
+    ui->DataFrom->setPlainText(QString::fromStdString(o[index].get_date_from()));
+    ui->DataTo->setPlainText(QString::fromStdString(o[index].get_date_to()));
+    ui->Weight->setPlainText(QString::fromStdString(std::to_string(o[index].get_weight())));
 }
 

@@ -33,6 +33,7 @@ public:
     void FileUpdate(long long pos);
     bool CheckCourierForm();
     void FileAdd(long long pos,std::string s);
+    bool CheckOrderForm();
 private slots:
     void on_OpenFileButton_clicked();
 
@@ -48,10 +49,17 @@ private slots:
 
     void on_ClearCourierForm_clicked();
 
+    void on_ClearOrderForm_clicked();
+
+    void on_OrderNumberSelect_currentIndexChanged(int index);
+
+    void on_AddOrderButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QVector<courier>c;
     courier c_from_form;
+    order o_from_form;
     QVector<order>o;
     QVector<std::pair<long long,long long>>order_position_in_file,courier_position_in_file;
     QVector<QString>select_orders,select_couriers;

@@ -7,6 +7,7 @@ class order
 {
 public:
     order();
+    order(std::string n,std::string a, Data df, Data dt, short tf, short tt,unsigned long long w);
     //Get functions
     std::string get_number();
     std::string get_addres();
@@ -32,6 +33,7 @@ public:
 
     short getTime_from() const;
     void setTime_from(short newTime_from);
+    std::string get_in_file_format();
 private:
     std::string number,addres;
     short int time_to,time_from;

@@ -5,6 +5,17 @@ order::order()
 
 }
 
+order::order(std::string n, std::string a, Data df, Data dt, short tf, short tt, unsigned long long w)
+{
+    number=n;
+    addres=a;
+    date_from=df;
+    date_to=dt;
+    time_from=tf;
+    time_to=tt;
+    weight=w;
+}
+
 
 
 //Get functions
@@ -116,4 +127,11 @@ short order::getTime_from() const
 void order::setTime_from(short newTime_from)
 {
     time_from = newTime_from;
+}
+
+std::string order::get_in_file_format()
+{
+    std::string s="";//[132333] {Belarus, Minsk, Lenina, 24, 2} 20.01.2018 20.01.2018 1000 1400 208
+    s="["+number + "] {" + addres + "} "+date_from.get()+" "+date_to.get()+" "+std::to_string(time_from)+" "+std::to_string(time_to)+" "+std::to_string(weight);
+    return s;
 }
