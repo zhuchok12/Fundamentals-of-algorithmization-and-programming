@@ -5,10 +5,10 @@
 
 class Square : public Figure
 {
-public:
 
-    Square();
-    float Size=100;
+public:
+    \
+        Square();
     float Area() override;
     float Perimeter() override;
 

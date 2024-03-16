@@ -28,5 +28,9 @@ private:
     QSlider *slider;
     Circle *circle;
     Wheel *wheel;
+
+private slots:
+    void updateScene();
+
 };
 #endif // MAINWINDOW_H

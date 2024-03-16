@@ -1,20 +1,20 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef ELLIPSE_H
+#define ELLIPSE_H
 
 #include "figure.h"
 
-
-class Rectangle : public Figure
+class Ellipse : public Figure
 {
-
 public:
 
-    Rectangle();
+    Ellipse();
     float Area() override;
     float Perimeter() override;
 
 protected:
+
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override;
+
 };
 
-#endif // RECTANGLE_H
+#endif // ELLIPSE_H

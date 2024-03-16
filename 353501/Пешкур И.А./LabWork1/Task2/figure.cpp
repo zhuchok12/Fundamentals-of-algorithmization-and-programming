@@ -1,16 +1,15 @@
 #include "figure.h"
 
-Figure::Figure() {}
+Figure::Figure(){}
 
 // 300 na 250
 
 void Figure :: paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *){}
 
-
 QRectF Figure :: boundingRect() const
 {
 
-    return QRectF( -1000 , -1000 , 1500 , 1500 );
+    return QRectF( -500 , -500 , 1000 , 1000 );
 
 }
 
@@ -21,31 +20,31 @@ float Figure :: getScale()
 
 }
 
+void Figure :: setCenterX( int CenterX )
+{
+
+    center = QPoint( CenterX , center.ry() );
+
+}
+
+void Figure :: setCenterY( int CenterY )
+{
+
+    center = QPoint( center.rx() , CenterY );
+
+}
+
 QPoint Figure :: getCenter()
 {
 
-    return QPoint(this->x(), this->y());
+    return QPoint( center.rx() , center.ry() );
 
 }
 
-void Figure :: moveX( int newX )
+void Figure :: makeFlagTrue()
 {
 
-    this -> setX( newX );
-
-}
-
-void Figure :: moveY( int newY )
-{
-
-    this -> setY( newY );
-
-}
-
-void Figure :: rotateFigure( int newAngle )
-{
-
-    this -> setRotation( newAngle );
+    Flag = true;
 
 }
 
@@ -60,5 +59,54 @@ float Figure :: Perimeter()
 {
 
     return 0;
+
+}
+
+void Figure :: changeRadius( int newRadius )
+{
+
+    Radius = newRadius;
+
+}
+
+void Figure :: changeLength( int newLength )
+{
+
+    Length = newLength;
+
+}
+
+void Figure :: changeWidth( int newWidth )
+{
+
+    Width = newWidth;
+
+}
+
+void Figure :: changeSize( int newSize )
+{
+
+    Size = newSize;
+
+}
+
+void Figure :: changeRadius1( int newRadius1 )
+{
+
+    Radius1 = newRadius1;
+
+}
+
+void Figure :: changeRadius2( int newRadius2 )
+{
+
+    Radius2 = newRadius2;
+
+}
+
+void Figure :: changeScale( int newScale )
+{
+
+    Scale = newScale;
 
 }

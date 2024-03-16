@@ -5,10 +5,10 @@
 
 class Triangle : public Figure
 {
+
 public:
 
     Triangle();
-    float Size=60;
     float Area() override;
     float Perimeter() override;
 

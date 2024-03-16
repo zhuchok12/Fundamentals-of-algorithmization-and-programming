@@ -5,10 +5,12 @@
 
 class Hexagon : public Figure
 {
+
+
+
 public:
 
     Hexagon();
-    float Radius = 100;
     float Area() override;
     float Perimeter() override;
 

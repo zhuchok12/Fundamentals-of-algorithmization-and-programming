@@ -1,6 +1,6 @@
 #include "hexagon.h"
 
-Hexagon::Hexagon() {}
+Hexagon::Hexagon(){}
 
 void Hexagon::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
@@ -25,3 +25,6 @@ float Hexagon::Perimeter()
     return 6 * Radius * this -> getScale();
 
 }
+
+
+

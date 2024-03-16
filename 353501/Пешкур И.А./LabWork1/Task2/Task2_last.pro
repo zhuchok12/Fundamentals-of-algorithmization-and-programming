@@ -10,21 +10,33 @@ CONFIG += c++17
 
 SOURCES += \
     circle.cpp \
+    customeshape.cpp \
+    customscene.cpp \
+    ellipse.cpp \
     figure.cpp \
     hexagon.cpp \
     main.cpp \
     mainwindow.cpp \
     rectangle.cpp \
     square.cpp \
+    star5.cpp \
+    star6.cpp \
+    star8.cpp \
     triangle.cpp
 
 HEADERS += \
     circle.h \
+    customeshape.h \
+    customscene.h \
+    ellipse.h \
     figure.h \
     hexagon.h \
     mainwindow.h \
     rectangle.h \
     square.h \
+    star5.h \
+    star6.h \
+    star8.h \
     triangle.h
 
 FORMS += \

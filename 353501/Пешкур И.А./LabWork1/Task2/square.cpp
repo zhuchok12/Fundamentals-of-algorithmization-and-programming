@@ -12,7 +12,7 @@ void Square :: paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
 
 float Square :: Area()
 {
-    return this->getScale() *this->getScale() * Size * Size;
+    return this->getScale() * this->getScale() * Size * Size;
 }
 
 float Square :: Perimeter()

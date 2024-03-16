@@ -7,7 +7,7 @@ void Triangle::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidge
 
     painter->setRenderHint(QPainter::Antialiasing, true);
     QPolygon polygon;
-    polygon << QPoint( -40 , 20 * sqrt( 3 ) ) << QPoint( 0 , -20 * sqrt( 3 ) ) << QPoint( 40 , 20 * sqrt( 3 ) );
+    polygon << QPoint( - Size * sqrt( 3 ) , Size * sqrt( 3 ) ) << QPoint( 0 , - Size * sqrt( 3 ) ) << QPoint( Size * sqrt( 3 ) , Size * sqrt( 3 ) );
     painter->drawPolygon( polygon );
 
 }

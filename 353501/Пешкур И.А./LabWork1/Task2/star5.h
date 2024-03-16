@@ -1,20 +1,18 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef STAR5_H
+#define STAR5_H
 
 #include "figure.h"
 
-
-class Rectangle : public Figure
+class Star5 : public Figure
 {
-
 public:
-
-    Rectangle();
+    Star5();
     float Area() override;
     float Perimeter() override;
 
 protected:
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *) override;
+
 };
 
-#endif // RECTANGLE_H
+#endif // STAR5_H

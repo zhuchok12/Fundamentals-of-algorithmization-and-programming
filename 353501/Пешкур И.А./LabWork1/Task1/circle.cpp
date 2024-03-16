@@ -5,7 +5,7 @@ Circle :: Circle(qreal x, qreal y, qreal width, qreal height, QGraphicsItem *par
 
 void Circle :: move( int angle ){
 
-    setX( angle );
+    setX( angle - 200 );
 
 }
 
