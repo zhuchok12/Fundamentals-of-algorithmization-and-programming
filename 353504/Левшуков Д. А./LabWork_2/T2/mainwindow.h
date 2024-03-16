@@ -26,19 +26,24 @@ public:
     ~MainWindow();
 
     void FileRead();
-    void ReadOrders(std::string);
-    void ReadCouriers(std::string);
+    bool ReadOrders(std::string);
+    bool ReadCouriers(std::string);
     void FileSave();
+    void Clear();
 private slots:
     void on_OpenFileButton_clicked();
 
     void on_SaveFileButton_clicked();
 
+    void on_DeleteCourierButton_clicked();
+
+    void on_DeleteOrderButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QVector<courier>c;
     QVector<order>o;
-    QVector<std::string>id;
+    QVector<std::pair<long long,long long>>order_position_in_file,courier_position_in_file;
     QVector<QString>select_orders,select_couriers;
     std::string file,orders_in_file,couriers_in_file;
     QShortcut *ctrlo,*ctrls;

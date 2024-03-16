@@ -41,32 +41,40 @@ void MainWindow::FileRead()
         qDebug()<<"Bad file";
         return;
     }
-    select_orders.clear();
+
+    Clear();
     orders_in_file=s+'\n';
+
     while(s!="------=======Couriers=======------")//Orders read
     {
         std::getline(fin,s);
         orders_in_file+=s+'\n';
         qDebug()<<s;
-        ReadOrders(s);
+        if(ReadOrders(s))
+            order_position_in_file.push_back({orders_in_file.size()-s.size()-1,s.size()+1});
+
     }
     ui->OrderNumberSelect->addItems(select_orders);
     couriers_in_file="";
+
     while(std::getline(fin,s))
     {
         couriers_in_file+=s+'\n';
-        ReadCouriers(s);
+        if(ReadCouriers(s))
+            courier_position_in_file.push_back({couriers_in_file.size()-s.size()-1,s.size()+1});
     }
     ui->CourierNumberSelect->addItems(select_couriers);
+    //std::ofstream fout(file);
+    //fin<<1;
 }
 
-void MainWindow::ReadOrders(std::string s)
+bool MainWindow::ReadOrders(std::string s)
 {
     //Example:[132332] {Belarus, Mogilev, blablabla, 54, 2} 24.01.2020 26.02.2022 1000 1400 228
     order now;
     Data from,to;
 
-    if(s[0]!='[')return;
+    if(s[0]!='[')return false;
 
     int n=s.size(),i=1;
 
@@ -75,12 +83,12 @@ void MainWindow::ReadOrders(std::string s)
         if(s[i]==']')
             break;
     }
-    if(i==n)return;
+    if(i==n)return false;
 
     now.setNumber(s.substr(1,i-1));
     qDebug()<<"1:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
     i+=2;
-    if(s[i]!='{')return;
+    if(s[i]!='{')return false;
     int j=i+1;
 
     for(;i<n;i++)
@@ -88,7 +96,7 @@ void MainWindow::ReadOrders(std::string s)
         if(s[i]=='}')
             break;
     }
-    if(i==n)return;
+    if(i==n)return false;
 
     now.setAddres(s.substr(j,i-j));
     qDebug()<<"2:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
@@ -103,14 +111,14 @@ void MainWindow::ReadOrders(std::string s)
             break;
         }
     }
-    if(i==n)return;
+    if(i==n)return false;
     //qDebug()<<"Try init:"<<s.substr(j,i-j+1);
     if(from.Init(s.substr(j,i-j+1)))
     {
         now.setDate_from(from);
     }
     else
-        return;
+        return false;
     qDebug()<<"3:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
 
     i+=2;
@@ -123,14 +131,14 @@ void MainWindow::ReadOrders(std::string s)
             break;
         }
     }
-    if(i==n)return;
+    if(i==n)return false;
 
     if(to.Init(s.substr(j,i-j+1)))
     {
         now.setDate_to(to);
     }
     else
-        return;
+        return false;
     qDebug()<<"4:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
 
     i+=2;
@@ -145,7 +153,7 @@ void MainWindow::ReadOrders(std::string s)
         }
     }
     //qDebug()<<i;
-    if(i==n)return;
+    if(i==n)return false;
     int t=0;
     try
     {
@@ -154,11 +162,11 @@ void MainWindow::ReadOrders(std::string s)
     catch(...)
     {
         qDebug()<<"stoi catch error";
-        return;
+        return false;
     }
     for(;j<=i;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setTime_from(t);
 
@@ -174,7 +182,7 @@ void MainWindow::ReadOrders(std::string s)
             break;
         }
     }
-    if(i==n)return;
+    if(i==n)return false;
     t=0;
     try
     {
@@ -182,11 +190,11 @@ void MainWindow::ReadOrders(std::string s)
     }
     catch(...)
     {
-        return;
+        return false;
     }
     for(;j<=i;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setTime_to(t);
     qDebug()<<"6:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
@@ -200,37 +208,38 @@ void MainWindow::ReadOrders(std::string s)
     }
     catch(...)
     {
-        return;
+        return false;
     }
     for(;j<n;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setWeight(w);
     qDebug()<<"7:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
     if(now.getTime_from()>now.getTime_to())
     {
         qDebug()<<"Time from>Time to";
-        return;
+        return false;
     }
     if(to>=from)
     {
         qDebug()<<"Date to>=from";
     }
     else
-        return;
+        return false;
     o.push_back(now);
     select_orders.push_back(QString::fromStdString(now.get_in_string()));
     qDebug()<<"FINAL:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
+    return true;
 }
 
-void MainWindow::ReadCouriers(std::string s)
+bool MainWindow::ReadCouriers(std::string s)
 
 {
     //Example:[132332] {Belarus, Mogilev, blablabla, 54, 2} 24.01.2020 26.02.2022 1000 1400 228
     courier now;
 
-    if(s[0]!='[')return;
+    if(s[0]!='[')return false;
 
     int n=s.size(),i=1;
 
@@ -239,12 +248,12 @@ void MainWindow::ReadCouriers(std::string s)
         if(s[i]==']')
             break;
     }
-    if(i==n)return;
+    if(i==n)return false;
 
     now.setNumber(s.substr(1,i-1));
     qDebug()<<"1:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     i+=2;
-    if(s[i]!='{')return;
+    if(s[i]!='{')return false;
     int j=i+1;
 
     for(;i<n;i++)
@@ -252,7 +261,7 @@ void MainWindow::ReadCouriers(std::string s)
         if(s[i]=='}')
             break;
     }
-    if(i==n)return;
+    if(i==n)return false;
 
     now.setName(s.substr(j,i-j));
     qDebug()<<"2:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
@@ -268,7 +277,7 @@ void MainWindow::ReadCouriers(std::string s)
         }
     }
     //qDebug()<<i;
-    if(i==n)return;
+    if(i==n)return false;
     int t=0;
     try
     {
@@ -277,11 +286,11 @@ void MainWindow::ReadCouriers(std::string s)
     catch(...)
     {
         qDebug()<<"stoi catch error";
-        return;
+        return false;
     }
     for(;j<=i;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setTime_from(t);
 
@@ -297,7 +306,7 @@ void MainWindow::ReadCouriers(std::string s)
             break;
         }
     }
-    if(i==n)return;
+    if(i==n)return false;
     t=0;
     try
     {
@@ -305,11 +314,11 @@ void MainWindow::ReadCouriers(std::string s)
     }
     catch(...)
     {
-        return;
+        return false;
     }
     for(;j<=i;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setTime_to(t);
     qDebug()<<"4:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
@@ -323,22 +332,23 @@ void MainWindow::ReadCouriers(std::string s)
     }
     catch(...)
     {
-        return;
+        return false;
     }
     for(;j<n;j++)
         if(!isdigit(s[j]))
-            return;
+            return false;
 
     now.setMax_weight(w);
     qDebug()<<"5:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     if(now.getTime_from()>now.getTime_to())
     {
         qDebug()<<"Time from>Time to";
-        return;
+        return false;
     }
     c.push_back(now);
     select_couriers.push_back(QString::fromStdString(now.get_in_string()));
     qDebug()<<"FINAL:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    return true;
 }
 
 void MainWindow::FileSave()
@@ -347,12 +357,24 @@ void MainWindow::FileSave()
     fout<<orders_in_file<<couriers_in_file;
 }
 
+void MainWindow::Clear()
+{
+    select_orders.clear();
+    select_couriers.clear();
+    ui->CourierNumberSelect->clear();
+    ui->OrderNumberSelect->clear();
+    order_position_in_file.clear();
+    courier_position_in_file.clear();
+    o.clear();
+    c.clear();
+}
+
 void MainWindow::on_SaveFileButton_clicked()
 {
     std::string new_file="";
     QString filters("Data files (*.inf)");
     QString defaultFilter("Data files (*.inf)");
-    new_file=(QFileDialog::getSaveFileName(this,"Save File","/home/dzmitry",filters,&defaultFilter)).toUtf8().constData();
+    new_file=(QFileDialog::getSaveFileName(this,"Save File",QString::fromStdString(file),filters,&defaultFilter)).toUtf8().constData();
 
     qDebug()<<"Save in "<<new_file;
     int n=new_file.size(),i=n-1;
@@ -372,5 +394,41 @@ void MainWindow::on_SaveFileButton_clicked()
     if(n-i>4)return;
     file=new_file;
     FileSave();
+}
+
+
+void MainWindow::on_DeleteCourierButton_clicked()
+{
+    std::string s=ui->CourierNumberSelect->currentText().toUtf8().constData();
+    qDebug()<<"Try to delete:"<<s;
+    int n=c.size(),i=0;
+    for(;i<n;i++)
+    {
+        qDebug()<<c[i].get_in_string();
+        if(c[i].get_in_string()==s)break;
+    }
+    if(i==n)return;
+    qDebug()<<"Delete ["<<i<<"]";
+    c.erase(c.begin()+i,c.begin()+1+i);
+    ui->CourierNumberSelect->removeItem(i);
+    //couriers_in_file.erase(i,1);
+}
+
+
+void MainWindow::on_DeleteOrderButton_clicked()
+{
+    std::string s=ui->OrderNumberSelect->currentText().toUtf8().constData();
+    qDebug()<<"Try to delete:"<<s;
+    int n=o.size(),i=0;
+    for(;i<n;i++)
+    {
+        qDebug()<<o[i].get_in_string();
+        if(o[i].get_in_string()==s)break;
+    }
+    if(i==n)return;
+    qDebug()<<"Delete ["<<i<<"]";
+    o.erase(o.begin()+i,o.begin()+1+i);
+    ui->OrderNumberSelect->removeItem(i);
+    //couriers_in_file.erase(i,1);
 }
 

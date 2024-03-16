@@ -31,7 +31,7 @@ std::string order::get_date_from()
 std::string order::get_in_string()
 {
     std::string s;
-    s="["+number + "] " + addres + " from "+date_from.get()+" to "+date_to.get()+"("
+    s="["+number + "] " + addres + " from "+date_from.get()+" to "+date_to.get()+" ("
         +get_time_from_in_string()+" - "+get_time_to_in_string()+") weight: "+std::to_string(get_weight());
     return s;
 }

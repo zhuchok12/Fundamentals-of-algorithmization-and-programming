@@ -67,27 +67,6 @@
      <string>Courier №</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ShowCourierOrdersButton">
-    <property name="geometry">
-     <rect>
-      <x>1</x>
-      <y>93</y>
-      <width>561</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Show courier orders</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">CourierInfo</string>
-    </attribute>
-   </widget>
    <widget class="QTextBrowser" name="IncompleteOrders">
     <property name="geometry">
      <rect>
@@ -146,11 +125,11 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="DeleteCourierInfoButton">
+   <widget class="QPushButton" name="DeleteCourierButton">
     <property name="geometry">
      <rect>
-      <x>1</x>
-      <y>191</y>
+      <x>0</x>
+      <y>109</y>
       <width>561</width>
       <height>31</height>
      </rect>
@@ -173,8 +152,8 @@
    <widget class="QPushButton" name="EditCourierInfoButton">
     <property name="geometry">
      <rect>
-      <x>1</x>
-      <y>142</y>
+      <x>0</x>
+      <y>60</y>
       <width>561</width>
       <height>31</height>
      </rect>
@@ -195,7 +174,7 @@
     <property name="geometry">
      <rect>
       <x>-1</x>
-      <y>359</y>
+      <y>169</y>
       <width>111</width>
       <height>51</height>
      </rect>
@@ -213,7 +192,7 @@
     <property name="geometry">
      <rect>
       <x>99</x>
-      <y>369</y>
+      <y>179</y>
       <width>461</width>
       <height>31</height>
      </rect>
@@ -223,7 +202,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>421</y>
+      <y>231</y>
       <width>561</width>
       <height>31</height>
      </rect>
@@ -237,11 +216,11 @@
      <string>Edit order info</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="DeleteOrderInfoButton">
+   <widget class="QPushButton" name="DeleteOrderButton">
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>470</y>
+      <y>280</y>
       <width>561</width>
       <height>31</height>
      </rect>
@@ -292,7 +271,7 @@
      <string>Add order</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="AddOrderButton_2">
+   <widget class="QPushButton" name="AddCourierButton">
     <property name="geometry">
      <rect>
       <x>0</x>
