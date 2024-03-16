@@ -7,6 +7,7 @@ class courier
 {
 public:
     courier();
+    courier(std::string numb,std::string nick,short int tf,short int tt,unsigned long long mw);
     //Get functions
 
     std::string getNumber() const;
@@ -28,6 +29,7 @@ public:
     std::string get_in_string();
     std::string get_time_to_in_string();
     std::string get_time_from_in_string();
+    std::string get_in_file_format();
 private:
     std::string number,name;
     short int time_to,time_from;

@@ -294,7 +294,7 @@ bool MainWindow::ReadCouriers(std::string s)
     for(;j<=i;j++)
         if(!isdigit(s[j]))
             return false;
-
+    if(t>1440||t<0)return false;
     now.setTime_from(t);
 
     //qDebug()<<"3:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
@@ -322,7 +322,7 @@ bool MainWindow::ReadCouriers(std::string s)
     for(;j<=i;j++)
         if(!isdigit(s[j]))
             return false;
-
+    if(t>1440||t<0)return false;
     now.setTime_to(t);
     //qDebug()<<"4:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     i+=2;
@@ -379,7 +379,7 @@ void MainWindow::FileUpdate(long long pos)
     qDebug()<<"{UPDATE}";
      fseek(f,pos,SEEK_SET);
     pos-=2;
-    if(pos>orders_in_file.size())
+    if(pos>orders_in_file.size()+orders_head.size())
     {
 
         qDebug()<<couriers_in_file;
@@ -398,6 +398,115 @@ void MainWindow::FileUpdate(long long pos)
     fclose(f);
 
 }
+
+bool MainWindow::CheckCourierForm()
+{
+    //Check number
+    std::string number=ui->NumberCurier->toPlainText().toUtf8().constData();
+    if(number.size()==0)return false;
+    for(auto i:number)
+    {
+        if(!isdigit(i))
+        {
+            qDebug()<<"Number has not-digit symbol";
+            return false;
+        }
+    }
+
+    //Check name
+    std::string name=ui->NameCurier->toPlainText().toUtf8().constData();
+    if(name.size()==0)return false;
+    bool fl=false;
+    for(auto i:name)
+    {
+        if(i!=' '&&i!='\n')
+        {
+            fl=true;
+            break;
+        }
+    }
+    if(!fl)
+    {
+        qDebug()<<"Bad name";
+        return false;
+    }
+
+    //Check from time
+    std::string t=ui->FromCurier->toPlainText().toUtf8().constData();
+    if(t.size()==0)return false;
+    int from=0;
+    try
+    {
+        from=stoi(t);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:t)
+        if(!isdigit(i))
+            return false;
+    if(from>1440||from<0)return false;
+
+    //Check to time
+    t=ui->ToCurier->toPlainText().toUtf8().constData();
+    if(t.size()==0)return false;
+    int to=0;
+    try
+    {
+        to=stoi(t);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:t)
+        if(!isdigit(i))
+            return false;
+    if(to>1440||to<0)return false;
+
+    std::string weight=ui->MaxWeight->toPlainText().toUtf8().constData();
+    if(weight.size()==0)return false;
+    unsigned long long w=0;
+    try
+    {
+        w=stoull(weight);
+    }
+    catch(...)
+    {
+        return false;
+    }
+    for(auto i:weight)
+        if(!isdigit(i))
+            return false;
+    if(from>to)return false;
+
+    short int tf=from,tt=to;
+    c_from_form={number,name,tf,tt,w};
+    return true;
+}
+
+void MainWindow::FileAdd(long long pos, std::string s)
+{
+    FILE *f=fopen(file.c_str(),"r+");
+
+    qDebug()<<"{Add}";
+    fseek(f,pos,SEEK_SET);
+    if(pos>orders_in_file.size()+orders_head.size())
+    {
+        qDebug()<<pos<<" "<<s;
+        fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
+    }
+    else
+    {
+        pos-=(-1+orders_head.size());
+        std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
+        qDebug()<<s;
+        fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
+    }
+    fclose(f);
+}
+
 
 void MainWindow::on_SaveFileButton_clicked()
 {
@@ -495,5 +604,51 @@ void MainWindow::on_DeleteOrderButton_clicked()
     order_position_in_file.erase(order_position_in_file.begin()+j,order_position_in_file.begin()+1+j);
     ui->OrderNumberSelect->removeItem(j);
     //couriers_in_file.erase(i,1);
+}
+
+
+void MainWindow::on_CourierNumberSelect_currentIndexChanged(int index)
+{
+    ui->NameCurier->setPlainText(QString::fromStdString(c[index].getName()));
+    ui->NumberCurier->setPlainText(QString::fromStdString(c[index].getNumber()));
+    ui->FromCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_from())));
+    ui->ToCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_to())));
+    ui->MaxWeight->setPlainText(QString::fromStdString(std::to_string(c[index].getMax_weight())));
+    qDebug()<<"Select "<<index;
+}
+
+
+void MainWindow::on_AddCourierButton_clicked()
+{
+    if(!CheckCourierForm())return;
+
+    qDebug()<<"Correct data in Courier form";
+    c.push_back(c_from_form);
+
+    select_couriers.push_back(QString::fromStdString(c_from_form.get_in_string()));
+    ui->CourierNumberSelect->addItem(select_couriers.back());
+
+    std::string c_string="";
+    int u=0;
+
+        u++;
+    c_string+='\n';
+
+    c_string+=c_from_form.get_in_file_format()+"\n";
+    qDebug()<<c_string;
+    courier_position_in_file.push_back({couriers_in_file.size()+u,c_string.size()-u});
+    couriers_in_file+=c_string;
+
+    FileAdd(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first,c_string);
+}
+
+
+void MainWindow::on_ClearCourierForm_clicked()
+{
+    ui->NameCurier->clear();
+    ui->NumberCurier->clear();
+    ui->FromCurier->clear();
+    ui->ToCurier->clear();
+    ui->MaxWeight->clear();
 }
 

@@ -2,6 +2,15 @@
 
 courier::courier() {}
 
+courier::courier(std::string numb, std::string nick, short tf, short tt, unsigned long long mw)
+{
+    number=numb;
+    name=nick;
+    time_to=tt;
+    time_from=tf;
+    max_weight=mw;
+}
+
 std::string courier::getNumber() const
 {
     return number;
@@ -87,3 +96,9 @@ std::string courier::get_time_from_in_string()
     return s;
 }
 
+std::string courier::get_in_file_format()
+{
+    std::string s="";//[2] {HIT A.A} 200 800 50
+    s="["+number + "] {" + name + "} "+std::to_string(time_from)+" "+std::to_string(time_to)+" "+std::to_string(max_weight);
+    return s;
+}
