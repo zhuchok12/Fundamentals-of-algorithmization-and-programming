@@ -50,7 +50,7 @@ void MainWindow::FileRead()
     {
         if(s==couriers_head)break;
         orders_in_file+=s+'\n';
-        qDebug()<<s;
+        qDebug()<<"|ORDERS READ|"<<s;
         if(ReadOrders(s))
             order_position_in_file.push_back({orders_in_file.size()-s.size()-1,s.size()+1});
 
@@ -60,7 +60,7 @@ void MainWindow::FileRead()
 
     while(std::getline(fin,s))
     {
-        qDebug()<<s;
+        qDebug()<<"|COURIERS READ|"<<s;
         couriers_in_file+=s+'\n';
         if(ReadCouriers(s))
             courier_position_in_file.push_back({couriers_in_file.size()-s.size()-1,s.size()+1});
@@ -224,12 +224,11 @@ bool MainWindow::ReadOrders(std::string s)
     }
     else
         return false;
-    if(now.getTime_to()>=now.getTime_from()&&to==from)
+    if(now.getTime_to()>=now.getTime_from())
     {
         qDebug()<<"Time to>=from";
     }
-    else if(to==from)
-        return false;
+    else return false;
     o.push_back(now);
     select_orders.push_back(QString::fromStdString(now.get_in_string()));
     qDebug()<<"FINAL:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
@@ -254,7 +253,7 @@ bool MainWindow::ReadCouriers(std::string s)
     if(i==n)return false;
 
     now.setNumber(s.substr(1,i-1));
-    //qDebug()<<"1:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    qDebug()<<"1:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     i+=2;
     if(s[i]!='{')return false;
     int j=i+1;
@@ -267,7 +266,7 @@ bool MainWindow::ReadCouriers(std::string s)
     if(i==n)return false;
 
     now.setName(s.substr(j,i-j));
-    //qDebug()<<"2:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    qDebug()<<"2:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     i+=2;
     j=i;
     //qDebug()<<s[i];
@@ -297,7 +296,7 @@ bool MainWindow::ReadCouriers(std::string s)
     if(t>1440||t<0)return false;
     now.setTime_from(t);
 
-    //qDebug()<<"3:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    qDebug()<<"3:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
 
     i+=2;
     j=i;
@@ -324,7 +323,7 @@ bool MainWindow::ReadCouriers(std::string s)
             return false;
     if(t>1440||t<0)return false;
     now.setTime_to(t);
-    //qDebug()<<"4:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    qDebug()<<"4:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     i+=2;
     j=i;
 
@@ -342,10 +341,10 @@ bool MainWindow::ReadCouriers(std::string s)
             return false;
 
     now.setMax_weight(w);
-    //qDebug()<<"5:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
+    qDebug()<<"5:"<<now.getNumber()<<" "<<now.getName()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.getMax_weight();
     if(now.getTime_from()>now.getTime_to())
     {
-        qDebug()<<"Time from>Time to";
+        //qDebug()<<"Time from>Time to";
         return false;
     }
     c.push_back(now);
@@ -364,20 +363,23 @@ void MainWindow::Clear()
 {
     select_orders.clear();
     select_couriers.clear();
-    ui->CourierNumberSelect->clear();
-    ui->OrderNumberSelect->clear();
     order_position_in_file.clear();
     courier_position_in_file.clear();
     o.clear();
     c.clear();
+    ui->CourierNumberSelect->clear();
+    ui->OrderNumberSelect->clear();
+
 }
 
-void MainWindow::FileUpdate(long long pos)
+void MainWindow::FileUpdate(long long pos, bool del)
 {
     FILE *f=fopen(file.c_str(),"r+");
 
     qDebug()<<"{UPDATE}";
      fseek(f,pos,SEEK_SET);
+    if(del)
+    {
     pos-=2;
     if(pos>orders_in_file.size()+orders_head.size())
     {
@@ -394,7 +396,26 @@ void MainWindow::FileUpdate(long long pos)
         qDebug()<<s;
         fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
     }
+    }
+    else
+    {
+        if(pos>orders_in_file.size()+orders_head.size())
+        {
 
+            qDebug()<<couriers_in_file;
+            std::string tow=couriers_in_file.substr(pos-orders_in_file.size()-couriers_head.size()-orders_head.size()-2);
+            qDebug()<<pos-orders_in_file.size()<<" "<<tow;
+            fwrite(tow.c_str(),sizeof(char),sizeof(char)*tow.size(),f);
+        }
+        else
+        {
+            pos-=orders_head.size();
+            pos-=1;
+            std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
+            qDebug()<<s;
+            fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
+        }
+    }
     fclose(f);
 
 }
@@ -482,6 +503,8 @@ bool MainWindow::CheckCourierForm()
     if(from>to)return false;
 
     short int tf=from,tt=to;
+    if(tf>tt)
+        return false;
     c_from_form={number,name,tf,tt,w};
     return true;
 }
@@ -520,7 +543,7 @@ bool MainWindow::CheckOrderForm()
             return false;
         }
     }
-
+    qDebug()<<"Number:OK";
     //Check addres
     std::string addres=ui->AddresOrder->toPlainText().toUtf8().constData();
     if(addres.size()==0)return false;
@@ -539,7 +562,7 @@ bool MainWindow::CheckOrderForm()
         return false;
     }
 
-
+    qDebug()<<"Addres:OK";
     //Check from time
     std::string t=ui->TimeFromOrder->toPlainText().toUtf8().constData();
     if(t.size()==0)return false;
@@ -558,8 +581,10 @@ bool MainWindow::CheckOrderForm()
     //qDebug()<<"TF";
     if(from>1440||from<0)return false;
 
+    qDebug()<<"From time:OK";
     //Check to time
     t=ui->TimeToOrder->toPlainText().toUtf8().constData();
+    qDebug()<<"to time = "<<t;
     if(t.size()==0)return false;
     int to=0;
     try
@@ -574,7 +599,8 @@ bool MainWindow::CheckOrderForm()
         if(!isdigit(i))
             return false;
     if(to>1440||to<0)return false;
-
+       if(from>to)return false;
+    qDebug()<<"To time:OK";
     std::string weight=ui->Weight->toPlainText().toUtf8().constData();
     if(weight.size()==0)return false;
     unsigned long long w=0;
@@ -589,12 +615,21 @@ bool MainWindow::CheckOrderForm()
     for(auto i:weight)
         if(!isdigit(i))
             return false;
-    if(from>to)return false;
-    qDebug()<<"TT";
+    qDebug()<<"Weight:OK";
+    //qDebug()<<"TT";
     Data df,dt;
     if(!df.Init(ui->DataFrom->toPlainText().toUtf8().constData()))
         return false;
+       qDebug()<<"Data from:OK";
     if(!dt.Init(ui->DataTo->toPlainText().toUtf8().constData()))
+        return false;
+       qDebug()<<"Data to:OK";
+    //qDebug()<<"QQ";
+    if(dt>=df)
+    {
+           qDebug()<<"Good datas";
+    }
+    else
         return false;
     short int tf=from,tt=to;
     o_from_form={number,addres,df,dt,tf,tt,w};
@@ -656,7 +691,7 @@ void MainWindow::on_DeleteCourierButton_clicked()
     couriers_in_file.erase(courier_position_in_file[i].first,courier_position_in_file[i].second);
     couriers_in_file+=u;
     //qDebug()<<"UPD COURIER IN FILE:"<<couriers_in_file;
-    FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file[i].first+2);
+    FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file[i].first+2,true);
 
     int j=i;
     for(;i<courier_position_in_file.size();i++)
@@ -692,7 +727,7 @@ void MainWindow::on_DeleteOrderButton_clicked()
     orders_in_file.erase(order_position_in_file[i].first,order_position_in_file[i].second);
     orders_in_file+=u;
     //qDebug()<<"UPD order IN FILE:"<<orders_in_file;
-    FileUpdate(orders_head.size()+order_position_in_file[i].first+1);
+    FileUpdate(orders_head.size()+order_position_in_file[i].first+1,true);
 
     int j=i;
     for(;i<order_position_in_file.size();i++)
@@ -713,7 +748,6 @@ void MainWindow::on_CourierNumberSelect_currentIndexChanged(int index)
     ui->MaxWeight->setPlainText(QString::fromStdString(std::to_string(c[index].getMax_weight())));
     //qDebug()<<"Select "<<index;
 }
-
 
 
 void MainWindow::on_AddCourierButton_clicked()
@@ -800,5 +834,82 @@ void MainWindow::on_OrderNumberSelect_currentIndexChanged(int index)
     ui->DataFrom->setPlainText(QString::fromStdString(o[index].get_date_from()));
     ui->DataTo->setPlainText(QString::fromStdString(o[index].get_date_to()));
     ui->Weight->setPlainText(QString::fromStdString(std::to_string(o[index].get_weight())));
+}
+
+
+void MainWindow::on_EditCourierInfoButton_clicked()
+{
+    if(!CheckCourierForm())return;
+
+    int index=ui->CourierNumberSelect->currentIndex();
+    qDebug()<<"Correct data in Courier form [index]"<<index;
+    c[index]=(c_from_form);
+
+
+    select_couriers[index]=(QString::fromStdString(c_from_form.get_in_string()));
+    ui->CourierNumberSelect->setItemText(index,select_couriers[index]);
+
+    std::string c_string=c_from_form.get_in_file_format()+"\n";
+    qDebug()<<c_string;
+    qDebug()<<"OLD:"<<couriers_in_file;
+    std::string new_cif=couriers_in_file.substr(0,courier_position_in_file[index].first)+c_string+
+                          couriers_in_file.substr(courier_position_in_file[index].first+courier_position_in_file[index].second);
+
+    qDebug()<<"NEW CIF:"<<new_cif;
+   long long delta=courier_position_in_file[index].second-c_string.size();
+    for(int i=0;i<delta;i++)
+       new_cif+=' ';
+    if(delta>0)
+    new_cif.back()='\n';
+    couriers_in_file=new_cif;
+
+
+    courier_position_in_file[index].second=c_string.size();
+
+    for(int i=index+1;i<courier_position_in_file.size();i++)
+    {
+        courier_position_in_file[i].first-=delta;
+    }
+
+    //qDebug()<<"TRY TO UPDATE";
+    FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file[index].first+2,false);
+}
+
+
+void MainWindow::on_EditOrderInfoButton_clicked()
+{
+    if(!CheckOrderForm())return;
+
+    int index=ui->OrderNumberSelect->currentIndex();
+    //qDebug()<<"Correct data in order form [index]"<<index;
+    o[index]=(o_from_form);
+
+
+    select_orders[index]=(QString::fromStdString(o_from_form.get_in_string()));
+    ui->OrderNumberSelect->setItemText(index,select_orders[index]);
+
+    std::string o_string=o_from_form.get_in_file_format()+"\n";
+    //qDebug()<<c_string;
+    //qDebug()<<"OLD:"<<orders_in_file;
+    std::string new_cif=orders_in_file.substr(0,order_position_in_file[index].first)+o_string+
+                          orders_in_file.substr(order_position_in_file[index].first+order_position_in_file[index].second);
+
+    qDebug()<<"NEW CIF:"<<new_cif;
+    long long delta=order_position_in_file[index].second-o_string.size();
+    for(int i=0;i<delta;i++)
+        new_cif+=' ';
+    if(delta>0)
+        new_cif.back()='\n';
+    orders_in_file=new_cif;
+
+
+    order_position_in_file[index].second=o_string.size();
+
+    for(int i=index+1;i<order_position_in_file.size();i++)
+    {
+        order_position_in_file[i].first-=delta;
+    }
+
+    FileUpdate(orders_head.size()+order_position_in_file[index].first+1,false);
 }
 

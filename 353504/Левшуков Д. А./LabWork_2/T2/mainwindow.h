@@ -30,7 +30,7 @@ public:
     bool ReadCouriers(std::string);
     void FileSave();
     void Clear();
-    void FileUpdate(long long pos);
+    void FileUpdate(long long pos, bool del);
     bool CheckCourierForm();
     void FileAdd(long long pos,std::string s);
     bool CheckOrderForm();
@@ -54,6 +54,10 @@ private slots:
     void on_OrderNumberSelect_currentIndexChanged(int index);
 
     void on_AddOrderButton_clicked();
+
+    void on_EditCourierInfoButton_clicked();
+
+    void on_EditOrderInfoButton_clicked();
 
 private:
     Ui::MainWindow *ui;
