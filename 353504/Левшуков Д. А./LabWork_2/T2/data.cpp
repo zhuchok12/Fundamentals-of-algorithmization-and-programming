@@ -159,6 +159,11 @@ bool Data::operator >=(Data b)
     return day>=b.day;
 }
 
+bool Data::operator ==(Data b)
+{
+    return day==b.day&&month==b.month&&year==b.year;
+}
+
 
 short Data::get_day()
 {

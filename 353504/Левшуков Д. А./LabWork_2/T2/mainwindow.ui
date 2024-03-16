@@ -254,7 +254,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>560</y>
+      <y>470</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -275,7 +275,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>750</y>
+      <y>660</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -302,7 +302,7 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>560</y>
+      <y>470</y>
       <width>461</width>
       <height>171</height>
      </rect>
@@ -312,9 +312,32 @@
     <property name="geometry">
      <rect>
       <x>100</x>
-      <y>750</y>
+      <y>660</y>
       <width>461</width>
       <height>171</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="SelectedFile">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>920</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Selected file:</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="FileBrowser">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>920</y>
+      <width>461</width>
+      <height>20</height>
      </rect>
     </property>
    </widget>

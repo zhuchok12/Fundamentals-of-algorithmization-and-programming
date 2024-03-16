@@ -30,6 +30,7 @@ public:
     bool ReadCouriers(std::string);
     void FileSave();
     void Clear();
+    void FileUpdate(long long pos);
 private slots:
     void on_OpenFileButton_clicked();
 
@@ -47,5 +48,6 @@ private:
     QVector<QString>select_orders,select_couriers;
     std::string file,orders_in_file,couriers_in_file;
     QShortcut *ctrlo,*ctrls;
+    const std::string orders_head="------=======Orders=======------",couriers_head="------=======Couriers=======------";
 };
 #endif // MAINWINDOW_H
