@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 10.0.2, 2024-03-22T03:22:43. -->
+<!-- Written by QtCreator 10.0.2, 2024-03-22T04:13:52. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -234,9 +234,8 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">Task_22</value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/eidanowi/Documents/GitHub/Fundamentals-of-algorithmization-and-programming/353504/Ковальчук Ф. А./LabWork_1/Task_2/Task_2.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/eidanowi/Documents/GitHub/Fundamentals-of-algorithmization-and-programming/353504/Ковальчук Ф. А./LabWork_1/Task_2/Task_2.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/eidanowi/Qt_Projects/Lab1/Task_2/Task_2.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/eidanowi/Qt_Projects/Lab1/Task_2/Task_2.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

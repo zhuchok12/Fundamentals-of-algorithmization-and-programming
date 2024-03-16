@@ -15,6 +15,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_ButMove_clicked();
+    void on_ButPaint_clicked();
+    void on_FigureSelecter_currentIndexChanged(int index);
+    void on_ButScale_clicked();
+    void on_ButRotate_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
