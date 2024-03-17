@@ -10,20 +10,22 @@ public:
     Data();
     bool Init(std::string s);
     std::string get();
+    Data NextDay();
     bool LeapYear();
-    bool LeapYear(long long year);
+    bool LeapYear( unsigned long long year);
     short int Days(short int m);
     short int get_day();
     short int get_month();
     unsigned long long get_year();
-    short Days(short m, long long y);
+    short Days(short m, unsigned long long y);
     bool operator >= (Data b);
+    bool operator <= (Data b);
     bool operator == (Data b);
     bool operator <(Data b);
     bool operator >(Data b);
 private:
     short int day,month;
-    long long year;
+    unsigned long long year;
     std::string Data_to_string(Data a);
 };
 

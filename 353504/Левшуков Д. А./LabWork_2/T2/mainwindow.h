@@ -36,6 +36,7 @@ public:
     void DistributeOrders();
     void Sort_Curriers();
     void Sort_Orders();
+    void Show_Tables();
 
 private slots:
     void on_OpenFileButton_clicked();
@@ -76,5 +77,6 @@ private:
     std::string file,orders_in_file,couriers_in_file;
     QShortcut *ctrlo,*ctrls;
     const std::string orders_head="------=======Orders=======------",couriers_head="------=======Couriers=======------";
+    const int time_go_to_addres=15,time_go_to_office_and_load=60;
 };
 #endif // MAINWINDOW_H

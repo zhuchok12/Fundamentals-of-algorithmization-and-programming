@@ -115,8 +115,8 @@ long long Date::Duration(Date b)
 
 bool Date::Init(std::string s)
 {
-    //qDebug()<<"Try init:"<<s;
-    if(s[2]!='.'||s[5]!='.')
+    qDebug()<<"Try init:"<<s;
+    if(s.size()<6||s[2]!='.'||s[5]!='.')
         return false;
 
     int siz=s.size();

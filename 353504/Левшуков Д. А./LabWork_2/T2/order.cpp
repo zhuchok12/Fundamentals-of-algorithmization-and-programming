@@ -76,6 +76,15 @@ std::string order::get_time_from_in_string()
     return s;
 }
 
+Data order::getDate_to()
+{
+    return date_to;
+}
+Data order::getDate_from()
+{
+    return date_from;
+}
+
 
 unsigned long long order::get_weight()
 {

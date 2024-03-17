@@ -16,6 +16,7 @@ public:
     std::string get_in_string();
     std::string get_time_to_in_string();
     std::string get_time_from_in_string();
+    Data getDate_to();
     unsigned long long get_weight();
     //Set functions
     void setNumber(const std::string &newNumber);
@@ -35,6 +36,7 @@ public:
     void setTime_from(short newTime_from);
     std::string get_in_file_format();
     bool operator < (order b);
+    Data getDate_from();
 private:
     std::string number,addres;
     short int time_to,time_from;

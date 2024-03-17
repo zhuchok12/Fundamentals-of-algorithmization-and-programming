@@ -84,6 +84,17 @@ std::string Data::get()
     return g;
 }
 
+Data Data::NextDay()
+{
+    Data Next={day,month,year};
+    Next.day++;
+    if(Next.day>Days(Next.month))
+        Next.month++,Next.day=1;
+    if(Next.month>12)
+        Next.year++,Next.month=1;
+    return Next;
+}
+
 
 std::string Data::Data_to_string(Data a)
 {
@@ -117,7 +128,7 @@ bool Data::LeapYear()
 }
 
 
-bool Data::LeapYear(long long year)
+bool Data::LeapYear( unsigned long long year)
 {
     return ((year%4==0&&year%100!=0)||year%400==0);
 }
@@ -135,7 +146,7 @@ short int Data::Days(short int m)
 }
 
 
-short int Data::Days(short int m,long long y)
+short int Data::Days(short int m, unsigned long long y)
 {
     if(m==1||m==3||m==5||m==7||m==8||m==10||m==12)
         return 31;
@@ -157,6 +168,19 @@ bool Data::operator >=(Data b)
     if(month<b.month)
         return false;
     return day>=b.day;
+}
+
+bool Data::operator <=(Data b)
+{
+    if(year>b.year)
+        return false;
+    if(year<b.year)
+        return true;
+    if(month>b.month)
+        return false;
+    if(month<b.month)
+        return true;
+    return day<=b.day;
 }
 
 bool Data::operator ==(Data b)

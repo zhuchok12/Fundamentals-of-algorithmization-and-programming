@@ -13,7 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
     ctrls= new QShortcut(this);
     ctrls->setKey(Qt::CTRL + Qt::Key_S);
     connect(ctrls, SIGNAL(activated()), this, SLOT(on_SaveFileButton_clicked()));
+
     //showFullScreen();
+
+    ui->CurierOrders->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->IncompleteOrders->setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 MainWindow::~MainWindow()
@@ -232,6 +236,7 @@ bool MainWindow::ReadOrders(std::string s)
         qDebug()<<"Time to>=from";
     }
     else return false;
+    if(now.getTime_to()>1440||now.getTime_from()>1440||now.getTime_from()<0||now.getTime_to()<0)return false;
     o.push_back(now);
     select_orders.push_back(QString::fromStdString(now.get_in_string()));
     qDebug()<<"FINAL:"<<now.get_number()<<" "<<now.get_addres()<<" "<<now.get_date_from()<<" "<<now.get_date_to()<<" "<<now.getTime_from()<<" "<<now.getTime_to()<<" "<<now.get_weight();
@@ -626,18 +631,60 @@ bool MainWindow::CheckOrderForm()
 
 void MainWindow::DistributeOrders()
 {
-    long long rows=ui->CurierOrders->rowCount();
-    for(int i=0;i<rows;i++)
-        ui->CurierOrders->removeRow(i);
-    rows=ui->IncompleteOrders->rowCount();
-    for(int i=0;i<rows;i++)
-        ui->IncompleteOrders->removeRow(i);
-
     qDebug()<<"Sorted curiers:";
     Sort_Curriers();
     qDebug()<<"Sorted orders:";
     Sort_Orders();
+
+    whose_order.resize(orders_for_sort.size());
+    for(int i=0;i<orders_for_sort.size();i++)
+    whose_order[i]=-1;//Incomplete
+
+    Data today={0,0,0};
+    for(int i=0;i<orders_for_sort.size();i++)
+    {
+        if(whose_order[i]!=-1||today>orders_for_sort[i].first.getDate_to())continue;
+        today=orders_for_sort[i].first.getDate_from();
+
+        bool lost_day=false;
+        while(!lost_day&&today<=orders_for_sort[i].first.getDate_to())
+        {
+            lost_day=true;
+            for(int j=0;j<for_sort.size();j++)
+            {
+                int t=for_sort[j].first.getTime_from()+15,w=0;
+                while(t<=for_sort[j].first.getTime_to())
+                {
+                    for(int q=0;q<orders_for_sort.size()&&t<=for_sort[j].first.getTime_to();q++)
+                    {
+                        if(whose_order[q]!=-1||today<orders_for_sort[q].first.getDate_from()||t>orders_for_sort[q].first.getTime_to()
+                            ||t<orders_for_sort[q].first.getTime_from())continue;
+                        if(today>orders_for_sort[q].first.getDate_to())break;
+
+                        if(w+orders_for_sort[q].first.get_weight()<=for_sort[j].first.getMax_weight())
+                        {
+                            t+=15;
+                            w+=orders_for_sort[q].first.get_weight();
+                            whose_order[q]=for_sort[j].second;
+                            lost_day=false;
+                        }
+                    }
+                    t+=75;
+                }
+
+             }
+
+            today=today.NextDay();
+        }
+
+
+        //today=orders_for_sort[i].first.getDate_to();
+    }
+
+    qDebug()<<"Distribute the end. Build tables...";
+    Show_Tables();
 }
+
 
 void MainWindow::Sort_Curriers()
 {
@@ -654,6 +701,7 @@ void MainWindow::Sort_Curriers()
         qDebug()<<"["<<i<<"]"<<for_sort[i].first.get_in_string();
 }
 
+
 void MainWindow::Sort_Orders()
 {
     orders_for_sort.clear();
@@ -667,6 +715,114 @@ void MainWindow::Sort_Orders()
         }
     for(int i=0;i<n;i++)
         qDebug()<<"["<<i<<"]"<<orders_for_sort[i].first.get_in_string();
+}
+
+
+void MainWindow::Show_Tables()
+{
+    //Curier Orders Table
+    //Clear_Tables();
+    int index=ui->CourierNumberSelect->currentIndex();
+    qDebug()<<index;
+    int kol=0;
+    for(int i=0;i<whose_order.size();i++)
+        if(whose_order[i]==index)
+            kol++;
+    ui->CurierOrders->setRowCount(kol);
+    kol=1;
+    for(int i=0;i<whose_order.size();i++)
+    {
+        if(whose_order[i]==index)
+        {
+            qDebug()<<whose_order[i]<<" "<<index;
+
+            QTableWidgetItem* it= new QTableWidgetItem;
+            it->setTextAlignment(Qt::AlignCenter);
+            it->setText(QString::fromStdString(orders_for_sort[i].first.get_number()));
+            ui->CurierOrders->setItem(kol-1,0,it);
+
+            QTableWidgetItem* it1= new QTableWidgetItem;
+            it1->setTextAlignment(Qt::AlignCenter);
+            it1->setText(QString::fromStdString(orders_for_sort[i].first.get_addres()));
+            ui->CurierOrders->setItem(kol-1,1,it1);
+
+            QTableWidgetItem* it2= new QTableWidgetItem;
+            it2->setTextAlignment(Qt::AlignCenter);
+            it2->setText(QString::fromStdString(orders_for_sort[i].first.get_date_from()));
+            ui->CurierOrders->setItem(kol-1,2,it2);
+
+            QTableWidgetItem* it3= new QTableWidgetItem;
+            it3->setTextAlignment(Qt::AlignCenter);
+            it3->setText(QString::fromStdString(orders_for_sort[i].first.get_date_to()));
+            ui->CurierOrders->setItem(kol-1,3,it3);
+
+            QTableWidgetItem* it4= new QTableWidgetItem;
+            it4->setTextAlignment(Qt::AlignCenter);
+            it4->setText(QString::fromStdString(orders_for_sort[i].first.get_time_from_in_string()));
+            ui->CurierOrders->setItem(kol-1,4,it4);
+
+            QTableWidgetItem* it5= new QTableWidgetItem;
+            it5->setTextAlignment(Qt::AlignCenter);
+            it5->setText(QString::fromStdString(orders_for_sort[i].first.get_time_to_in_string()));
+            ui->CurierOrders->setItem(kol-1,5,it5);
+
+            QTableWidgetItem* it6= new QTableWidgetItem;
+            it6->setTextAlignment(Qt::AlignCenter);
+            it6->setText(QString::fromStdString(std::to_string(orders_for_sort[i].first.get_weight())));
+            ui->CurierOrders->setItem(kol-1,6,it6);
+            kol++;
+        }
+    }
+
+    kol=0;
+    for(int i=0;i<whose_order.size();i++)
+        if(whose_order[i]==-1)
+            kol++;
+    ui->IncompleteOrders->setRowCount(kol);
+    kol=1;
+    for(int i=0;i<whose_order.size();i++)
+    {
+        if(whose_order[i]==-1)
+        {
+            //qDebug()<<whose_order[i]<<" "<<index;
+
+            QTableWidgetItem* inc= new QTableWidgetItem;
+            inc->setTextAlignment(Qt::AlignCenter);
+            inc->setText(QString::fromStdString(orders_for_sort[i].first.get_number()));
+            ui->IncompleteOrders->setItem(kol-1,0,inc);
+
+            QTableWidgetItem* inc1= new QTableWidgetItem;
+            inc1->setTextAlignment(Qt::AlignCenter);
+            inc1->setText(QString::fromStdString(orders_for_sort[i].first.get_addres()));
+            ui->IncompleteOrders->setItem(kol-1,1,inc1);
+
+            QTableWidgetItem* inc2= new QTableWidgetItem;
+            inc2->setTextAlignment(Qt::AlignCenter);
+            inc2->setText(QString::fromStdString(orders_for_sort[i].first.get_date_from()));
+            ui->IncompleteOrders->setItem(kol-1,2,inc2);
+
+            QTableWidgetItem* inc3= new QTableWidgetItem;
+            inc3->setTextAlignment(Qt::AlignCenter);
+            inc3->setText(QString::fromStdString(orders_for_sort[i].first.get_date_to()));
+            ui->IncompleteOrders->setItem(kol-1,3,inc3);
+
+            QTableWidgetItem* inc4= new QTableWidgetItem;
+            inc4->setTextAlignment(Qt::AlignCenter);
+            inc4->setText(QString::fromStdString(orders_for_sort[i].first.get_time_from_in_string()));
+            ui->IncompleteOrders->setItem(kol-1,4,inc4);
+
+            QTableWidgetItem* inc5= new QTableWidgetItem;
+            inc5->setTextAlignment(Qt::AlignCenter);
+            inc5->setText(QString::fromStdString(orders_for_sort[i].first.get_time_to_in_string()));
+            ui->IncompleteOrders->setItem(kol-1,5,inc5);
+
+            QTableWidgetItem* inc6= new QTableWidgetItem;
+            inc6->setTextAlignment(Qt::AlignCenter);
+            inc6->setText(QString::fromStdString(std::to_string(orders_for_sort[i].first.get_weight())));
+            ui->IncompleteOrders->setItem(kol-1,6,inc6);
+            kol++;
+        }
+    }
 }
 
 
@@ -781,7 +937,8 @@ void MainWindow::on_CourierNumberSelect_currentIndexChanged(int index)
     ui->FromCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_from())));
     ui->ToCurier->setPlainText(QString::fromStdString(std::to_string(c[index].getTime_to())));
     ui->MaxWeight->setPlainText(QString::fromStdString(std::to_string(c[index].getMax_weight())));
-    //qDebug()<<"Select "<<index;
+    qDebug()<<"Select "<<index;
+    Show_Tables();
 }
 
 
