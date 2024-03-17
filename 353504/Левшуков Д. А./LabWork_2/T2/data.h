@@ -19,6 +19,8 @@ public:
     short Days(short m, long long y);
     bool operator >= (Data b);
     bool operator == (Data b);
+    bool operator <(Data b);
+    bool operator >(Data b);
 private:
     short int day,month;
     long long year;

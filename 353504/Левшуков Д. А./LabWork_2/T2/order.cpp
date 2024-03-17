@@ -1,4 +1,5 @@
 #include "order.h"
+#include <QApplication>
 
 order::order()
 {
@@ -134,4 +135,23 @@ std::string order::get_in_file_format()
     std::string s="";//[132333] {Belarus, Minsk, Lenina, 24, 2} 20.01.2018 20.01.2018 1000 1400 208
     s="["+number + "] {" + addres + "} "+date_from.get()+" "+date_to.get()+" "+std::to_string(time_from)+" "+std::to_string(time_to)+" "+std::to_string(weight);
     return s;
+}
+
+bool order::operator <(order b)
+{
+    //1.Data from 2. Time from 3. Time to 4. Data to
+    //qDebug()<<"DF cmp:"<<date_from.get()<<" "<<b.date_from.get();
+    if(date_from<b.date_from) return true;
+    if(date_from>b.date_from) return false;
+    // qDebug()<<"TF cmp:"<<time_from<<" "<<b.time_from;
+    if(time_from<b.time_from) return true;
+    if(time_from>b.time_from) return false;
+    // qDebug()<<"TT cmp:"<<time_to<<" "<<b.time_to;
+    if(time_to<b.time_to) return true;
+    if(time_to>b.time_to) return false;
+    // qDebug()<<"DT cmp:"<<date_to.get()<<" "<<b.date_to.get();
+    if(date_to<b.date_to) return true;
+    if(date_to>b.date_to) return false;
+    return weight<b.weight;
+
 }

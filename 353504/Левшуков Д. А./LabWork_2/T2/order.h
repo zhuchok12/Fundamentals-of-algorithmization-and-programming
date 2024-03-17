@@ -34,6 +34,7 @@ public:
     short getTime_from() const;
     void setTime_from(short newTime_from);
     std::string get_in_file_format();
+    bool operator < (order b);
 private:
     std::string number,addres;
     short int time_to,time_from;

@@ -32,10 +32,10 @@ public:
     void Clear();
     void FileUpdate(long long pos, bool del);
     bool CheckCourierForm();
-    void FileAdd(long long pos,std::string s);
     bool CheckOrderForm();
     void DistributeOrders();
     void Sort_Curriers();
+    void Sort_Orders();
 
 private slots:
     void on_OpenFileButton_clicked();
@@ -70,7 +70,7 @@ private:
     QVector<order>o;
     QVector<long long>whose_order;
     QVector<std::pair<courier,long long>>for_sort;
-    QVector<std::pair<courier,long long>>orders_for_sort;
+    QVector<std::pair<order,long long>>orders_for_sort;
     QVector<std::pair<long long,long long>>order_position_in_file,courier_position_in_file;
     QVector<QString>select_orders,select_couriers;
     std::string file,orders_in_file,couriers_in_file;

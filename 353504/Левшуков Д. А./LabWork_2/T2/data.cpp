@@ -164,6 +164,31 @@ bool Data::operator ==(Data b)
     return day==b.day&&month==b.month&&year==b.year;
 }
 
+bool Data::operator <(Data b)
+{
+    if(year<b.year)
+        return true;
+    if(year>b.year)
+        return false;
+    if(month<b.month)
+        return true;
+    if(month>b.month)
+        return false;
+    return day<b.day;
+}
+
+bool Data::operator >(Data b)
+{
+    if(year<b.year)
+        return false;
+    if(year>b.year)
+        return true;
+    if(month<b.month)
+        return false;
+    if(month>b.month)
+        return true;
+    return day>b.day;
+}
 
 short Data::get_day()
 {

@@ -31,6 +31,7 @@ void MainWindow::on_OpenFileButton_clicked()
     FileRead();
 }
 
+
 void MainWindow::FileRead()
 {
     std::ifstream fin(file);
@@ -70,6 +71,7 @@ void MainWindow::FileRead()
     //std::ofstream fout(file);
     //fin<<1;
 }
+
 
 bool MainWindow::ReadOrders(std::string s)
 {
@@ -236,6 +238,7 @@ bool MainWindow::ReadOrders(std::string s)
     return true;
 }
 
+
 bool MainWindow::ReadCouriers(std::string s)
 
 {
@@ -360,6 +363,7 @@ void MainWindow::FileSave()
     fout<<orders_head<<'\n'<<orders_in_file<<couriers_head<<'\n'<<couriers_in_file;
 }
 
+
 void MainWindow::Clear()
 {
     select_orders.clear();
@@ -372,6 +376,7 @@ void MainWindow::Clear()
     ui->OrderNumberSelect->clear();
 
 }
+
 
 void MainWindow::FileUpdate(long long pos, bool del)
 {
@@ -420,6 +425,7 @@ void MainWindow::FileUpdate(long long pos, bool del)
     fclose(f);
 
 }
+
 
 bool MainWindow::CheckCourierForm()
 {
@@ -510,26 +516,6 @@ bool MainWindow::CheckCourierForm()
     return true;
 }
 
-void MainWindow::FileAdd(long long pos, std::string s)
-{
-    FILE *f=fopen(file.c_str(),"r+");
-
-    qDebug()<<"{Add}";
-    fseek(f,pos,SEEK_SET);
-    if(pos>orders_in_file.size()+orders_head.size())
-    {
-        qDebug()<<pos<<" "<<s;
-        fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
-    }
-    else
-    {
-        pos-=(orders_head.size());
-        std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
-        qDebug()<<s;
-        fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
-    }
-    fclose(f);
-}
 
 bool MainWindow::CheckOrderForm()
 {
@@ -637,6 +623,7 @@ bool MainWindow::CheckOrderForm()
     return true;
 }
 
+
 void MainWindow::DistributeOrders()
 {
     long long rows=ui->CurierOrders->rowCount();
@@ -646,8 +633,10 @@ void MainWindow::DistributeOrders()
     for(int i=0;i<rows;i++)
         ui->IncompleteOrders->removeRow(i);
 
+    qDebug()<<"Sorted curiers:";
     Sort_Curriers();
-
+    qDebug()<<"Sorted orders:";
+    Sort_Orders();
 }
 
 void MainWindow::Sort_Curriers()
@@ -664,6 +653,22 @@ void MainWindow::Sort_Curriers()
     for(int i=0;i<n;i++)
         qDebug()<<"["<<i<<"]"<<for_sort[i].first.get_in_string();
 }
+
+void MainWindow::Sort_Orders()
+{
+    orders_for_sort.clear();
+    for(int i=0;i<o.size();i++)
+        orders_for_sort.push_back({o[i],i});
+    int n=orders_for_sort.size();
+    for(int i=0;i<n;i++)
+        for(int j=i;j>0&&orders_for_sort[j].first<orders_for_sort[j-1].first;j--)
+        {
+            swap(orders_for_sort[j],orders_for_sort[j-1]);
+        }
+    for(int i=0;i<n;i++)
+        qDebug()<<"["<<i<<"]"<<orders_for_sort[i].first.get_in_string();
+}
+
 
 void MainWindow::on_SaveFileButton_clicked()
 {

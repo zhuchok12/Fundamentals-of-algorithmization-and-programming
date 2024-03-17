@@ -107,5 +107,6 @@ bool courier::operator <(courier b)
 {
     if(time_to!=b.time_to)
         return b.time_to>time_to;
-    return b.time_from>time_from;
+     if(time_from!=b.time_from) return b.time_from>time_from;
+     return b.max_weight>max_weight;
 }
