@@ -30,6 +30,7 @@ public:
     std::string get_time_to_in_string();
     std::string get_time_from_in_string();
     std::string get_in_file_format();
+    bool operator < (courier b);
 private:
     std::string number,name;
     short int time_to,time_from;

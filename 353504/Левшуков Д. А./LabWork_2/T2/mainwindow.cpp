@@ -66,6 +66,7 @@ void MainWindow::FileRead()
             courier_position_in_file.push_back({couriers_in_file.size()-s.size()-1,s.size()+1});
     }
     ui->CourierNumberSelect->addItems(select_couriers);
+    DistributeOrders();
     //std::ofstream fout(file);
     //fin<<1;
 }
@@ -636,6 +637,33 @@ bool MainWindow::CheckOrderForm()
     return true;
 }
 
+void MainWindow::DistributeOrders()
+{
+    long long rows=ui->CurierOrders->rowCount();
+    for(int i=0;i<rows;i++)
+        ui->CurierOrders->removeRow(i);
+    rows=ui->IncompleteOrders->rowCount();
+    for(int i=0;i<rows;i++)
+        ui->IncompleteOrders->removeRow(i);
+
+    Sort_Curriers();
+
+}
+
+void MainWindow::Sort_Curriers()
+{
+    for_sort.clear();
+    for(int i=0;i<c.size();i++)
+        for_sort.push_back({c[i],i});
+    int n=for_sort.size();
+    for(int i=0;i<n;i++)
+        for(int j=i;j>0&&for_sort[j].first<for_sort[j-1].first;j--)
+        {
+            swap(for_sort[j],for_sort[j-1]);
+        }
+    for(int i=0;i<n;i++)
+        qDebug()<<"["<<i<<"]"<<for_sort[i].first.get_in_string();
+}
 
 void MainWindow::on_SaveFileButton_clicked()
 {
@@ -699,6 +727,7 @@ void MainWindow::on_DeleteCourierButton_clicked()
     courier_position_in_file.erase(courier_position_in_file.begin()+j,courier_position_in_file.begin()+1+j);
     ui->CourierNumberSelect->removeItem(j);
     //couriers_in_file.erase(i,1);
+    DistributeOrders();
 }
 
 
@@ -735,6 +764,7 @@ void MainWindow::on_DeleteOrderButton_clicked()
     order_position_in_file.erase(order_position_in_file.begin()+j,order_position_in_file.begin()+1+j);
     ui->OrderNumberSelect->removeItem(j);
     //couriers_in_file.erase(i,1);
+    DistributeOrders();
 }
 
 
@@ -771,6 +801,7 @@ void MainWindow::on_AddCourierButton_clicked()
     couriers_in_file=new_cif;
      //qDebug()<<"TRY TO UPDATE";
      FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first,false);
+    DistributeOrders();
 }
 
 
@@ -792,6 +823,7 @@ void MainWindow::on_AddOrderButton_clicked()
     orders_in_file=new_cif;
     //qDebug()<<"TRY TO UPDATE";
     FileUpdate(orders_head.size()+order_position_in_file.back().first,false);
+    DistributeOrders();
 }
 
 
@@ -868,6 +900,7 @@ void MainWindow::on_EditCourierInfoButton_clicked()
 
     //qDebug()<<"TRY TO UPDATE";
     FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file[index].first+2,false);
+    DistributeOrders();
 }
 
 
@@ -906,5 +939,6 @@ void MainWindow::on_EditOrderInfoButton_clicked()
     }
 
     FileUpdate(orders_head.size()+order_position_in_file[index].first+1,false);
+    DistributeOrders();
 }
 

@@ -34,6 +34,9 @@ public:
     bool CheckCourierForm();
     void FileAdd(long long pos,std::string s);
     bool CheckOrderForm();
+    void DistributeOrders();
+    void Sort_Curriers();
+
 private slots:
     void on_OpenFileButton_clicked();
 
@@ -65,6 +68,9 @@ private:
     courier c_from_form;
     order o_from_form;
     QVector<order>o;
+    QVector<long long>whose_order;
+    QVector<std::pair<courier,long long>>for_sort;
+    QVector<std::pair<courier,long long>>orders_for_sort;
     QVector<std::pair<long long,long long>>order_position_in_file,courier_position_in_file;
     QVector<QString>select_orders,select_couriers;
     std::string file,orders_in_file,couriers_in_file;

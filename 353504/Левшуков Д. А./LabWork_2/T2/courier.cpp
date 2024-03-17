@@ -102,3 +102,10 @@ std::string courier::get_in_file_format()
     s="["+number + "] {" + name + "} "+std::to_string(time_from)+" "+std::to_string(time_to)+" "+std::to_string(max_weight);
     return s;
 }
+
+bool courier::operator <(courier b)
+{
+    if(time_to!=b.time_to)
+        return b.time_to>time_to;
+    return b.time_from>time_from;
+}
