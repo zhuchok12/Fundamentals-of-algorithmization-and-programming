@@ -392,7 +392,7 @@ void MainWindow::FileUpdate(long long pos, bool del)
     else
     {
         pos-=(-1+orders_head.size());
-        std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
+        std::string s=orders_in_file.substr(pos)+couriers_head+"\n"+couriers_in_file;
         qDebug()<<s;
         fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
     }
@@ -411,7 +411,7 @@ void MainWindow::FileUpdate(long long pos, bool del)
         {
             pos-=orders_head.size();
             pos-=1;
-            std::string s=orders_in_file.substr(pos)+couriers_head+'\n'+couriers_in_file;
+            std::string s=orders_in_file.substr(pos)+couriers_head+"\n"+couriers_in_file;
             qDebug()<<s;
             fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
         }
@@ -754,24 +754,23 @@ void MainWindow::on_AddCourierButton_clicked()
 {
     if(!CheckCourierForm())return;
 
-    qDebug()<<"Correct data in Courier form";
+    //qDebug()<<"Correct data in Courier form [index]"<<index;
     c.push_back(c_from_form);
 
     select_couriers.push_back(QString::fromStdString(c_from_form.get_in_string()));
     ui->CourierNumberSelect->addItem(select_couriers.back());
 
-    std::string c_string="";
-    int u=0;
+    std::string c_string="\n"+c_from_form.get_in_file_format()+"\n";
+    //qDebug()<<c_string;
+    //qDebug()<<"OLD:"<<couriers_in_file;
+    std::string new_cif=couriers_in_file+c_string;
 
-        u++;
-    c_string+='\n';
+    //qDebug()<<"NEW CIF:"<<new_cif;
 
-    c_string+=c_from_form.get_in_file_format()+"\n";
-    qDebug()<<c_string;
-    courier_position_in_file.push_back({couriers_in_file.size()+u,c_string.size()-u});
-    couriers_in_file+=c_string;
-
-    FileAdd(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first,c_string);
+    courier_position_in_file.push_back({couriers_in_file.size()+1,c_from_form.get_in_file_format().size()+1});
+    couriers_in_file=new_cif;
+     //qDebug()<<"TRY TO UPDATE";
+     FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first,false);
 }
 
 
@@ -779,24 +778,20 @@ void MainWindow::on_AddOrderButton_clicked()
 {
     if(!CheckOrderForm())return;
 
-    qDebug()<<"Correct order in Order form";
     o.push_back(o_from_form);
 
     select_orders.push_back(QString::fromStdString(o_from_form.get_in_string()));
     ui->OrderNumberSelect->addItem(select_orders.back());
 
-    std::string c_string="";
-    int u=0;
+    std::string o_string="\n"+o_from_form.get_in_file_format()+"\n";
 
-    u++;
-    c_string+='\n';
+    std::string new_cif=orders_in_file+o_string;
 
-    c_string+=o_from_form.get_in_file_format()+"\n";
-    qDebug()<<c_string;
-    order_position_in_file.push_back({orders_in_file.size()+u,c_string.size()-u});
-    orders_in_file+=c_string;
 
-    FileAdd(orders_head.size()+order_position_in_file.back().first,c_string);
+    order_position_in_file.push_back({orders_in_file.size()+1,o_from_form.get_in_file_format().size()+1});
+    orders_in_file=new_cif;
+    //qDebug()<<"TRY TO UPDATE";
+    FileUpdate(orders_head.size()+order_position_in_file.back().first,false);
 }
 
 
