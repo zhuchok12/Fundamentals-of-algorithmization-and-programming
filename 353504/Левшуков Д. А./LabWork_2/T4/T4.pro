@@ -1,29 +1,13 @@
-QT       += core gui
+QT = core
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
-CONFIG += c++17
+CONFIG += c++17 cmdline
 
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    courier.cpp \
-    data.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    order.cpp
-
-HEADERS += \
-    courier.h \
-    courier_func.h \
-    data.h \
-    mainwindow.h \
-    order.h
-
-FORMS += \
-    mainwindow.ui
+        main.cpp
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

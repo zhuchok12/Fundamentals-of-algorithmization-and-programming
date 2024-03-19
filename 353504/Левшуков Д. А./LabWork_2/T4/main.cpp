@@ -61,24 +61,34 @@ public:
 
 };
 
+char a[10];
+bool check_equals(Expression const* left, Expression const* right)
+{
+    bool check=(*((auto)left))==(*((auto)right));
+    return check;
+    std::cout<<*left<<" "<<*right<<"\n";
+    std::cout << "a == b == " << ((void*)left == (void*)right) << std::endl;
+ return ((void(*(*(&)[2]))(const Expression&))left)[0][0] == ((void(*(*(&)[2]))(const Expression&))right)[0][0];
+
+
+}
+
+
 int main()
 {
-    Expression *c=new Number(4.5);
-    std::cout<<std::endl<<c->evalute()<<std::endl;
+    auto *ch1=new Number(14.123123);
+    auto *ch2=new Number(88.6666666);
+    auto *bin_op1=new BinaryOperation(ch1,'+',ch2);
+    auto *bin_op2=new BinaryOperation(ch2,'-',ch1);
+    auto *bin_op3=new BinaryOperation(bin_op1,'*',bin_op2);
 
-    Expression *q=new BinaryOperation(new Number(4.5), '+', new Number(5));
-    std::cout<<q->evalute()<<std::endl;
-    //return 0;
-
-    Expression *sube = new BinaryOperation(new Number(4.5), '*', new Number(5));
-    std::cout<<sube->evalute()<<std::endl;
-
-    // потом используем его в выражении для +
-    Expression* expr = new BinaryOperation(new Number(3), '+', sube);
-    // вычисляем и выводим результат: 25.5
-    std::cout << expr->evalute() << std::endl;
-
-    delete expr;
-    delete c;
-    delete q;
+    //a[0]=a[1]=1000;
+    std::cout<<'\n'<<check_equals(ch1,ch2);
+    std::cout<<'\n'<<check_equals(ch1,bin_op1);
+    std::cout<<'\n'<<check_equals(ch1,bin_op2);
+    std::cout<<'\n'<<check_equals(ch1,bin_op3);
+    std::cout<<'\n'<<check_equals(ch2,bin_op1);
+    std::cout<<'\n'<<check_equals(ch2,bin_op2);
+    std::cout<<'\n'<<check_equals(ch2,bin_op3);
+    //std::cout<<'\n'<<size_t(a)<<" "<<*((size_t*)(a))<<" "<<sizeof(a);
 }
