@@ -41,6 +41,8 @@ private slots:
 
     void on_pushButton_save_clicked();
 
+    void on_spinBox_year_editingFinished();
+
 private:
     QVector<Date> dates;
     void arrayToTable(QVector<Date>);

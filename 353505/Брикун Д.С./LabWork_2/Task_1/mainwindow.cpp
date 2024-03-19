@@ -1,3 +1,4 @@
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -21,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->spinBox_year->setValue(std::localtime(&currentTime)->tm_year + 1900);
 
     ui->label_BDate->setText(QString("Birh Date: " + QString::number(BDay.GetDay()) + "." + QString::number(BDay.GetMonth()) + "." + QString::number(BDay.GetYear())));
+
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 }
 
 MainWindow::~MainWindow()
@@ -270,5 +273,31 @@ void MainWindow::on_pushButton_save_clicked()
         out << i.ToQString() << ' ';
     }
     file.close();
+}
+
+
+void MainWindow::on_spinBox_year_editingFinished()
+{
+    switch (ui->spinBox_month->value()) {
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+        ui->spinBox_day->setMaximum(31);
+        break;
+    case 4: case 6: case 9: case 11:
+        ui->spinBox_day->setMaximum(30);
+        if (ui->spinBox_day->value() == 31)
+            ui->spinBox_day->setValue(30);
+        break;
+    case 2:
+        if (Date(1, 1, ui->spinBox_year->value()).IsLeap()){
+            ui->spinBox_day->setMaximum(29);
+            if (ui->spinBox_day->value() > 29)
+                ui->spinBox_day->setValue(29);
+        } else {
+            ui->spinBox_day->setMaximum(28);
+            if (ui->spinBox_day->value() > 28)
+                ui->spinBox_day->setValue(28);
+        }
+        break;
+    }
 }
 

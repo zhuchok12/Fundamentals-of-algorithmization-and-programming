@@ -148,18 +148,28 @@ short Date::dayOfWeekOfYearBegin(short y){
 };
 
 int Date::DaysTillYourBithday(Date birth){
-    if ((month < birth.GetMonth()) || (month == birth.GetMonth() && day < birth.GetDay())){
-        return duration(Date(day, month, year), Date(birth.GetDay(), birth.GetMonth(), year));
+    auto a = birth;
+    if (!this->IsLeap() && (a.GetMonth() == 2 && a.GetDay() == 29)){
+        a.SetMonth(3);
+        a.SetDay(1);
+    }
+    if ((month < a.GetMonth()) || (month == a.GetMonth() && day < a.GetDay())){
+        return duration(Date(day, month, year), Date(a.GetDay(), a.GetMonth(), year));
     } else {
-        return duration(Date(day, month, year), Date(birth.GetDay(), birth.GetMonth(), year));
+        return duration(Date(day, month, year), Date(a.GetDay(), a.GetMonth(), year));
     }
 }
 
-int Date::Duration(Date birth){
-    if (year < birth.GetYear() || (year == birth.GetYear() && month < birth.GetMonth()) || (year == birth.GetYear() && month == birth.GetMonth() && day < birth.GetDay())){
-        return duration(Date(day, month, year), Date(birth.GetDay(), birth.GetMonth(), birth.GetYear()));
+int Date::Duration(Date dur){
+    auto a = dur;
+    // if (!this->IsLeap() && (a.GetMonth() == 2 && a.GetDay() == 29)){
+    //     a.SetMonth(3);
+    //     a.SetDay(1);
+    // }
+    if (year < a.GetYear() || (year == a.GetYear() && month < a.GetMonth()) || (year == a.GetYear() && month == a.GetMonth() && day < a.GetDay())){
+        return duration(Date(day, month, year), Date(a.GetDay(), a.GetMonth(), a.GetYear()));
     } else {
-        return duration(Date(birth.GetDay(), birth.GetMonth(), birth.GetYear()), Date(day, month, year));
+        return duration(Date(a.GetDay(), a.GetMonth(), a.GetYear()), Date(day, month, year));
     }
 }
 

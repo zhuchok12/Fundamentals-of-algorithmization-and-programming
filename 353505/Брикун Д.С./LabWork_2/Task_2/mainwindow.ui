@@ -58,7 +58,7 @@
      <rect>
       <x>10</x>
       <y>40</y>
-      <width>61</width>
+      <width>71</width>
       <height>16</height>
      </rect>
     </property>
@@ -71,7 +71,7 @@
      <rect>
       <x>10</x>
       <y>70</y>
-      <width>49</width>
+      <width>61</width>
       <height>16</height>
      </rect>
     </property>
@@ -95,9 +95,9 @@
    <widget class="QPushButton" name="pushButton_display">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>530</x>
       <y>10</y>
-      <width>261</width>
+      <width>321</width>
       <height>41</height>
      </rect>
     </property>
@@ -108,7 +108,7 @@
    <widget class="QDoubleSpinBox" name="doubleSpinBox_min">
     <property name="geometry">
      <rect>
-      <x>650</x>
+      <x>600</x>
       <y>50</y>
       <width>62</width>
       <height>25</height>
@@ -118,9 +118,9 @@
    <widget class="QDoubleSpinBox" name="doubleSpinBox_max">
     <property name="geometry">
      <rect>
-      <x>781</x>
+      <x>751</x>
       <y>50</y>
-      <width>71</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -134,9 +134,9 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>530</x>
       <y>50</y>
-      <width>61</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -147,10 +147,10 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>720</x>
+      <x>680</x>
       <y>50</y>
-      <width>61</width>
-      <height>20</height>
+      <width>71</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -160,9 +160,9 @@
    <widget class="QPushButton" name="pushButton_search">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>530</x>
       <y>80</y>
-      <width>261</width>
+      <width>321</width>
       <height>41</height>
      </rect>
     </property>
@@ -174,9 +174,9 @@ and value in line editor</string>
    <widget class="QPushButton" name="pushButton_sort">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>530</x>
       <y>190</y>
-      <width>271</width>
+      <width>331</width>
       <height>41</height>
      </rect>
     </property>
@@ -187,7 +187,7 @@ and value in line editor</string>
    <widget class="QRadioButton" name="radioButton_type">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>530</x>
       <y>120</y>
       <width>91</width>
       <height>22</height>
@@ -203,7 +203,7 @@ and value in line editor</string>
    <widget class="QRadioButton" name="radioButton_company">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>530</x>
       <y>140</y>
       <width>91</width>
       <height>22</height>
@@ -216,7 +216,7 @@ and value in line editor</string>
    <widget class="QRadioButton" name="radioButton_model">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>530</x>
       <y>160</y>
       <width>91</width>
       <height>22</height>
@@ -229,7 +229,7 @@ and value in line editor</string>
    <widget class="QLineEdit" name="lineEdit_search">
     <property name="geometry">
      <rect>
-      <x>660</x>
+      <x>610</x>
       <y>140</y>
       <width>113</width>
       <height>24</height>
@@ -241,7 +241,7 @@ and value in line editor</string>
      <rect>
       <x>10</x>
       <y>100</y>
-      <width>71</width>
+      <width>81</width>
       <height>16</height>
      </rect>
     </property>
@@ -307,7 +307,7 @@ and value in line editor</string>
      <rect>
       <x>100</x>
       <y>160</y>
-      <width>77</width>
+      <width>91</width>
       <height>22</height>
      </rect>
     </property>
@@ -331,9 +331,9 @@ and value in line editor</string>
    <widget class="QPushButton" name="pushButton_showAll">
     <property name="geometry">
      <rect>
-      <x>590</x>
+      <x>530</x>
       <y>250</y>
-      <width>271</width>
+      <width>331</width>
       <height>41</height>
      </rect>
     </property>
@@ -422,7 +422,7 @@ and value in line editor</string>
      <x>0</x>
      <y>0</y>
      <width>935</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
