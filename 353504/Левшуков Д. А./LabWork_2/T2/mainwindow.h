@@ -10,6 +10,7 @@
 #include <QDialog>
 #include <fstream>
 #include <QShortcut>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -37,7 +38,7 @@ public:
     void Sort_Curriers();
     void Sort_Orders();
     void Show_Tables();
-
+    bool only_spaces(std::string q);
 private slots:
     void on_OpenFileButton_clicked();
 

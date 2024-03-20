@@ -21,7 +21,7 @@ Data::Data()
 bool Data::Init(std::string s)
 {
     //qDebug()<<"Try init:"<<s;
-    if(s[2]!='.'||s[5]!='.')
+    if(s.size()<6||s[2]!='.'||s[5]!='.')
         return false;
 
     int siz=s.size();
@@ -40,8 +40,9 @@ bool Data::Init(std::string s)
         year=stoll(s.substr(6,s.size()-8))*(-1);
     else
 */
-    year=stoull(s.substr(6));
 
+    if(s.size()-7>4)return false;
+    year=stoull(s.substr(6));
 
     //qDebug()<<year;
     if(day==0||month==0||month>12||day>Days(month))

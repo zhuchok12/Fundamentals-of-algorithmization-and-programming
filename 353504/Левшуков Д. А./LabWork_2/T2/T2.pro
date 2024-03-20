@@ -10,6 +10,7 @@ CONFIG += c++17
 
 SOURCES += \
     courier.cpp \
+    courier_func.cpp \
     data.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -17,7 +18,6 @@ SOURCES += \
 
 HEADERS += \
     courier.h \
-    courier_func.h \
     data.h \
     mainwindow.h \
     order.h

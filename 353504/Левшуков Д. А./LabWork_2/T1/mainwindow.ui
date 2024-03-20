@@ -226,7 +226,7 @@ Enter/Space after writing
 Format of data: DD.MM.Y
 DD - Day
 MM -  Month
-Y - Any number
+YYYY - Number(0-9999)
 DD and MM ALWAYS
 consists 2 digits </string>
     </property>

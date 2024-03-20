@@ -11,6 +11,8 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <QMessageBox>
+#include <QItemDelegate>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -50,5 +52,16 @@ private:
     bool showing;
     std::string s,file_inside;
     char ch;
+};
+class NonEditTableColumnDelegate : public QItemDelegate
+{
+    Q_OBJECT
+public:
+    NonEditTableColumnDelegate(QObject * parent = 0) : QItemDelegate(parent) {}
+    virtual QWidget * createEditor ( QWidget *, const QStyleOptionViewItem &,
+                                  const QModelIndex &) const
+    {
+        return 0;
+    }
 };
 #endif // MAINWINDOW_H

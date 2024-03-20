@@ -135,8 +135,9 @@ bool Date::Init(std::string s)
         year=stoll(s.substr(6,s.size()-8))*(-1);
     else
 */
-        year=stoull(s.substr(6));
 
+    if(s.size()-7>3)return false;
+        year=stoull(s.substr(6));
 
     //qDebug()<<year;
     if(day==0||month==0||month>12||day>Days(month))

@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#define EditNothing QMessageBox::information(this,"Error", "You can't edit nothing", QMessageBox::Ok)
+#define Form QMessageBox::information(this,"Error", "Wrong data in form(check format below)", QMessageBox::Ok)
+#define BadFile QMessageBox::information(this,"Error", "The file does not match the format (extension should be  .inf  /  wrong format of data into file) or file not selected", QMessageBox::Ok)
+#define Delete QMessageBox::information(this,"Error", "You can't delete nothing", QMessageBox::Ok)
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -14,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     ctrls->setKey(Qt::CTRL + Qt::Key_S);
     connect(ctrls, SIGNAL(activated()), this, SLOT(on_SaveFileButton_clicked()));
 
+    //Form;
     //showFullScreen();
 
     ui->CurierOrders->setEditTriggers(QAbstractItemView::NoEditTriggers);
@@ -27,10 +32,17 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_OpenFileButton_clicked()
 {
-    file=(QFileDialog::getOpenFileName(this,"Open File","/home/dzmitry","*.inf")).toUtf8().constData();
-    qDebug()<<file;
-    if(file=="")
+    std:: string new_file=(QFileDialog::getOpenFileName(this,"Open File","/home/dzmitry","*.inf")).toUtf8().constData();
+    qDebug()<<new_file;
+    if(new_file==""&&file=="")
+    {
+        file="";
+        BadFile;
         return;
+    }
+    else
+        if(new_file!="")
+        file=new_file;
     ui->FileBrowser->setText(QString::fromStdString(file));
     FileRead();
 }
@@ -44,6 +56,11 @@ void MainWindow::FileRead()
     if(s!=orders_head)
     {
         //Bad file
+        BadFile;
+        Clear();
+        file="";
+        ui->FileBrowser->clear();
+        //ui->ErLabel->setHidden(false);
         qDebug()<<"Bad file";
         return;
     }
@@ -54,11 +71,19 @@ void MainWindow::FileRead()
     while(s!=couriers_head&&std::getline(fin,s))//Orders read
     {
         if(s==couriers_head)break;
+        if(only_spaces(s))continue;
         orders_in_file+=s+'\n';
         qDebug()<<"|ORDERS READ|"<<s;
         if(ReadOrders(s))
             order_position_in_file.push_back({orders_in_file.size()-s.size()-1,s.size()+1});
-
+        else
+        {
+            BadFile;
+            Clear();
+            file="";
+            ui->FileBrowser->clear();
+            return;
+        }
     }
     ui->OrderNumberSelect->addItems(select_orders);
     couriers_in_file="";
@@ -66,9 +91,18 @@ void MainWindow::FileRead()
     while(std::getline(fin,s))
     {
         qDebug()<<"|COURIERS READ|"<<s;
+        if(only_spaces(s))continue;
         couriers_in_file+=s+'\n';
         if(ReadCouriers(s))
             courier_position_in_file.push_back({couriers_in_file.size()-s.size()-1,s.size()+1});
+        else
+        {
+            BadFile;
+            Clear();
+            file="";
+            ui->FileBrowser->clear();
+            return;
+        }
     }
     ui->CourierNumberSelect->addItems(select_couriers);
     DistributeOrders();
@@ -379,7 +413,14 @@ void MainWindow::Clear()
     c.clear();
     ui->CourierNumberSelect->clear();
     ui->OrderNumberSelect->clear();
-
+    ui->CurierOrders->setRowCount(0);
+    ui->IncompleteOrders->setRowCount(0);
+    /*
+    ui->ErLabel->setHidden(true);
+    ui->ErEd->setHidden(true);
+    ui->ErForm->setHidden(true);
+    ui->ErLabel->setHidden(true);
+*/
 }
 
 
@@ -387,7 +428,7 @@ void MainWindow::FileUpdate(long long pos, bool del)
 {
     FILE *f=fopen(file.c_str(),"r+");
 
-    qDebug()<<"{UPDATE}";
+    qDebug()<<"{UPDATE} "<<pos<<" Delete?"<<del;
      fseek(f,pos,SEEK_SET);
     if(del)
     {
@@ -414,6 +455,7 @@ void MainWindow::FileUpdate(long long pos, bool del)
         {
 
             qDebug()<<couriers_in_file;
+            qDebug()<<orders_in_file.size()<<" "<<couriers_head.size()<<" "<<orders_head.size();
             std::string tow=couriers_in_file.substr(pos-orders_in_file.size()-couriers_head.size()-orders_head.size()-2);
             qDebug()<<pos-orders_in_file.size()<<" "<<tow;
             fwrite(tow.c_str(),sizeof(char),sizeof(char)*tow.size(),f);
@@ -826,6 +868,14 @@ void MainWindow::Show_Tables()
 }
 
 
+bool MainWindow::only_spaces(std::string q)
+{
+    for(int i=0;i<q.size();i++)
+        if(q[i]!=' ')return false;
+    return true;
+}
+
+
 void MainWindow::on_SaveFileButton_clicked()
 {
     std::string new_file="";
@@ -835,19 +885,21 @@ void MainWindow::on_SaveFileButton_clicked()
 
     qDebug()<<"Save in "<<new_file;
     int n=new_file.size(),i=n-1;
-
-    if(new_file=="")
-        return;
-
     for(;n-i<=4;i--)
     {
         if(new_file[i]=='.')
         {
             if(new_file.substr(i,n-i)==".inf")
                 break;
-            return on_SaveFileButton_clicked();
+            else
+            {
+                qDebug()<<"not .inf";
+                BadFile;
+                return;
+            }
         }
     }
+    qDebug()<<"ok";
     if(n-i>4)return;
     file=new_file;
     ui->FileBrowser->setText(QString::fromStdString(file));
@@ -857,7 +909,17 @@ void MainWindow::on_SaveFileButton_clicked()
 
 void MainWindow::on_DeleteCourierButton_clicked()
 {
-    if(c.size()==0)return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+    if(c.size()==0)
+    {
+        Delete;
+        return;
+    }
+    //ui->ErDel->setHidden(true);
     std::string s=ui->CourierNumberSelect->currentText().toUtf8().constData();
     qDebug()<<"Try to delete:"<<s;
     int n=c.size(),i=0;
@@ -889,12 +951,23 @@ void MainWindow::on_DeleteCourierButton_clicked()
     ui->CourierNumberSelect->removeItem(j);
     //couriers_in_file.erase(i,1);
     DistributeOrders();
+    //ui->ErDel->setHidden(true);
 }
 
 
 void MainWindow::on_DeleteOrderButton_clicked()
 {
-    if(o.size()<=0)return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+
+    if(o.size()<=0)
+    {
+        Delete;
+        return;
+    }
     std::string s=ui->OrderNumberSelect->currentText().toUtf8().constData();
     qDebug()<<"Try to delete:"<<s;
     int n=o.size(),i=0;
@@ -944,7 +1017,17 @@ void MainWindow::on_CourierNumberSelect_currentIndexChanged(int index)
 
 void MainWindow::on_AddCourierButton_clicked()
 {
-    if(!CheckCourierForm())return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+    //qDebug()<<CheckCourierForm();
+    if(!CheckCourierForm())
+    {
+        Form;
+        return;
+    }
 
     //qDebug()<<"Correct data in Courier form [index]"<<index;
     c.push_back(c_from_form);
@@ -962,14 +1045,26 @@ void MainWindow::on_AddCourierButton_clicked()
     courier_position_in_file.push_back({couriers_in_file.size()+1,c_from_form.get_in_file_format().size()+1});
     couriers_in_file=new_cif;
      //qDebug()<<"TRY TO UPDATE";
-     FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first,false);
+    FileUpdate(couriers_head.size()+orders_head.size()+orders_in_file.size()+courier_position_in_file.back().first+2,false);
+    ui->CourierNumberSelect->setCurrentIndex(select_couriers.size()-1);
     DistributeOrders();
 }
 
 
 void MainWindow::on_AddOrderButton_clicked()
 {
-    if(!CheckOrderForm())return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+    //qDebug()<<CheckOrderForm();
+    if(!CheckOrderForm())
+    {
+        Form;
+        return;
+    }
+
 
     o.push_back(o_from_form);
 
@@ -985,6 +1080,7 @@ void MainWindow::on_AddOrderButton_clicked()
     orders_in_file=new_cif;
     //qDebug()<<"TRY TO UPDATE";
     FileUpdate(orders_head.size()+order_position_in_file.back().first,false);
+    ui->OrderNumberSelect->setCurrentIndex(select_orders.size()-1);
     DistributeOrders();
 }
 
@@ -1028,7 +1124,23 @@ void MainWindow::on_OrderNumberSelect_currentIndexChanged(int index)
 
 void MainWindow::on_EditCourierInfoButton_clicked()
 {
-    if(!CheckCourierForm())return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+
+    if(select_couriers.size()==0)
+    {
+        EditNothing;
+        return;
+    }
+
+    if(!CheckCourierForm())
+    {
+        Form;
+        return;
+    }
 
     int index=ui->CourierNumberSelect->currentIndex();
     qDebug()<<"Correct data in Courier form [index]"<<index;
@@ -1068,7 +1180,23 @@ void MainWindow::on_EditCourierInfoButton_clicked()
 
 void MainWindow::on_EditOrderInfoButton_clicked()
 {
-    if(!CheckOrderForm())return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
+
+    if(select_orders.size()==0)
+    {
+        EditNothing;
+        return;
+    }
+
+    if(!CheckOrderForm())
+    {
+        Form;
+        return;
+    }
 
     int index=ui->OrderNumberSelect->currentIndex();
     //qDebug()<<"Correct data in order form [index]"<<index;

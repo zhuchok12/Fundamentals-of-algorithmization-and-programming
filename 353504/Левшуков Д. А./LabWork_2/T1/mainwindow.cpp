@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#define BadFile QMessageBox::information(this,"Error", "The file does not match the format or file not selected", QMessageBox::Ok)
+#define IncFormat QMessageBox::information(this,"Error", "New data does not match the format below", QMessageBox::Ok)
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +15,12 @@ MainWindow::MainWindow(QWidget *parent)
     ctrlo= new QShortcut(this);
     ctrlo->setKey(Qt::CTRL + Qt::Key_O);
     //ui->Table->column
+    //ui->label_4->setHidden(true);
+    ui->Table->setItemDelegateForColumn(1, new NonEditTableColumnDelegate());
+    ui->Table->setItemDelegateForColumn(2, new NonEditTableColumnDelegate());
+    ui->Table->setItemDelegateForColumn(3, new NonEditTableColumnDelegate());
+    ui->Table->setItemDelegateForColumn(4, new NonEditTableColumnDelegate());
+    ui->Table->setItemDelegateForColumn(5, new NonEditTableColumnDelegate());
     connect(ctrlo, SIGNAL(activated()), this, SLOT(on_OpenFileButton_clicked()));
     s="";
     birthday={-1,-1,-1};
@@ -25,9 +33,14 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
 void MainWindow::FileRead()
 {
-    if(file=="")return;
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
 
     std::ifstream cin(file.toUtf8().constData());
 
@@ -35,6 +48,7 @@ void MainWindow::FileRead()
     file_inside="";
     qDebug()<<"Start reading the file";
     int last=0,si,n;
+    bool error=false;
     while(std::getline(cin,s))
     {
         file_inside+=s;
@@ -57,11 +71,26 @@ void MainWindow::FileRead()
                     data->push_back(current,si);
                     //qDebug()<<data->get(data->size()-1).get_date()<<" : posiiton in file:"<<data->get_pos(data->size()-1);
                 }
+                else
+                {
+                    error=true;
+                    break;
+                }
             }
         }
+        if(error)
+        {break;}
 
 
     }
+    if(error)
+    {
+        file="";
+        BadFile;
+        return;
+
+    }
+
     qDebug()<<"Finish reading the file";
     ShowTable();
 }
@@ -72,6 +101,7 @@ void MainWindow::Today()
     t=t.today();
     ui->Today->setText("Today: "+QString::fromStdString(t.get_date()));
 }
+
 
 void MainWindow::FileUpdate(int ind,std::string s, Date nw)
 {
@@ -98,9 +128,16 @@ void MainWindow::FileUpdate(int ind,std::string s, Date nw)
     data->update(nw,ind);
 }
 
+
 void MainWindow::FileAdd(std::string s)
 {
+    if(file=="")
+    {
+        BadFile;
+        return;
+    }
     FILE *f=fopen(file.toUtf8().constData(),"a");
+
     qDebug()<<"Try to add "<<s<<" in "<<file;
     //fseek(f,0,2);
     fwrite(s.c_str(),sizeof(char),sizeof(char)*s.size(),f);
@@ -236,6 +273,8 @@ void MainWindow::on_DateOfBirthday_textChanged()
             ui->DateOfBirthday->repaint();
             QThread::sleep(1);
             ui->DateOfBirthday->clear();
+            IncFormat;
+            return;
         }
         else
         {
@@ -260,6 +299,8 @@ void MainWindow::on_Table_itemChanged(QTableWidgetItem *item)
     {
         qDebug()<<"Incorrect edit";
         item->setText(QString::fromStdString(data->get(item->row()).get_date()));
+        IncFormat;
+        return;
     }
     else
     {
@@ -294,6 +335,8 @@ void MainWindow::on_Add_textChanged()
             ui->Add->repaint();
             QThread::sleep(1);
             ui->Add->clear();
+            IncFormat;
+            return;
         }
         else
         {

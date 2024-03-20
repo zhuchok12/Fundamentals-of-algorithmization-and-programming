@@ -76,7 +76,7 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>560</y>
+      <y>410</y>
       <width>971</width>
       <height>31</height>
      </rect>
@@ -87,7 +87,7 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color:rgb(224, 27, 36)</string>
+     <string notr="true">color:rgb(237, 51, 59)</string>
     </property>
     <property name="text">
      <string>Incomplete orders:</string>
@@ -539,7 +539,7 @@
       <x>620</x>
       <y>31</y>
       <width>975</width>
-      <height>521</height>
+      <height>381</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderMinimumSectionSize">
@@ -594,9 +594,9 @@
     <property name="geometry">
      <rect>
       <x>620</x>
-      <y>590</y>
+      <y>440</y>
       <width>975</width>
-      <height>391</height>
+      <height>501</height>
      </rect>
     </property>
     <attribute name="horizontalHeaderDefaultSectionSize">
@@ -682,7 +682,7 @@ Number should contains only digit
 Name should contain non-space symbol
 From and To should contain time in minutes (0&lt;=time&lt;=1440)
 Max Weight - positive integer number(&lt;=1e18)
-Data: DD.MM.Y : DD - Day MM -  Month Y - Any number
+Data: DD.MM.Y : DD - Day MM -  Month Y - Number of year (from 0 to 9999)
 DD and MM ALWAYS consists 2 digits</string>
     </property>
     <property name="alignment">
@@ -940,6 +940,27 @@ DD and MM ALWAYS consists 2 digits</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>950</y>
+      <width>981</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(255, 120, 0)</string>
+    </property>
+    <property name="text">
+     <string>For start working you must choose the file with extension .inf</string>
     </property>
    </widget>
   </widget>
