@@ -34,7 +34,7 @@ private slots:
     void paintEvent(QPaintEvent *event);
 
     void on_ButMove_clicked();
-    void on_ButPaint_clicked();
+    //void on_ButPaint_clicked();
     //void on_FigureSelecter_currentIndexChanged(int index);
     void on_ButScale_clicked();
     void on_ButRotate_clicked();

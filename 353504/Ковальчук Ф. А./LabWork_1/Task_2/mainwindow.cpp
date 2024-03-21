@@ -3,6 +3,13 @@
 #include "Figures.h"
 #include <QtWidgets>
 
+enum FigureIndexies{
+    triangle,
+    circle,
+    rhomb,
+    square,
+    recter
+};
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -22,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->FigureSelecter->addItem("Star(6)");
     ui->FigureSelecter->addItem("Star(8)");
     ui->FigureSelecter->addItem("Hexagon");
-    ui->FigureSelecter->addItem("My trapeze");
 
     ui->ButMoveUp->setVisible(false);
     ui->ButMoveDown->setVisible(false);
@@ -55,7 +61,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::DisplayCharacteristics(){
     ui->LblPerim->setText(("Perimetr: " + std::to_string(m_pCurrentFigure->m_perimetr)).c_str());
-    ui->LblSquare->setText(("Square: " + std::to_string(m_pCurrentFigure->m_perimetr)).c_str());
+    ui->LblSquare->setText(("Square: " + std::to_string(m_pCurrentFigure->m_square)).c_str());
     //Centre of mass\nx: 0.0    y: 0.0
     ui->LblMass->setText(("Centre of mass\nX: " + std::to_string(m_pCurrentFigure->m_centre.x()) + "  Y:" + std::to_string(m_pCurrentFigure->m_centre.y())).c_str());
 }
@@ -79,7 +85,7 @@ void MainWindow::paintEvent(QPaintEvent *event)
 }
 
 
-void MainWindow::on_ButPaint_clicked()
+/*void MainWindow::on_ButPaint_clicked()
 {
     ui->ButMoveUp->setVisible(false);
     ui->ButMoveDown->setVisible(false);
@@ -104,7 +110,7 @@ void MainWindow::on_ButPaint_clicked()
     ui->ButScale->setStyleSheet("");
     ui->ButRotate->setStyleSheet("");
     ui->FigureSelecter->setStyleSheet("");
-}
+}*/
 
 void MainWindow::on_ButMove_clicked()
 {
@@ -125,7 +131,7 @@ void MainWindow::on_ButMove_clicked()
         QString qss = QString("color: %1").arg(col.name());
         ui->ButMove->setStyleSheet(qss);
     }
-    ui->ButPaint->setStyleSheet("");
+    //ui->ButPaint->setStyleSheet("");
     ui->ButScale->setStyleSheet("");
     ui->ButRotate->setStyleSheet("");
     ui->FigureSelecter->setStyleSheet("");
@@ -147,7 +153,7 @@ void MainWindow::on_FigureSelecter_activated(int index)
     //ClearCanva();
     m_currentEditMode = Draw;
     ui->ButMove->setStyleSheet("");
-    ui->ButPaint->setStyleSheet("");
+    //ui->ButPaint->setStyleSheet("");
     ui->ButScale->setStyleSheet("");
     ui->ButRotate->setStyleSheet("");
 
@@ -156,6 +162,33 @@ void MainWindow::on_FigureSelecter_activated(int index)
         QString qss = QString("color: %1").arg(col.name());
         ui->FigureSelecter->setStyleSheet(qss);
     }
+
+
+    switch (index) {
+    case triangle:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new Triangle();
+        break;
+    case circle:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new Circle();
+        break;
+    case rhomb:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new Rhomb();
+        break;
+    case square:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new Scuare();
+        break;
+    case recter:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new Rect();
+        break;
+    default:
+        break;
+    }
+
 }
 
 void MainWindow::on_ButScale_clicked()
@@ -179,7 +212,7 @@ void MainWindow::on_ButScale_clicked()
     }
     ui->ButMove->setStyleSheet("");
     ui->FigureSelecter->setStyleSheet("");
-    ui->ButPaint->setStyleSheet("");
+    //ui->ButPaint->setStyleSheet("");
     ui->ButRotate->setStyleSheet("");
 }
 
@@ -204,7 +237,7 @@ void MainWindow::on_ButRotate_clicked()
     }
     ui->ButMove->setStyleSheet("");
     ui->FigureSelecter->setStyleSheet("");
-    ui->ButPaint->setStyleSheet("");
+    //ui->ButPaint->setStyleSheet("");
     ui->ButScale->setStyleSheet("");
 }
 
