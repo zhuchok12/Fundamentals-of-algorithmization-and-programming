@@ -34,8 +34,6 @@ private slots:
     void paintEvent(QPaintEvent *event);
 
     void on_ButMove_clicked();
-    //void on_ButPaint_clicked();
-    //void on_FigureSelecter_currentIndexChanged(int index);
     void on_ButScale_clicked();
     void on_ButRotate_clicked();
 
@@ -46,43 +44,16 @@ private slots:
     void on_ButRotAntiClockWise_released();
 
 
-    void RotateForButtonClock(){
-        m_pCurrentFigure->Rotate(1);
-        DisplayCharacteristics();
-        update();
-    }
-    void RotateForButtonAntiClock(){
-        m_pCurrentFigure->Rotate(-1);
-        DisplayCharacteristics();
-        update();
-    }
-    void SizeIncrease(){
-        m_pCurrentFigure->Scale(false);
-        DisplayCharacteristics();
-        update();
-    }
-    void SizeDecrease(){
-        m_pCurrentFigure->Scale(true);
-        DisplayCharacteristics();
-        update();
-    }
+    void RotateForButtonClock();
+    void RotateForButtonAntiClock();
 
-    void MoveUp(){
-        m_pCurrentFigure->Translate(0.0f, 1.0f);
-        update();
-    }
-    void MoveDown(){
-        m_pCurrentFigure->Translate(0.0f, -1.0f);
-        update();
-    }
-    void MoveRight(){
-        m_pCurrentFigure->Translate(-1.0f, 0.0f);
-        update();
-    }
-    void MoveLeft(){
-        m_pCurrentFigure->Translate(1.0f, 0.0f);
-        update();
-    }
+    void SizeIncrease();
+    void SizeDecrease();
+
+    void MoveUp();
+    void MoveDown();
+    void MoveRight();
+    void MoveLeft();
 
     void on_FigureSelecter_activated(int index);
 

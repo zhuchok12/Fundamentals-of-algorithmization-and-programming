@@ -8,7 +8,10 @@ enum FigureIndexies{
     circle,
     rhomb,
     square,
-    recter
+    recter,
+    star_5,
+    star_6,
+    star_8,
 };
 
 MainWindow::MainWindow(QWidget *parent)
@@ -28,7 +31,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->FigureSelecter->addItem("Star(5)");
     ui->FigureSelecter->addItem("Star(6)");
     ui->FigureSelecter->addItem("Star(8)");
-    ui->FigureSelecter->addItem("Hexagon");
 
     ui->ButMoveUp->setVisible(false);
     ui->ButMoveDown->setVisible(false);
@@ -60,8 +62,8 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::DisplayCharacteristics(){
-    ui->LblPerim->setText(("Perimetr: " + std::to_string(m_pCurrentFigure->m_perimetr)).c_str());
-    ui->LblSquare->setText(("Square: " + std::to_string(m_pCurrentFigure->m_square)).c_str());
+    ui->LblPerim->setText(("Perimetr: " + std::to_string(abs(m_pCurrentFigure->m_perimetr))).c_str());
+    ui->LblSquare->setText(("Square: " + std::to_string(abs(m_pCurrentFigure->m_square))).c_str());
     //Centre of mass\nx: 0.0    y: 0.0
     ui->LblMass->setText(("Centre of mass\nX: " + std::to_string(m_pCurrentFigure->m_centre.x()) + "  Y:" + std::to_string(m_pCurrentFigure->m_centre.y())).c_str());
 }
@@ -83,34 +85,6 @@ void MainWindow::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     m_pCurrentFigure->Draw(&painter);
 }
-
-
-/*void MainWindow::on_ButPaint_clicked()
-{
-    ui->ButMoveUp->setVisible(false);
-    ui->ButMoveDown->setVisible(false);
-    ui->ButMoveRight->setVisible(false);
-    ui->ButMoveLeft->setVisible(false);
-
-    ui->ButScaleL->setVisible(false);
-    ui->ButScaleR->setVisible(false);
-
-    ui->ButRotClockWise->setVisible(false);
-    ui->ButRotAntiClockWise->setVisible(false);
-
-    ClearCanva();
-
-    m_currentEditMode = Draw;
-    QColor col = QColor(Qt::red);
-    if(col.isValid()) {
-        QString qss = QString("color: %1").arg(col.name());
-        ui->ButPaint->setStyleSheet(qss);
-    }
-    ui->ButMove->setStyleSheet("");
-    ui->ButScale->setStyleSheet("");
-    ui->ButRotate->setStyleSheet("");
-    ui->FigureSelecter->setStyleSheet("");
-}*/
 
 void MainWindow::on_ButMove_clicked()
 {
@@ -184,6 +158,21 @@ void MainWindow::on_FigureSelecter_activated(int index)
     case recter:
         delete m_pCurrentFigure;
         m_pCurrentFigure = new Rect();
+        break;
+    case star_5:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new NStar();
+        ((NStar*)m_pCurrentFigure)->m_numAngles = 5;
+        break;
+    case star_6:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new NStar();
+        ((NStar*)m_pCurrentFigure)->m_numAngles = 6;
+        break;
+    case star_8:
+        delete m_pCurrentFigure;
+        m_pCurrentFigure = new NStar();
+        ((NStar*)m_pCurrentFigure)->m_numAngles = 8;
         break;
     default:
         break;
@@ -361,5 +350,43 @@ void MainWindow::on_ButMoveDown_released()
 {
     disconnect(&m_timer,SIGNAL(timeout()),this,SLOT(MoveDown()));
     m_timer.stop();
+}
+
+void MainWindow::RotateForButtonClock(){
+    m_pCurrentFigure->Rotate(1);
+    DisplayCharacteristics();
+    update();
+}
+void MainWindow::RotateForButtonAntiClock(){
+    m_pCurrentFigure->Rotate(-1);
+    DisplayCharacteristics();
+    update();
+}
+void MainWindow::SizeIncrease(){
+    m_pCurrentFigure->Scale(false);
+    DisplayCharacteristics();
+    update();
+}
+void MainWindow::SizeDecrease(){
+    m_pCurrentFigure->Scale(true);
+    DisplayCharacteristics();
+    update();
+}
+
+void MainWindow::MoveUp(){
+    m_pCurrentFigure->Translate(0.0f, 1.0f);
+    update();
+}
+void MainWindow::MoveDown(){
+    m_pCurrentFigure->Translate(0.0f, -1.0f);
+    update();
+}
+void MainWindow::MoveRight(){
+    m_pCurrentFigure->Translate(-1.0f, 0.0f);
+    update();
+}
+void MainWindow::MoveLeft(){
+    m_pCurrentFigure->Translate(1.0f, 0.0f);
+    update();
 }
 
