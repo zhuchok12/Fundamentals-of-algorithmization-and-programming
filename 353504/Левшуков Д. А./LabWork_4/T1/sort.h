@@ -7,19 +7,19 @@
 class Sort
 {
 public:
-    Sort(long long *a, long long n);
+    Sort(int *a, long long n);
 
     //void quicksort();
     //void mergesort();
     void heap_sort();
 
-    void sw(long long &, long long &);
+    void sw(int &, int &);
 
     long double getHeapsort_speed() const;
 
 private:
     void heapify(long long v);
-    long long *a=nullptr;
+    int *a=nullptr;
     long long n;
     long double heapsort_speed,quicksort_speed,mergesort_speed;
     long long heap_size;

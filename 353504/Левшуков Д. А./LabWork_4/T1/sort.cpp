@@ -1,7 +1,7 @@
 #include "sort.h"
 
 //default construcotrs
-Sort::Sort(long long *a, long long n)
+Sort::Sort(int *a, long long n)
 {
     this->a=a;
     this->n=n;
@@ -60,7 +60,7 @@ long double Sort::getHeapsort_speed() const
     return heapsort_speed;
 }
 
-void Sort::sw(long long &f,long long &s)
+void Sort::sw(int &f,int &s)
 {
     qDebug()<<"-=SWAP=-\n"<<f<<" "<<s;
     f^=s;
