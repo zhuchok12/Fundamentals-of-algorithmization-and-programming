@@ -25,7 +25,7 @@ public:
     void add(int ch);
     void paintEvent(QPaintEvent *event);
     clock_t heapSort(int arr[], int n);
-    clock_t quickSort(int arr[], int n);
+    void quickSort(int arr[], int n);
     void heapify(int arr[], int n, int i);
     void printArray(int arr[],int n);
 

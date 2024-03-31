@@ -158,8 +158,11 @@ void MainWindow::on_sortButton_clicked()
 
     if(ui->Quick->isChecked())
     {
-        ui->speed->setText(QString::fromStdString(std::to_string(quickSort(a,siz))));
+        clock_t t1=clock();
+        quickSort(a,siz);
+        ui->speed->setText(QString::fromStdString(std::to_string(clock()-t1)));
     }
+    printArray(a,siz);
     update();
     last_sort_array=s;
 }
@@ -186,7 +189,7 @@ void MainWindow::heapify(int arr[], int n, int i)
 
 clock_t MainWindow::heapSort(int arr[], int n)
 {
-    double t1=clock();
+    clock_t t1=clock();
     // Build max heap
     for (int i = n / 2 - 1; i >= 0; i--)
         heapify(arr, n, i);
@@ -198,13 +201,35 @@ clock_t MainWindow::heapSort(int arr[], int n)
         heapify(arr, i, 0);
     }
 
-    printArray(arr,n);
     return clock()-t1;
 }
 
-clock_t MainWindow::quickSort(int arr[], int n)
+void MainWindow::quickSort(int *arr, int n)
 {
 
+    int i=0;
+    int j=n-1;
+    int m=n/2;
+
+    do{
+        while(arr[i]<arr[m])
+            i++;
+
+        while(arr[j]>arr[m])
+            j--;
+        if(i<=j)
+        {
+            std::swap(arr[i],arr[j]);
+            i++;
+            j--;
+        }
+    }while(i<=j);
+    if(j>0) // Если осталось что-то слева
+        quickSort(arr,j+1);
+    if(i<n)
+    {
+        quickSort(&arr[i],n-i);
+    }
 }
 
 void MainWindow::printArray(int arr[], int n)
