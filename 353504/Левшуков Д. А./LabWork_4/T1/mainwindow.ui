@@ -231,7 +231,7 @@ Elements must be in the range [-2*1e9;2*1e9]</string>
    <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>380</x>
       <y>870</y>
       <width>301</width>
       <height>41</height>
@@ -255,7 +255,7 @@ that you wanna find below.</string>
    <widget class="QLineEdit" name="element">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>380</x>
       <y>930</y>
       <width>301</width>
       <height>25</height>
@@ -274,7 +274,7 @@ that you wanna find below.</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>380</x>
       <y>970</y>
       <width>301</width>
       <height>25</height>
@@ -287,9 +287,9 @@ that you wanna find below.</string>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
      <rect>
-      <x>580</x>
+      <x>700</x>
       <y>870</y>
-      <width>1131</width>
+      <width>1011</width>
       <height>131</height>
      </rect>
     </property>
@@ -307,9 +307,9 @@ that you wanna find below.</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>870</y>
-      <width>580</width>
-      <height>3</height>
+      <y>860</y>
+      <width>861</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -327,6 +327,54 @@ that you wanna find below.</string>
       <width>821</width>
       <height>381</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>870</y>
+      <width>111</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Speed</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="speed">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>900</y>
+      <width>81</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="Line" name="line_6">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>870</y>
+      <width>21</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(2, 16, 42)</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>

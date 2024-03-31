@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "sort.h"
 #include "graph.h"
 #include <QMessageBox>
 
@@ -24,6 +23,9 @@ public:
     void delar();
     void add(int ch);
     void paintEvent(QPaintEvent *event);
+    clock_t heapSort(int arr[], int n);
+    void heapify(int arr[], int n, int i);
+    void printArray(int arr[],int n);
 
 private slots:
     void on_sortButton_clicked();

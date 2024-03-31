@@ -11,13 +11,11 @@ CONFIG += c++17
 SOURCES += \
     graph.cpp \
     main.cpp \
-    mainwindow.cpp \
-    sort.cpp
+    mainwindow.cpp
 
 HEADERS += \
     graph.h \
-    mainwindow.h \
-    sort.h
+    mainwindow.h
 
 FORMS += \
     mainwindow.ui

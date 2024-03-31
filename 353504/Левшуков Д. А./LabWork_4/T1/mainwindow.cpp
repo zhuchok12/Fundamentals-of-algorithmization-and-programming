@@ -97,7 +97,7 @@ void MainWindow::add(int ch)
 void MainWindow::paintEvent(QPaintEvent *event)
 {
     QPainter p(this);
-    qDebug()<<"PAINTEVENT";
+    //qDebug()<<"PAINTEVENT";
     g.draw(&p);
 }
 
@@ -119,10 +119,67 @@ void MainWindow::on_sortButton_clicked()
 
     qDebug()<<"[Type of sort]\nHeap:"<<ui->Heap->isChecked()<<"\nQuick:"<<ui->Quick->isChecked()<<"\nMerge:"<<ui->Merge->isChecked();
 
-    Sort srt(a,siz);
-
     if(ui->Heap->isChecked())
     {
-        srt.heap_sort();
+        ui->speed->setText(QString::fromStdString(std::to_string(heapSort(a,siz))));
     }
+
+    if(ui->Quick->isChecked())
+    {
+
+    }
+    update();
+}
+
+//Heap sort
+void MainWindow::heapify(int arr[], int n, int i)
+{
+    int largest = i;
+    int l = 2*i + 1;
+    int r = 2*i + 2;
+
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+
+    if (largest != i)
+    {
+        std::swap(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+}
+
+// main function to do heap sort
+clock_t MainWindow::heapSort(int arr[], int n)
+{
+    double t1=clock();
+    // Build max heap
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+
+    // Heap sort
+    for (int i=n-1; i>=0; i--)
+    {
+        std::swap(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+
+    printArray(arr,n);
+    return clock()-t1;
+}
+
+void MainWindow::printArray(int arr[], int n)
+{
+    //return;
+    qDebug()<<"Print Array was started";
+    std::string s;
+    for(int i=0;i<n;i++)
+    {
+        s+=std::to_string(arr[i])+" ";
+    }
+    //qDebug()<<s;
+    ui->sortarr->setText(QString::fromStdString(s));
+    qDebug()<<"Print Array was finished";
 }

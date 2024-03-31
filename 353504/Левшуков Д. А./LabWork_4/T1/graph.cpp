@@ -12,15 +12,15 @@ Graph::Graph()
 
 void Graph::draw(QPainter *p)
 {
-    qDebug()<<"draw1";
+    //qDebug()<<"draw1";
     if(not_to_draw)return;
-    qDebug()<<"draw2";
+    //qDebug()<<"draw2";
     long double pos=1;
-    qDebug()<<array_size;
-    for(int i=0;i<array_size;i++,pos+=1)
+    //qDebug()<<array_size<<" array:";
+    for(int i=0;i<array_size;i++,pos+=3)
     {
-
-        p->drawLine(pos,1,pos,scale*(array[i]-min_element));
+        //qDebug()<<array[i];
+        p->drawLine(pos,1,pos,(array[i]-min_element)/scale);
     }
 }
 
@@ -30,10 +30,10 @@ void Graph::set(int *a, long long size)
     array_size=size;
     not_to_draw=false;
 
-    if(array_size>max_weight)
+    if(array_size>max_weight/3+max_weight%3)
     {
         not_to_draw=true;
-        qDebug()<<"Too many elements in array [ "<<array_size<<" > "<<max_weight;
+        qDebug()<<"Too many elements in array ["<<array_size<<"] > "<<max_weight;
         return;
     }
 
@@ -42,7 +42,7 @@ void Graph::set(int *a, long long size)
     for(int i=0;i<size;i++)
     {
         max_element=std::max(max_element,(long long)a[i]);
-        min_element=std::min(max_element,(long long)a[i]);
+        min_element=std::min(min_element,(long long)a[i]);
     }
 
     scale=((long double)max_element-(long double)min_element)/(long double)max_height;
