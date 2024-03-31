@@ -270,7 +270,7 @@ that you wanna find below.</string>
    </widget>
    <widget class="QPushButton" name="findButton">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>
@@ -282,6 +282,12 @@ that you wanna find below.</string>
     </property>
     <property name="text">
      <string>Find</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -348,10 +354,10 @@ that you wanna find below.</string>
    <widget class="QLabel" name="speed">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>270</x>
       <y>900</y>
-      <width>81</width>
-      <height>17</height>
+      <width>91</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
@@ -375,6 +381,51 @@ that you wanna find below.</string>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_7">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>930</y>
+      <width>110</width>
+      <height>3</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>265</x>
+      <y>940</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Find index</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="index">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>970</y>
+      <width>91</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
   </widget>

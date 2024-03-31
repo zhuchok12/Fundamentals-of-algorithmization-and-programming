@@ -2,6 +2,8 @@
 #include "ui_mainwindow.h"
 
 #define InputError QMessageBox::information(this,"Error", "Wrong format of array elements or you write nothing", QMessageBox::Ok);
+#define ElementError QMessageBox::information(this,"Error", "You didn't write a number", QMessageBox::Ok);
+#define NotSortError QMessageBox::information(this,"Error", "Firstly, you should sort array :)", QMessageBox::Ok);
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -80,6 +82,36 @@ bool MainWindow::check(std::string s)
     return true;
 }
 
+bool MainWindow::check_el(std::string s)
+{
+    long long n=s.size();
+    bool have_digit=false;
+    for(long long i=0;i<n;i++)
+    {
+        if(!isdigit(s[i])&&s[i]!='-'||(s[i]=='-'&&i!=0))
+            return false;
+        if(isdigit(s[i]))have_digit=true;
+    }
+
+    if(!have_digit)
+        return false;
+
+            try
+            {
+                int ch=stoi(s.substr(0));
+            }
+            catch(...)
+            {
+                qDebug()<<"Bad elemnt";
+                return false;
+            }
+
+
+
+
+    return true;
+}
+
 void MainWindow::delar()
 {
     siz=0;
@@ -91,7 +123,7 @@ void MainWindow::add(int ch)
 {
     a=(int *)realloc(a,(++siz)*sizeof(int));
     a[siz-1]=ch;
-    qDebug()<<ch;
+    //qDebug()<<ch;
 }
 
 void MainWindow::paintEvent(QPaintEvent *event)
@@ -126,9 +158,10 @@ void MainWindow::on_sortButton_clicked()
 
     if(ui->Quick->isChecked())
     {
-
+        ui->speed->setText(QString::fromStdString(std::to_string(quickSort(a,siz))));
     }
     update();
+    last_sort_array=s;
 }
 
 //Heap sort
@@ -151,7 +184,6 @@ void MainWindow::heapify(int arr[], int n, int i)
     }
 }
 
-// main function to do heap sort
 clock_t MainWindow::heapSort(int arr[], int n)
 {
     double t1=clock();
@@ -170,6 +202,11 @@ clock_t MainWindow::heapSort(int arr[], int n)
     return clock()-t1;
 }
 
+clock_t MainWindow::quickSort(int arr[], int n)
+{
+
+}
+
 void MainWindow::printArray(int arr[], int n)
 {
     //return;
@@ -183,3 +220,54 @@ void MainWindow::printArray(int arr[], int n)
     ui->sortarr->setText(QString::fromStdString(s));
     qDebug()<<"Print Array was finished";
 }
+
+//BinFind
+int MainWindow::binfind(int a[],int n,int el)
+{
+    int l=0,r=n-1;
+    while(l<r)
+    {
+        int m=l+r;
+        m/=2;
+
+        if(a[m]==el)
+        {
+            g.paint(m);
+            update();
+            return m;
+        }
+
+        g.paint(l,r,m);
+        update();
+
+        if(a[m]>el)
+            r=m-1;
+        else
+            l=m+1;
+    }
+
+    g.paint(-1488);
+        if(a[l]!=el)return -1;
+
+    g.paint(l);
+    update();
+    return l;
+}
+
+void MainWindow::on_findButton_clicked()
+{
+    if(!check_el(ui->element->text().toUtf8().constData()))
+    {
+        ElementError;
+        return;
+    }
+
+    if(last_sort_array!=ui->ArrayText->toPlainText().toStdString())
+    {
+        NotSortError;
+        return;
+    }
+    int e=std::stoi(ui->element->text().toUtf8().constData());
+    ui->index->setText(QString::fromStdString(std::to_string(binfind(a,siz,e))));
+}
+

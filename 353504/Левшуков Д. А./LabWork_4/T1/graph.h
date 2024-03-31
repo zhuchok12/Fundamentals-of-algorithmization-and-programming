@@ -11,8 +11,11 @@ public:
     Graph();
     void draw(QPainter *p);
     void set(int *a, long long size);
+    void paint(int l, int r, int m);
+    void paint(int ind);
 private:
-    int *array;
+    int *array=nullptr;
+    int *color=nullptr;
     long long array_size,max_element,min_element;
     long double scale;
     bool not_to_draw;

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "graph.h"
 #include <QMessageBox>
+#include <QThread>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,16 +25,22 @@ public:
     void add(int ch);
     void paintEvent(QPaintEvent *event);
     clock_t heapSort(int arr[], int n);
+    clock_t quickSort(int arr[], int n);
     void heapify(int arr[], int n, int i);
     void printArray(int arr[],int n);
 
+    int binfind(int arr[], int n, int el);
+    bool check_el(std::string s);
 private slots:
     void on_sortButton_clicked();
+
+    void on_findButton_clicked();
 
 private:
     Ui::MainWindow *ui;
     int *a=nullptr;
     long long siz=0;
     Graph g;
+    std::string last_sort_array;
 };
 #endif // MAINWINDOW_H
