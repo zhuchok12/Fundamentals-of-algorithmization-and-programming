@@ -25,7 +25,9 @@ public:
     void add(int ch);
     void paintEvent(QPaintEvent *event);
     clock_t heapSort(int arr[], int n);
-    void quickSort(int arr[], int n);
+    void quickSort(int *arr, int l,int r);
+    void merge_sort(int arr[],int left,int right);
+    void merge(int *arr,int left, int mid, int right);
     void heapify(int arr[], int n, int i);
     void printArray(int arr[],int n);
 
@@ -37,6 +39,7 @@ private slots:
     void on_findButton_clicked();
 
 private:
+    int partition(int a[],int l,int r);
     Ui::MainWindow *ui;
     int *a=nullptr;
     long long siz=0;

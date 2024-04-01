@@ -88,7 +88,7 @@ bool MainWindow::check_el(std::string s)
     bool have_digit=false;
     for(long long i=0;i<n;i++)
     {
-        if(!isdigit(s[i])&&s[i]!='-'||(s[i]=='-'&&i!=0))
+        if((!isdigit(s[i])&&s[i]!='-')||(s[i]=='-'&&i!=0))
             return false;
         if(isdigit(s[i]))have_digit=true;
     }
@@ -98,7 +98,7 @@ bool MainWindow::check_el(std::string s)
 
             try
             {
-                int ch=stoi(s.substr(0));
+                stoi(s.substr(0));
             }
             catch(...)
             {
@@ -159,7 +159,13 @@ void MainWindow::on_sortButton_clicked()
     if(ui->Quick->isChecked())
     {
         clock_t t1=clock();
-        quickSort(a,siz);
+        quickSort(a,0,siz-1);
+        ui->speed->setText(QString::fromStdString(std::to_string(clock()-t1)));
+    }
+    if(ui->Merge->isChecked())
+    {
+        clock_t t1=clock();
+        merge_sort(a,0,siz);
         ui->speed->setText(QString::fromStdString(std::to_string(clock()-t1)));
     }
     printArray(a,siz);
@@ -204,32 +210,16 @@ clock_t MainWindow::heapSort(int arr[], int n)
     return clock()-t1;
 }
 
-void MainWindow::quickSort(int *arr, int n)
+void MainWindow::quickSort(int *arr, int l, int r)
 {
-
-    int i=0;
-    int j=n-1;
-    int m=n/2;
-
-    do{
-        while(arr[i]<arr[m])
-            i++;
-
-        while(arr[j]>arr[m])
-            j--;
-        if(i<=j)
-        {
-            std::swap(arr[i],arr[j]);
-            i++;
-            j--;
-        }
-    }while(i<=j);
-    if(j>0) // Если осталось что-то слева
-        quickSort(arr,j+1);
-    if(i<n)
+    if(l<r)
     {
-        quickSort(&arr[i],n-i);
+      int q=partition(a,l,r);
+      quickSort(a,l,q);
+      quickSort(a,q+1,r);
     }
+    return;
+
 }
 
 void MainWindow::printArray(int arr[], int n)
@@ -296,3 +286,69 @@ void MainWindow::on_findButton_clicked()
     ui->index->setText(QString::fromStdString(std::to_string(binfind(a,siz,e))));
 }
 
+int MainWindow::partition(int a[], int l, int r)
+{
+    int m=a[(l+r)/2];
+    int i=l;
+    int j=r;
+    //int m=n/2;
+
+    while(i<=j)
+    {
+        while(a[i]<m)
+            i++;
+
+        while(a[j]>m)
+            j--;
+        if(i>=j)
+            break;
+
+            std::swap(a[i],a[j]);
+            i++;
+            j--;
+
+    }
+    return j;
+}
+
+//MergeFind
+void MainWindow::merge(int a[],int l,int mid, int r)
+{
+    int i=0,j=0;
+    int *res=new int[r-l+1];
+    while(l+i<mid&&mid+j<r)
+    {
+        if(a[i+l]<a[mid+j])
+            res[i+j]=a[l+i],i++;
+        else
+        {
+            res[i+j]=a[mid+j],j++;
+        }
+    }
+    while(l+i<mid)
+    {
+        res[i+j]=a[l+i];
+        i++;
+    }
+    while(j+mid<r)
+    {
+        res[i+j]=a[mid+j];
+        j++;
+    }
+
+    for(int q=0;q<i+j;q++)
+    {
+        a[l+q]=res[q];
+    }
+    delete []res;
+}
+
+void MainWindow::merge_sort(int a[],int l, int r)
+{
+    if(l+1>=r)return;
+
+    int mid=(l+r)/2;
+    merge_sort(a,l,mid);
+    merge_sort(a,mid,r);
+    merge(a,l,mid,r);
+}
