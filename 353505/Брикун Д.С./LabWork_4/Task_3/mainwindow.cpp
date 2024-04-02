@@ -52,10 +52,12 @@ void MainWindow::on_pushButton_enter_clicked()
                 add += QString::number(b) + " ";
             }
             long long sum = 0;
-            for (long long i = arr.size() - arr.size() % 3; i < arr.size(); ++i) {
-                sum += arr[i];
+            if (arr.size() % 3){
+                for (long long i = arr.size() - arr.size() % 3; i < arr.size(); ++i) {
+                    sum += arr[i];
+                }
+                add += QString::number(round((1. * sum) / (arr.size() % 3))) + " ";
             }
-            add += QString::number(round((1. * sum) / (arr.size() % 3))) + " ";
             ui->textEdit->setText(ui->textEdit->toPlainText() + "\n" + add);
 
         }

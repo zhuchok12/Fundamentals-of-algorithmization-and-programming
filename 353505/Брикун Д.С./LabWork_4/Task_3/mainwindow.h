@@ -23,7 +23,7 @@ private slots:
     void on_pushButton_restart_clicked();
 
 private:
-    long long n, enterI;
+    long long n, enterI = 0;
     QVector<long long> arr;
     Ui::MainWindow *ui;
 };

@@ -17,7 +17,7 @@
    <widget class="QSpinBox" name="spinBox">
     <property name="geometry">
      <rect>
-      <x>161</x>
+      <x>391</x>
       <y>20</y>
       <width>81</width>
       <height>25</height>
@@ -33,7 +33,7 @@
    <widget class="QPushButton" name="pushButton_enter">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>490</x>
       <y>20</y>
       <width>121</width>
       <height>24</height>
@@ -48,7 +48,7 @@
      <rect>
       <x>10</x>
       <y>20</y>
-      <width>131</width>
+      <width>261</width>
       <height>21</height>
      </rect>
     </property>
@@ -59,7 +59,7 @@
    <widget class="QPushButton" name="pushButton_restart">
     <property name="geometry">
      <rect>
-      <x>420</x>
+      <x>650</x>
       <y>20</y>
       <width>80</width>
       <height>24</height>
@@ -119,7 +119,7 @@
      <rect>
       <x>40</x>
       <y>440</y>
-      <width>171</width>
+      <width>401</width>
       <height>51</height>
      </rect>
     </property>
@@ -134,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>
