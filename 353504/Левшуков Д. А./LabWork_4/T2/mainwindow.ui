@@ -113,83 +113,13 @@ Elements must be in the range [-2*1e9;2*1e9]</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QRadioButton" name="Heap">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>910</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Heap sort</string>
-    </property>
-    <property name="checked">
-     <bool>true</bool>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">typeofsort</string>
-    </attribute>
-   </widget>
-   <widget class="QLabel" name="label_3">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>870</y>
-      <width>251</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Choose type of sort below</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="Quick">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>940</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Quick sort</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">typeofsort</string>
-    </attribute>
-   </widget>
-   <widget class="QRadioButton" name="Merge">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>970</y>
-      <width>101</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Merge sort</string>
-    </property>
-    <attribute name="buttonGroup">
-     <string notr="true">typeofsort</string>
-    </attribute>
-   </widget>
    <widget class="QPushButton" name="sortButton">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>910</y>
-      <width>121</width>
-      <height>81</height>
+      <x>10</x>
+      <y>880</y>
+      <width>301</width>
+      <height>111</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -202,7 +132,7 @@ Elements must be in the range [-2*1e9;2*1e9]</string>
    <widget class="Line" name="line_4">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>310</x>
       <y>870</y>
       <width>21</width>
       <height>141</height>
@@ -228,20 +158,6 @@ Elements must be in the range [-2*1e9;2*1e9]</string>
      <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>870</y>
-      <width>301</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Write element in the range [-2*1e9;2*1e9]
-that you wanna find below.</string>
-    </property>
-   </widget>
    <widget class="QPlainTextEdit" name="ArrayText">
     <property name="geometry">
      <rect>
@@ -252,69 +168,12 @@ that you wanna find below.</string>
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="element">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>930</y>
-      <width>301</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="findButton">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>970</y>
-      <width>301</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Find</string>
-    </property>
-    <property name="checkable">
-     <bool>false</bool>
-    </property>
-    <property name="checked">
-     <bool>false</bool>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_5">
-    <property name="geometry">
-     <rect>
-      <x>700</x>
-      <y>870</y>
-      <width>1011</width>
-      <height>131</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>../resource/cpp-master (1).png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="Line" name="line_3">
     <property name="geometry">
      <rect>
       <x>0</x>
       <y>860</y>
-      <width>861</width>
+      <width>1701</width>
       <height>16</height>
      </rect>
     </property>
@@ -335,42 +194,10 @@ that you wanna find below.</string>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_6">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>870</y>
-      <width>111</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Speed</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
-   <widget class="QLabel" name="speed">
-    <property name="geometry">
-     <rect>
-      <x>270</x>
-      <y>900</y>
-      <width>91</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-   </widget>
    <widget class="Line" name="line_6">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>640</x>
       <y>870</y>
       <width>21</width>
       <height>141</height>
@@ -383,30 +210,54 @@ that you wanna find below.</string>
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="Line" name="line_7">
+   <widget class="QPushButton" name="PrevStep">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>930</y>
-      <width>110</width>
-      <height>3</height>
+      <x>330</x>
+      <y>880</y>
+      <width>311</width>
+      <height>111</height>
      </rect>
     </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Previous step of sort</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="element">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>930</y>
+      <width>301</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>265</x>
-      <y>940</y>
-      <width>91</width>
-      <height>20</height>
+      <x>1305</x>
+      <y>880</y>
+      <width>381</width>
+      <height>51</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>Find index</string>
+     <string>Finded index</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -415,17 +266,106 @@ that you wanna find below.</string>
    <widget class="QLabel" name="index">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>970</y>
-      <width>91</width>
-      <height>17</height>
+      <x>1310</x>
+      <y>950</y>
+      <width>381</width>
+      <height>41</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>16</pointsize>
+     </font>
     </property>
     <property name="text">
      <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="findButton">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>970</y>
+      <width>301</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Find</string>
+    </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>990</x>
+      <y>870</y>
+      <width>301</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Write element in the range [-2*1e9;2*1e9]
+that you wanna find below.</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NextStep">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>880</y>
+      <width>311</width>
+      <height>111</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Next step of sort</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_7">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>870</y>
+      <width>21</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(2, 16, 42)</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_8">
+    <property name="geometry">
+     <rect>
+      <x>1290</x>
+      <y>870</y>
+      <width>21</width>
+      <height>141</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color:rgb(2, 16, 42)</string>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>
