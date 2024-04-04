@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     HiddenError();
-    
 }
 
 MainWindow::~MainWindow()
