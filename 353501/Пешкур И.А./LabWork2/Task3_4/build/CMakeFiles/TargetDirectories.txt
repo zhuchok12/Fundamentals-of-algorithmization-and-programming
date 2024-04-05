@@ -1,0 +1,6 @@
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/Task3_1.dir
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/binaryoperation.dir
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/expression.dir
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/number.dir
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/edit_cache.dir
+/home/dima-bilan-228/LabWork2/Task3_1/build/CMakeFiles/rebuild_cache.dir
