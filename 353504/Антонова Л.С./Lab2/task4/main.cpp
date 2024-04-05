@@ -4,6 +4,7 @@
 
 #include <iostream>
 
+
 bool check_equals(Expression const* left, Expression const* right) {
     return (left->isNumber() && right->isNumber()) ||
            (left->isBinaryOperation() && right->isBinaryOperation());
