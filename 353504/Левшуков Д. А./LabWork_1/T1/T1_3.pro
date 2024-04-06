@@ -9,15 +9,15 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    iterator.cpp \
     main.cpp \
     mainwindow.cpp \
-    vector.cpp
+    rectangle.cpp \
+    telega.cpp
 
 HEADERS += \
-    iterator.h \
     mainwindow.h \
-    vector.h
+    rectangle.h \
+    telega.h
 
 FORMS += \
     mainwindow.ui
