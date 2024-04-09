@@ -16,3 +16,4 @@ jobs:
       - name: Run Hierarchy checker
         run: |
           python3 check_hierarchy.py
+  
