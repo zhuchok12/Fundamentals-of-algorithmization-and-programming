@@ -145,3 +145,204 @@ long long vector<T>::max_size()
 {
     return std::numeric_limits<T>::max()/sizeof(T);
 }
+
+template<typename T>
+template<typename... Types>
+void vector<T>::emplace_back(Types... args){
+    T t(std::forward<Types>(args)...);
+    push_back(t);
+}
+
+template<typename T>
+it::iterator<T> vector<T>::begin() const
+{
+    return it::iterator(_v);
+}
+
+template<typename T>
+it::const_iterator<T> vector<T>::cbegin() const
+{
+    return it::const_iterator(_v);
+}
+
+template<typename T>
+void vector<T>::insert(it::iterator<T> _pos, const T &value)
+{
+    it::iterator<T> it = vector::begin();
+    size_t ind = 0;
+    while (it != _pos)
+    {
+        ind++;
+        it++;
+    }
+    if (_capacity <= _size + 1)
+    {
+        size_t new_capacity = _size + 5;
+        T* new_v = new T[new_capacity];
+        for (size_t i = 0; i < _size; ++i)
+        {
+            new (&new_v[i]) T(_v[i]);
+            _v[i].~T();
+        }
+        delete[] _v;
+        _v = new_v;
+        _capacity = new_capacity;
+    }
+    it = vector::begin();
+    for (int i = 0; i < ind; ++i)
+    {
+        it++;
+    }
+    size_t i;
+    try
+    {
+        for (i = _size; i > ind; --i)
+        {
+            new (&_v[i]) T(_v[i - 1]);
+            (_v + i - 1)->~T();
+        }
+        new (&*it) T(value);
+        _size++;
+    }
+    catch (...)
+    {
+        vector::clear();
+        throw;
+    }
+}
+
+template<typename T>
+vector<T> &vector<T>::operator=(const vector &other) {
+    if (this != &other) {
+        vector<T> temp(other);
+        T* temp_v = temp._v;
+        temp._v = _v;
+        _v = temp_v;
+
+        size_t temp_size = temp._size;
+        temp._size = _size;
+        _size = temp_size;
+
+        size_t temp_capacity = temp._capacity;
+        temp._capacity = _capacity;
+        _capacity = temp_capacity;
+    }
+    return *this;
+}
+
+template<typename T>
+it::iterator<T> vector<T>::end() const
+{
+    return it::iterator(_v+_size);
+}
+
+template<typename T>
+void vector<T>::erase(it::iterator<T> it)
+{
+    size_t ind=0;
+    for(auto i = begin();i!=it&&ind<_size;i++,ind++);
+    try {
+        for (size_t i = ind + 1; i < _size; ++i) {
+            new (_v + i - 1) T(_v[i]);
+            (_v + i)->~T();
+        }
+        _size--;
+    } catch (...) {
+        vector::clear();
+        throw;
+    }
+}
+
+template<typename T>
+void vector<T>::erase(it::iterator<T> begin, it::iterator<T> end) {
+    size_t count = end - begin;
+    size_t ind = begin - vector::begin();
+    for (size_t i = ind; i < _size; ++i) {
+        _v[i - count] = std::move(_v[i]);
+    }
+    for (size_t i = _size - count; i < _size; ++i) {
+        _v[i].~T();
+    }
+    _size -= count;
+}
+
+template<typename T>
+it::iterator<T> vector<T>::rend() const
+{
+    return it::reverse_iterator<T>(_v-1);
+}
+
+template<typename T>
+it::iterator<T> vector<T>::rbegin() const
+{
+    return it::reverse_iterator<T>(_v+_size-1);
+}
+
+template<typename T>
+template<typename... Args>
+void vector<T>::emplace(it::iterator<T> pos, Args &&...args) {
+    pos.get()->~T();
+    new (pos.get()) T(args...);
+}
+
+template<typename T>
+void vector<T>::assign(size_t n, const T & v)
+{
+    clear();
+    for(int i=0;i<n;i++)
+        push_back(v);
+}
+
+
+template<typename T>
+template<typename InputIterator>
+void vector<T>::insert(const it::iterator<T> &pos, InputIterator beg, InputIterator end)
+{
+    auto other_beg=beg;
+    size_t kol=0;
+    while(other_beg!=end)
+    {
+        other_beg++;
+        kol++;
+    }
+    it::iterator<T>it=vector::begin();
+    size_t ind=0;
+    while(it!=pos)
+    {
+        ind++;
+        it++;
+    }
+    if(_size+kol>_capacity)//need add
+    {
+        size_t new_capacity=_size+kol+5;
+        T* new_v=new T[new_capacity];
+        for(size_t i=0;i<ind;i++)
+        {
+            new(&new_v[i]) T(_v[i]);
+            _v[i].~T();
+        }
+        for(size_t i=0;other_beg!=end;i++)
+        {
+            new(&new_v[ind+i]) T(*(other_beg++));
+        }
+        for(size_t i=ind;i<_size;i++)
+        {
+            new (&new_v[kol + i]) T(_v[i]);
+            _v[i].~T();
+        }
+        delete []_v;
+        _v=new_v;
+        _capacity=new_capacity;
+    }else
+    {
+        for (size_t i = _size - 1 + kol; i > ind; --i) {
+            new (&_v[i]) T(_v[i - kol]);
+            (_v + i - kol)->~T();
+        }
+        other_beg = beg;
+        for (size_t i = ind; other_beg != end; ++i) {
+            new (_v + i) T(*(other_beg++));
+        }
+    }
+    _size+=kol;
+}

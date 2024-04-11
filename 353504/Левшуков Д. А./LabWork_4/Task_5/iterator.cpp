@@ -44,6 +44,12 @@ it::iterator<T>::iterator(const iterator<T> &b)
     this->it=b.it;
 }
 
+template<class T>
+it::iterator<T> &it::iterator<T>::operator++() {
+    it++;
+    return *this;
+}
+
 
 
 template<class T>

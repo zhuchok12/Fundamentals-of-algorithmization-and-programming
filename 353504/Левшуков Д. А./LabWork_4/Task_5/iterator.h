@@ -50,6 +50,8 @@ public:
 
     iterator &operator=(const iterator *b);
 
+    iterator<T>& operator++();
+
     T&operator*();
 
     T *get();

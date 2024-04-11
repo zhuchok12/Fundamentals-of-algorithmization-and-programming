@@ -1,8 +1,10 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include<iostream>
-#include<limits>
+#include <iostream>
+#include <limits>
+#include "iterator.h"
+#include <stdexcept>
 
 template<typename T>
 class vector
@@ -13,7 +15,8 @@ class vector
 public:
     vector();//+
     ~vector();//+
-    void assign();
+    void assign(size_t, const T&);
+
     T& at(int);//+
     long long capacity();//+
     void clear();//+
@@ -28,8 +31,21 @@ public:
     void push_back(const T& a);//+
     void pop_back();//+
     long long max_size();//?
-    void insert();//?
-    void emplace_back();//?
+    it::iterator<T> begin()const;
+    it::const_iterator<T> cbegin()const;
+    template<typename... Types>
+    void emplace_back(Types... args);
+    template<class... Args>
+    void emplace(it::iterator<T>, Args &&...);
+    void insert(it::iterator<T>, const T& value);
+    template<typename InputIterator>
+    void insert(const it::iterator<T>&, InputIterator, InputIterator);
+    vector<T>& operator=(const vector& other);
+    it::iterator<T> end()const;
+    void erase(it::iterator<T>);
+    void erase(it::iterator<T>, it::iterator<T>);
+    it::iterator<T> rend()const;
+    it::iterator<T> rbegin()const;
 };
 
 #endif // VECTOR_H
