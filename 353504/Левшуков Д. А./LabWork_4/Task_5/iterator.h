@@ -1,204 +1,157 @@
-#include <iostream>
-namespace it {
-template<class T>
-class const_iterator {
-private:
-    const T* it;
+#ifndef L3T1_ITERATOR_H
+#define L3T1_ITERATOR_H
+
+#include <cstdio>
+
+template<typename T>
+class iterator {
+
+    T *it;
+
 public:
-    const_iterator() {
-        it = nullptr;
+
+    explicit iterator(T *tmp) {
+        it = tmp;
     }
 
-    const_iterator(const const_iterator<T>& other) {
-        this->it = other.it;
-    }
+    ~iterator() = default;
 
-    explicit const_iterator(T *iter) {
-        it = iter;
-    }
-
-    const T *operator->() {
+    const T *base() const {
         return it;
     }
 
-    bool operator!=(const const_iterator &other) {
-        return it != other.it;
-    }
-
-    const_iterator& operator=(const const_iterator &other) {
-        it = other.it;
-        return *this;
-    }
-
-    const T &operator*() {
+    // *
+    T &operator*() const {
         return *it;
     }
-    const T* get_pointer() {
-        return it;
-    }
-};
 
-template<class T>
-class iterator : public const_iterator<T> {
-protected:
-    T *it;
-public:
-    iterator() {
-        it = nullptr;
-    }
-
-    iterator(const iterator<T>& other) {
-        this->it = other.it;
-    }
-
-    explicit iterator(T *iter) {
-        it = iter;
-    }
-
-    iterator<T>& operator++() {
-        it++;
-        return *this;
-    }
-
-    iterator<T>& operator--() {
-        it--;
-        return *this;
-    }
-
-    iterator<T>& operator++(int) {
-        it++;
-        return *this;
-    }
-
-    iterator<T>& operator--(int) {
-        it--;
-        return *this;
-    }
-
-    T *operator->() {
+    // ->
+    T *operator->() const {
         return it;
     }
 
-    virtual bool operator!=(iterator other) {
-        return this->it != other.it;
-    }
-
-    bool operator==(iterator other) {
-        return this->it == other.it;
-    }
-
-    iterator& operator=(const iterator &other) {
-        it = other.it;
+    // ++ | --
+    iterator &operator++() {
+        ++it;
         return *this;
     }
 
-    iterator& operator=(const iterator *other) {
-        it = other->it;
+    iterator &operator--() {
+        --it;
         return *this;
     }
 
+    iterator operator++(int) {
+        return iterator(it++);
+    }
+
+    iterator operator--(int) {
+        return iterator(it--);
+    }
+
+    // + | -
     iterator operator+(int n) {
+        return iterator(it + n);
+    }
+
+    iterator operator-(size_t n) {
+        return iterator(it - n);
+    }
+
+    // += | -=
+    iterator &operator+=(size_t n) {
         it += n;
         return *this;
     }
 
-    iterator operator-(int n) {
+    iterator &operator-=(size_t n) {
         it -= n;
         return *this;
     }
 
-    size_t operator-(iterator n) {
-        return it - n.it;
+    // []
+    T operator[](size_t n) {
+        return it[n];
     }
 
-    T &operator*() {
-        return *it;
+    bool operator !=(iterator x) {
+        return it != x.operator->();
     }
 
-    T* get_pointer() const {
-        return it;
-    }
 };
 
-template<class T>
-class reverse_iterator : public iterator<T> {
-protected:
+template<typename T>
+class reverse_iterator {
+
     T *it;
+
 public:
-    reverse_iterator() {
-        it = nullptr;
+
+    explicit reverse_iterator(T *tmp) {
+        it = tmp;
     }
 
-    explicit reverse_iterator(const iterator<T>& other) {
-        this->it = other.it;
+    ~reverse_iterator() = default;
+
+    const T &base() const {
+        return *it;
     }
 
-    explicit reverse_iterator(T *iter) {
-        it = iter;
+    // *
+    T &operator*() const {
+        return *it;
     }
 
-    reverse_iterator<T>& operator++() {
-        it--;
+    // ->
+    T *operator->() const {
+        return  it;
+    }
+
+    // ++ | --
+    reverse_iterator &operator++() {
+        --it;
         return *this;
     }
 
-    reverse_iterator<T>& operator--() {
-        it++;
+    reverse_iterator &operator--() {
+        ++it;
         return *this;
     }
 
-    reverse_iterator<T>& operator++(int) {
-        it--;
-        return *this;
+    reverse_iterator operator++(int) {
+        return reverse_iterator(it--);
     }
 
-    reverse_iterator<T>& operator--(int) {
-        it++;
-        return *this;
+    reverse_iterator operator--(int) {
+        return reverse_iterator(it++);
     }
 
-    T *operator->() {
-        return it;
+    // + | -
+    reverse_iterator operator+(size_t n) {
+        return reverse_iterator(it - n);
     }
 
-    virtual bool operator!=(reverse_iterator other) {
-        return this->it != other.it;
+    reverse_iterator operator-(size_t n) {
+        return reverse_iterator(it + n);
     }
 
-    bool operator==(reverse_iterator other) {
-        return this->it == other.it;
-    }
-
-    reverse_iterator& operator=(const reverse_iterator &other) {
-        it = other.it;
-        return *this;
-    }
-
-    reverse_iterator& operator=(const reverse_iterator *other) {
-        it = other->it;
-        return *this;
-    }
-
-    reverse_iterator operator+(int n) {
-        it += n;
-        return *this;
-    }
-
-    reverse_iterator operator-(int n) {
+    // += | -=
+    reverse_iterator &operator+=(size_t n) {
         it -= n;
         return *this;
     }
 
-    size_t operator-(reverse_iterator n) {
-        return it - n.it;
+    reverse_iterator &operator-=(size_t n) {
+        it += n;
+        return *this;
     }
 
-    T &operator*() {
-        return *it;
+    // []
+    T operator[](size_t n) {
+        return it[n];
     }
 
-    T* get_pointer() const {
-        return it;
-    }
 };
-};
+
+
+#endif

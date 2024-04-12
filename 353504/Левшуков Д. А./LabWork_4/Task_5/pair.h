@@ -1,38 +1,27 @@
-#ifndef PAIR_H
-#define PAIR_H
-//#include "myvector.h"
-template<typename f, typename s>
-struct Pair{
-    f first;
-    s second;
+#ifndef L3T1_PAIR_H
+#define L3T1_PAIR_H
 
+template<typename T1, typename T2>
+struct pair {
+    T1 first;
+    T2 second;
 
-    Pair(f first_, s second_):first(first), second(second){}
+    pair() = default;
 
-    Pair() = default;
-
-    void swap(Pair<f, s>& other) {
-        f buf1 = first;
-        first = other.first;
-        other.first = buf1;
-        s buf2 = second;
-        second = other.second;
-        other.second = buf2;
+    pair(T1 a, T2 b) {
+        this->first = a;
+        this->second = b;
     }
 
-    Pair<f, s>& operator=(const Pair<f, s>& other) {
-        if (this != &other) {
-            first = other.first;
-            second = other.second;
-        }
-        return *this;
+    pair(std::initializer_list<pair> a) {
+        pair(*a.begin());
     }
+
+    void operator=(pair const &pair_) {
+        first = pair_.first;
+        second = pair_.second;
+
+    }
+
 };
-
-template <typename f, typename s>
-Pair<f, s> make_pair(const f& first, const s& second) {
-    return Pair<f, s>(first, second);
-}
-
-
-#endif // PAIR_H
+#endif //L3T1_PAIR_H
