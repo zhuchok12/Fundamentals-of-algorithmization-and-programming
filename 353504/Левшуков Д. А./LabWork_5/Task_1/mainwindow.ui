@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1600</width>
+    <height>900</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1600</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>1600</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>530</y>
+      <width>1600</width>
+      <height>3</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="QButton">
+    <property name="geometry">
+     <rect>
+      <x>61</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Q</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="WButton">
+    <property name="geometry">
+     <rect>
+      <x>111</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>W</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="RButton">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>R</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EButton">
+    <property name="geometry">
+     <rect>
+      <x>161</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>E</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="YButton">
+    <property name="geometry">
+     <rect>
+      <x>311</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Y</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="IButton">
+    <property name="geometry">
+     <rect>
+      <x>411</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>I</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="UButton">
+    <property name="geometry">
+     <rect>
+      <x>361</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>U</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="TButton">
+    <property name="geometry">
+     <rect>
+      <x>261</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>T</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OButton">
+    <property name="geometry">
+     <rect>
+      <x>461</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>O</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="PButton">
+    <property name="geometry">
+     <rect>
+      <x>511</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>P</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="P1Button">
+    <property name="geometry">
+     <rect>
+      <x>561</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="P2Button">
+    <property name="geometry">
+     <rect>
+      <x>611</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SButton">
+    <property name="geometry">
+     <rect>
+      <x>141</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>S</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="GButton">
+    <property name="geometry">
+     <rect>
+      <x>291</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>G</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="JButton">
+    <property name="geometry">
+     <rect>
+      <x>391</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>J</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="HButton">
+    <property name="geometry">
+     <rect>
+      <x>341</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>H</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="FButton">
+    <property name="geometry">
+     <rect>
+      <x>241</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>F</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="KButton">
+    <property name="geometry">
+     <rect>
+      <x>441</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>K</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="LButton">
+    <property name="geometry">
+     <rect>
+      <x>491</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>L</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="L2Button">
+    <property name="geometry">
+     <rect>
+      <x>591</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="L1Button">
+    <property name="geometry">
+     <rect>
+      <x>541</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DButton">
+    <property name="geometry">
+     <rect>
+      <x>191</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>D</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="AButton">
+    <property name="geometry">
+     <rect>
+      <x>91</x>
+      <y>600</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>A</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MButton">
+    <property name="geometry">
+     <rect>
+      <x>411</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>M</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="BButton">
+    <property name="geometry">
+     <rect>
+      <x>311</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>B</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ZButton">
+    <property name="geometry">
+     <rect>
+      <x>111</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Z</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="NButton">
+    <property name="geometry">
+     <rect>
+      <x>361</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>N</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="VButton">
+    <property name="geometry">
+     <rect>
+      <x>261</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>V</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="XButton">
+    <property name="geometry">
+     <rect>
+      <x>161</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="M1Button">
+    <property name="geometry">
+     <rect>
+      <x>461</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="M3Button">
+    <property name="geometry">
+     <rect>
+      <x>561</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="CButton">
+    <property name="geometry">
+     <rect>
+      <x>211</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>C</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="M2Button">
+    <property name="geometry">
+     <rect>
+      <x>511</x>
+      <y>650</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="All_good">
+    <property name="geometry">
+     <rect>
+      <x>1170</x>
+      <y>100</y>
+      <width>421</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../../Lab4/resource/Без_имени-1-removebg-preview.png</pixmap>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="SpaceButton">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>704</y>
+      <width>241</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>530</y>
+      <width>3</width>
+      <height>370</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="P2Button_2">
+    <property name="geometry">
+     <rect>
+      <x>660</x>
+      <y>550</y>
+      <width>80</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>19</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>⟵</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="All_Good_label">
+    <property name="geometry">
+     <rect>
+      <x>850</x>
+      <y>90</y>
+      <width>331</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>256</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>🆒</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="CapsButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>600</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CapsLock</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ShiftButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>650</y>
+      <width>90</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Shift</string>
+    </property>
+   </widget>
+   <widget class="QTextBrowser" name="textBrowser">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>110</y>
+      <width>821</width>
+      <height>401</height>
+     </rect>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>121</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Belarusian</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>German</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>French</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chinese</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>🇮🇱</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Arabic</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="TildaButton">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>0</y>
+      <width>131</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Regenerate text</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+ <buttongroups>
+  <buttongroup name="Language"/>
+ </buttongroups>
+</ui>
