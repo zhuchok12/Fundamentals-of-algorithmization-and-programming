@@ -11,9 +11,9 @@ Date::Date(int DD, int MM, int YY)
     try{
         if(m_mounth > 12 || m_mounth < 1) throw "Incorrect month!!";
 
-        if(m_day > m_dayNumPerMounces[m_mounth -1 ] || m_day < 0) throw "Incorrect date!!";
+        if(m_day > m_dayNumPerMounces[m_mounth - 1] || m_day < 0) throw "Incorrect date!!";
 
-        if(m_mounth < 0) throw "Incorrect year!!";
+        if(m_year < 0) throw "Incorrect year!!";
     }
     catch(const char* exeption){
         QMessageBox box;

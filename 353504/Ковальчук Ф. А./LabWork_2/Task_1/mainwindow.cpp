@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent)
     std::tm* now = std::localtime(&t);
 
     QString nowDate = Date::ToString(Date(now->tm_mday, now->tm_mon + 1, now->tm_year + 1900));
-    ui->label_5->setText(nowDate);
+    ui->label->setText(nowDate);
 }
 
 MainWindow::~MainWindow()
@@ -38,7 +38,7 @@ bool isValid(QCharRef a){
 void MainWindow::AddDate(QString stringDate,bool over){
     if(stringDate.size() != 10) return;
     if(stringDate[0] == '0'){
-        if(stringDate[1] > '9' || stringDate[1] < '1') return;
+        if(stringDate[1] > '9' || stringDate[1] < '0') return;
     }
     if(stringDate[2] != '.') return;
     if(stringDate[3] == '0'){
@@ -61,7 +61,17 @@ void MainWindow::AddDate(QString stringDate,bool over){
     yy.push_back(stringDate[7]);
     yy.push_back(stringDate[8]);
     yy.push_back(stringDate[9]);
+
     int YY = yy.toInt();
+
+    if(YY == 0){
+        return;
+    }
+
+    if(DD == 0 && MM == 0 && YY == 0){
+        return;
+    }
+    //if(DD == 0 && MM )
 
     m_pDates[m_datesNum] = Date(DD, MM, YY);
 
@@ -111,11 +121,22 @@ void MainWindow::UpdateTable(){
              ui->tableWidget->setItem(i, 2, new QTableWidgetItem((std::to_string(birthdayDuration).c_str())));
         }
 
-        int nextDuration = m_pDates[i].Duration(m_pDates[i].NextDay());
-        ui->tableWidget->setItem(i, 3, new QTableWidgetItem((std::to_string(nextDuration).c_str())));
+        if(i + 1 < m_datesNum){
+             int nextDuration = m_pDates[i].Duration(m_pDates[i + 1]);
+             ui->tableWidget->setItem(i, 3, new QTableWidgetItem((std::to_string(nextDuration).c_str())));
+        }
+        else{
+              ui->tableWidget->setItem(i, 3, new QTableWidgetItem(" - "));
+        }
 
-        int previosDuration = m_pDates[i].Duration(m_pDates[i].PreviousDay());
-        ui->tableWidget->setItem(i, 4, new QTableWidgetItem((std::to_string(previosDuration).c_str())));
+
+        if(i - 1 >= 0){
+             int previosDuration = m_pDates[i].Duration(m_pDates[i - 1]);
+             ui->tableWidget->setItem(i, 4, new QTableWidgetItem((std::to_string(previosDuration).c_str())));
+        }
+        else{
+             ui->tableWidget->setItem(i, 4, new QTableWidgetItem(" - "));
+        }
     }
 }
 
@@ -162,7 +183,7 @@ void MainWindow::on_pushButton_4_clicked()
     QString stringDate = ui->lineEdit_2->text();
     if(stringDate.size() != 10) return;
     if(stringDate[0] == '0'){
-        if(stringDate[1] > '9' || stringDate[1] < '1') return;
+        if(stringDate[1] > '9' || stringDate[1] < '0') return;
     }
     if(stringDate[2] != '.') return;
     if(stringDate[3] == '0'){
