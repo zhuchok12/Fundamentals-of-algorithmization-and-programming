@@ -16,7 +16,10 @@ MainWindow::MainWindow(QWidget *parent)
         get(but[i])->setStyleSheet(default_button);
         get(but[i])->setFocusPolicy(Qt::NoFocus);
     }
-    qDebug()<<toUp[0];
+    //qDebug()<<toUp[0];
+    ui->BackSpaceButton->setHidden(true);
+    ui->PercentOfText->setValue(0);
+    ui->Accurate->setValue(0);
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +49,11 @@ void MainWindow::gen_text()
         task+=g;
 
     }
+
+    while(task.back()==' ')// space in the end
+    {
+        task.back()=alphabet[language][gen()%alphabet[language].size()];
+    }
     ui->textBrowser->setText(task);
 }
 
@@ -59,6 +67,7 @@ bool MainWindow::index_of_button(int &ind,int b)
         }
     return false;
 }
+
 
 QPushButton* MainWindow::get(int index)
 {
@@ -239,6 +248,24 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
 
     get(key)->setStyleSheet(pressed_button);
     qDebug()<<"+"<<ke->key();
+}
+
+void MainWindow::PercentOfText()
+{
+
+}
+
+void MainWindow::SetTime()
+{
+    ui->Time->setText(QString::fromStdString(std::to_string(clock()-start)));
+}
+
+void MainWindow::Start()
+{
+    ui->PercentOfText->setValue(0);
+    ui->Accurate->setValue(0);
+    start=clock();
+    ui->speed->setText("");
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *ke)

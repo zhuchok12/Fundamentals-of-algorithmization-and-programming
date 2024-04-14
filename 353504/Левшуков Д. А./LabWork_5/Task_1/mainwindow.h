@@ -30,6 +30,9 @@ private slots:
     void on_pushButton_clicked();
     virtual void keyReleaseEvent(QKeyEvent *ke) override;
     virtual void keyPressEvent(QKeyEvent *ke) override;
+    void PercentOfText();
+    void SetTime();
+    void Start();
     // /pus
 private:
     Ui::MainWindow *ui;
@@ -39,10 +42,10 @@ private:
     QString task;
     int language=0;
     const int but[38]={96, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47, 16777252, 16777248, 32, 16777219};//Last 4: caps shift space backspace
-
+    time_t start;
     //Stylsheets
-    QString default_button="background-color: rgb(143, 240, 164);color: rgb(0, 0, 0);";
-    QString pressed_button="background-color: rgb(246, 97, 81);color: rgb(0, 0, 0);";
+    const QString default_button="background-color: rgb(143, 240, 164);color: rgb(0, 0, 0);";
+    const QString pressed_button="background-color: rgb(246, 97, 81);color: rgb(0, 0, 0);";
 
 };
 #endif // MAINWINDOW_H
