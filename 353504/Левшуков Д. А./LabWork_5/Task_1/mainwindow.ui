@@ -40,6 +40,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="QButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>61</x>
@@ -53,11 +56,20 @@
       <pointsize>13</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
     <property name="text">
      <string>Q</string>
     </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="WButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>111</x>
@@ -76,6 +88,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="RButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>211</x>
@@ -89,11 +104,18 @@
       <pointsize>13</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(143, 240, 164);
+color: rgb(0, 0, 0);</string>
+    </property>
     <property name="text">
      <string>R</string>
     </property>
    </widget>
    <widget class="QPushButton" name="EButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>161</x>
@@ -112,6 +134,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="YButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>311</x>
@@ -130,6 +155,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="IButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>411</x>
@@ -148,6 +176,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="UButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>361</x>
@@ -166,6 +197,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="TButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>261</x>
@@ -179,11 +213,17 @@
       <pointsize>13</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(246, 97, 81);</string>
+    </property>
     <property name="text">
      <string>T</string>
     </property>
    </widget>
    <widget class="QPushButton" name="OButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>461</x>
@@ -202,6 +242,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="PButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>511</x>
@@ -220,6 +263,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="P1Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>561</x>
@@ -238,6 +284,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="P2Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>611</x>
@@ -256,6 +305,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="SButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>141</x>
@@ -274,6 +326,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="GButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>291</x>
@@ -292,6 +347,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="JButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>391</x>
@@ -310,6 +368,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="HButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>341</x>
@@ -328,6 +389,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="FButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>241</x>
@@ -346,6 +410,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="KButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>441</x>
@@ -364,6 +431,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="LButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>491</x>
@@ -382,6 +452,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="L2Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>591</x>
@@ -400,6 +473,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="L1Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>541</x>
@@ -418,6 +494,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="DButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>191</x>
@@ -436,6 +515,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="AButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>91</x>
@@ -449,11 +531,29 @@
       <pointsize>13</pointsize>
      </font>
     </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
     <property name="text">
      <string>A</string>
     </property>
+    <property name="checkable">
+     <bool>false</bool>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>false</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="MButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>411</x>
@@ -472,6 +572,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="BButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>311</x>
@@ -490,6 +593,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="ZButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>111</x>
@@ -508,6 +614,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="NButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>361</x>
@@ -526,6 +635,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="VButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>261</x>
@@ -544,6 +656,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="XButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>161</x>
@@ -562,6 +677,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="M1Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>461</x>
@@ -580,6 +698,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="M3Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>561</x>
@@ -598,6 +719,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="CButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>211</x>
@@ -616,6 +740,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="M2Button">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>511</x>
@@ -650,6 +777,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="SpaceButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>210</x>
@@ -675,7 +805,10 @@
      <enum>Qt::Vertical</enum>
     </property>
    </widget>
-   <widget class="QPushButton" name="P2Button_2">
+   <widget class="QPushButton" name="BackSpaceButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>660</x>
@@ -713,6 +846,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="CapsButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -726,6 +862,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="ShiftButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -747,6 +886,11 @@
       <height>401</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
 &lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -754,8 +898,8 @@ p, li { white-space: pre-wrap; }
 hr { height: 1px; border-width: 0; }
 li.unchecked::marker { content: &quot;\2610&quot;; }
 li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:13pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox">
@@ -799,6 +943,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </item>
    </widget>
    <widget class="QPushButton" name="TildaButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -829,11 +976,34 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <string>Regenerate text</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>301</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>To start challenge write First letter of task</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>660</y>
+      <width>88</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Special for space</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="Language"/>
- </buttongroups>
 </ui>
