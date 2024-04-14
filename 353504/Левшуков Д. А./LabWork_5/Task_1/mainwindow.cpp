@@ -10,8 +10,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->All_Good_label->setHidden(true);
     on_comboBox_currentIndexChanged(0);
 
+    //Set base options of button
     for(int i=0;i<38;i++)
+    {
         get(but[i])->setStyleSheet(default_button);
+        get(but[i])->setFocusPolicy(Qt::NoFocus);
+    }
+    qDebug()<<toUp[0];
 }
 
 MainWindow::~MainWindow()
@@ -57,7 +62,7 @@ bool MainWindow::index_of_button(int &ind,int b)
 
 QPushButton* MainWindow::get(int index)
 {
-    qDebug()<<index<<" "<<but[36];
+    //qDebug()<<index<<" "<<but[36];
     if(index==but[0])
         return ui->TildaButton;
     if(index==but[1])

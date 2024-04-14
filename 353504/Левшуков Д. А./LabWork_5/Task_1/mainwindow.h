@@ -35,6 +35,7 @@ private:
     Ui::MainWindow *ui;
     const int size=1000;//size of text_browser
     const QString alphabet[2]={"ёйцукенгшўзхфывапролджэячсмітьбюЁЙЦУКЕНГШЎЗХФЫВАПРОЛДЖЭЯЧСМІТЬБЮ                                     ","aa"};//0-Belarusian
+    const int toUp[2]={std::string("ёйцукенгшўзхфывапролджэячсмітьбю").size()/2,0};
     QString task;
     int language=0;
     const int but[38]={96, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47, 16777252, 16777248, 32, 16777219};//Last 4: caps shift space backspace
