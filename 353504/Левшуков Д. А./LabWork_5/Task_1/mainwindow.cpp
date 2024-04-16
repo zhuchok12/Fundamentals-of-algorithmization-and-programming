@@ -154,7 +154,8 @@ QPushButton* MainWindow::get(int index)
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
-    if(index!=0)return;
+    //qDebug()<<"Language changed:"<<index;
+    if(index>1)return;
     language=index;
     gen_text();
     change_keyboard();
@@ -170,11 +171,14 @@ void MainWindow::change_keyboard()
         set_belarusian_keyboard();
         break;
     case 1:
+        set_german_keyboard();
         break;
 
     case 2:
-        break;
+    {
 
+        break;
+    }
     case 3:
         break;
 
@@ -184,6 +188,10 @@ void MainWindow::change_keyboard()
     case 5:
         break;
     }
+    if(!Hiden)
+        ShowUnusedKeys();
+    else
+        HideUnusedKeys();
 }
 
 
@@ -224,6 +232,89 @@ void MainWindow::set_belarusian_keyboard()
     ui->M2Button->setText("Ю");
     ui->M3Button->setText("");
     ui->MinusButton->setText("");
+    //qDebug()<<ui->M3Button->text();
+    update();
+}
+
+void MainWindow::set_german_keyboard()
+{
+    ui->TildaButton->setText("");
+    ui->QButton->setText("Q");
+    ui->WButton->setText("W");
+    ui->EButton->setText("E");
+    ui->RButton->setText("R");
+    ui->TButton->setText("T");
+    ui->YButton->setText("Z");
+    ui->UButton->setText("U");
+    ui->IButton->setText("I");
+    ui->OButton->setText("O");
+    ui->PButton->setText("P");
+    ui->P1Button->setText("Ü");
+    ui->P2Button->setText("");
+    ui->AButton->setText("A");
+    ui->SButton->setText("S");
+    ui->DButton->setText("D");
+    ui->FButton->setText("F");
+    ui->GButton->setText("G");
+    ui->HButton->setText("H");
+    ui->JButton->setText("J");
+    ui->KButton->setText("K");
+    ui->LButton->setText("L");
+    ui->L1Button->setText("Ö");
+    ui->L2Button->setText("Ä");
+    ui->ZButton->setText("");
+    ui->XButton->setText("Y");
+    ui->CButton->setText("X");
+    ui->VButton->setText("C");
+    ui->BButton->setText("V");
+    ui->NButton->setText("B");
+    ui->MButton->setText("N");
+    ui->M1Button->setText("M");
+    ui->M2Button->setText("");
+    ui->M3Button->setText("");
+    ui->MinusButton->setText("ß");
+    //qDebug()<<ui->M3Button->text();
+    update();
+}
+
+void MainWindow::set_french_keyboard()
+{
+
+    ui->TildaButton->setText("");
+    ui->QButton->setText("A");
+    ui->WButton->setText("Z");
+    ui->EButton->setText("E");
+    ui->RButton->setText("R");
+    ui->TButton->setText("T");
+    ui->YButton->setText("Z");
+    ui->UButton->setText("U");
+    ui->IButton->setText("I");
+    ui->OButton->setText("O");
+    ui->PButton->setText("P");
+    ui->P1Button->setText("Ü");
+    ui->P2Button->setText("");
+    ui->AButton->setText("A");
+    ui->SButton->setText("S");
+    ui->DButton->setText("D");
+    ui->FButton->setText("F");
+    ui->GButton->setText("G");
+    ui->HButton->setText("H");
+    ui->JButton->setText("J");
+    ui->KButton->setText("K");
+    ui->LButton->setText("L");
+    ui->L1Button->setText("Ö");
+    ui->L2Button->setText("Ä");
+    ui->ZButton->setText("");
+    ui->XButton->setText("Y");
+    ui->CButton->setText("X");
+    ui->VButton->setText("C");
+    ui->BButton->setText("V");
+    ui->NButton->setText("B");
+    ui->MButton->setText("N");
+    ui->M1Button->setText("M");
+    ui->M2Button->setText("");
+    ui->M3Button->setText("");
+    ui->MinusButton->setText("ß");
     //qDebug()<<ui->M3Button->text();
     update();
 }
@@ -306,22 +397,27 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
 
 void MainWindow::on_checkBox_stateChanged(int arg1)//0 - no 2- yes
 {
+    ShowUnusedKeys();
     if(arg1==0)
     {
         HideUnusedKeys();
+        Hiden=true;
     }
     else
     {
-        ShowUnusedKeys();
+
+        Hiden=false;
     }
 
-    qDebug()<<arg1;
+    //qDebug()<<arg1;
 }
 
 void MainWindow::HideUnusedKeys()
 {
+    ShowUnusedKeys();
     for(int i=0;i<36;i++)
     {
+        //qDebug()<<get(but[i])->text();
         if(get(but[i])->text()=="")
             get(but[i])->setHidden(true);
     }

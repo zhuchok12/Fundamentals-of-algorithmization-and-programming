@@ -1045,12 +1045,12 @@ li.checked::marker { content: &quot;\2612&quot;; }
     </property>
     <item>
      <property name="text">
-      <string>Belarusian</string>
+      <string>Беларуская</string>
      </property>
     </item>
     <item>
      <property name="text">
-      <string>German</string>
+      <string>Deutsch</string>
      </property>
     </item>
     <item>
@@ -1081,7 +1081,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>600</y>
+      <y>550</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -1148,7 +1148,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
-     <string>⏲</string>
+     <string>⏲👨🏿‍🦽</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
