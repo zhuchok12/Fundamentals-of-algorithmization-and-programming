@@ -6,6 +6,7 @@
 #include <random>
 #include <QKeyEvent>
 #include <QPushButton>
+//#include <QVirtualKeyboardInputContext>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -33,19 +34,28 @@ private slots:
     void PercentOfText();
     void SetTime();
     void Start();
+    void SetDefaultKeyboard();
+    void ChangeCapsState();
     // /pus
+    void on_checkBox_stateChanged(int arg1);
+    void HideUnusedKeys();
+    void ShowUnusedKeys();
 private:
     Ui::MainWindow *ui;
     const int size=1000;//size of text_browser
     const QString alphabet[2]={"ёйцукенгшўзхфывапролджэячсмітьбюЁЙЦУКЕНГШЎЗХФЫВАПРОЛДЖЭЯЧСМІТЬБЮ                                     ","aa"};//0-Belarusian
-    const int toUp[2]={std::string("ёйцукенгшўзхфывапролджэячсмітьбю").size()/2,0};
+    const int toUp[2]={32,0};
     QString task;
     int language=0;
-    const int but[38]={96, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47, 16777252, 16777248, 32, 16777219};//Last 4: caps shift space backspace
+
     time_t start;
     //Stylsheets
     const QString default_button="background-color: rgb(143, 240, 164);color: rgb(0, 0, 0);";
     const QString pressed_button="background-color: rgb(246, 97, 81);color: rgb(0, 0, 0);";
-
+    const QString CapsOn="background-color: rgb(248, 228, 92);color: rgb(0, 0, 0);";
+    //Buttons
+    const int but[39]={96, 81, 87, 69, 82, 84, 89, 85, 73, 79, 80, 91, 93, 65, 83, 68, 70, 71, 72, 74, 75, 76, 59, 39, 90, 88, 67, 86, 66, 78, 77, 44, 46, 47,45, 16777252, 16777248, 32, 16777219};
+    //Last 5:minus caps shift space backspace
+    bool CapsActive=false;
 };
 #endif // MAINWINDOW_H

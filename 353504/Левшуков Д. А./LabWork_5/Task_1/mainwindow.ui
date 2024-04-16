@@ -35,6 +35,9 @@
       <height>3</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -46,7 +49,7 @@
     <property name="geometry">
      <rect>
       <x>61</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -76,7 +79,7 @@
     <property name="geometry">
      <rect>
       <x>111</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -100,7 +103,7 @@
     <property name="geometry">
      <rect>
       <x>211</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -128,7 +131,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>161</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -152,7 +155,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>311</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -176,7 +179,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>411</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -200,7 +203,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>361</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -224,7 +227,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>261</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -251,7 +254,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>461</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -275,7 +278,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>511</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -299,7 +302,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>561</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -323,7 +326,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>611</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -347,7 +350,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>141</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -371,7 +374,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>291</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -395,7 +398,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>391</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -419,7 +422,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>341</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -443,7 +446,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>241</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -467,7 +470,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>441</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -491,7 +494,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>491</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -515,7 +518,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>591</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -539,7 +542,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>541</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -563,7 +566,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>191</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -587,7 +590,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>91</x>
-      <y>600</y>
+      <y>650</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -626,7 +629,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>411</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -650,7 +653,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>311</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -674,7 +677,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>111</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -698,7 +701,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>361</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -722,7 +725,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>261</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -746,7 +749,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>161</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -770,7 +773,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>461</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -794,7 +797,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>561</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -818,7 +821,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>211</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -842,7 +845,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>511</x>
-      <y>650</y>
+      <y>700</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -868,6 +871,9 @@ color: rgb(0, 0, 0);</string>
       <height>431</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -882,7 +888,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>704</y>
+      <y>754</y>
       <width>241</width>
       <height>31</height>
      </rect>
@@ -903,6 +909,9 @@ color: rgb(0, 0, 0);</string>
       <height>370</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
     </property>
@@ -914,7 +923,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>660</x>
-      <y>550</y>
+      <y>600</y>
       <width>80</width>
       <height>41</height>
      </rect>
@@ -946,6 +955,9 @@ color: rgb(0, 0, 0);</string>
       <pointsize>256</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>🆒</string>
     </property>
@@ -957,13 +969,16 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>600</y>
+      <y>650</y>
       <width>71</width>
       <height>41</height>
      </rect>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(248, 228, 92);</string>
     </property>
     <property name="text">
      <string>CapsLock</string>
@@ -976,7 +991,7 @@ color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>650</y>
+      <y>700</y>
       <width>90</width>
       <height>41</height>
      </rect>
@@ -1066,7 +1081,7 @@ li.checked::marker { content: &quot;\2612&quot;; }
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>550</y>
+      <y>600</y>
       <width>41</width>
       <height>41</height>
      </rect>
@@ -1108,6 +1123,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>71</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>To start challenge write First letter of task</string>
     </property>
@@ -1125,6 +1143,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
      <font>
       <pointsize>40</pointsize>
      </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
      <string>⏲</string>
@@ -1147,6 +1168,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <pointsize>8</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="value">
      <number>24</number>
     </property>
@@ -1159,6 +1183,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <width>141</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="html">
      <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
@@ -1186,6 +1213,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <pointsize>17</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Accurate</string>
     </property>
@@ -1202,6 +1232,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>21</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="value">
      <number>24</number>
     </property>
@@ -1214,6 +1247,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <width>3</width>
       <height>130</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
@@ -1228,6 +1264,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>130</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
     </property>
@@ -1240,6 +1279,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <width>560</width>
       <height>3</height>
      </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
@@ -1259,6 +1301,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <pointsize>17</pointsize>
      </font>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string>Words/minute</string>
     </property>
@@ -1275,6 +1320,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>130</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
     </property>
@@ -1288,8 +1336,51 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <height>17</height>
      </rect>
     </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
     <property name="text">
      <string/>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>870</y>
+      <width>180</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="text">
+     <string>Show not used buttons</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MinusButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>550</y>
+      <width>41</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="focusPolicy">
+     <enum>Qt::NoFocus</enum>
+    </property>
+    <property name="text">
+     <string>-</string>
     </property>
    </widget>
   </widget>

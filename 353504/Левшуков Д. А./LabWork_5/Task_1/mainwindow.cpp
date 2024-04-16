@@ -11,16 +11,14 @@ MainWindow::MainWindow(QWidget *parent)
     on_comboBox_currentIndexChanged(0);
 
     //Set base options of button
-    for(int i=0;i<38;i++)
-    {
-        get(but[i])->setStyleSheet(default_button);
-        get(but[i])->setFocusPolicy(Qt::NoFocus);
-    }
-    //qDebug()<<toUp[0];
+    SetDefaultKeyboard();
+    qDebug()<<toUp[0];
     ui->BackSpaceButton->setHidden(true);
     ui->PercentOfText->setValue(0);
     ui->Accurate->setValue(0);
+    on_checkBox_stateChanged(0);
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -57,9 +55,10 @@ void MainWindow::gen_text()
     ui->textBrowser->setText(task);
 }
 
+
 bool MainWindow::index_of_button(int &ind,int b)
 {
-    for(int i=0;i<38;i++)
+    for(int i=0;i<39;i++)
         if(but[i]==b)
         {
             ind=i;
@@ -141,12 +140,14 @@ QPushButton* MainWindow::get(int index)
     if(index==but[33])
         return ui->M3Button;
     if(index==but[34])
-        return ui->CapsButton;
+        return ui->MinusButton;
     if(index==but[35])
-        return ui->ShiftButton;
+        return ui->CapsButton;
     if(index==but[36])
-        return ui->SpaceButton;
+        return ui->ShiftButton;
     if(index==but[37])
+        return ui->SpaceButton;
+    if(index==but[38])
         return ui->BackSpaceButton;
 }
 
@@ -222,6 +223,8 @@ void MainWindow::set_belarusian_keyboard()
     ui->M1Button->setText("Б");
     ui->M2Button->setText("Ю");
     ui->M3Button->setText("");
+    ui->MinusButton->setText("");
+    //qDebug()<<ui->M3Button->text();
     update();
 }
 
@@ -235,7 +238,6 @@ void MainWindow::on_pushButton_clicked()
     ui->pushButton->setHidden(false);
     ui->pushButton->setEnabled(true);
     update();
-
 }
 
 
@@ -255,10 +257,12 @@ void MainWindow::PercentOfText()
 
 }
 
+
 void MainWindow::SetTime()
 {
     ui->Time->setText(QString::fromStdString(std::to_string(clock()-start)));
 }
+
 
 void MainWindow::Start()
 {
@@ -268,6 +272,25 @@ void MainWindow::Start()
     ui->speed->setText("");
 }
 
+void MainWindow::SetDefaultKeyboard()
+{
+    for(int i=0;i<39;i++)
+    {
+        get(but[i])->setStyleSheet(default_button);
+        get(but[i])->setFocusPolicy(Qt::NoFocus);
+    }
+    CapsActive=false;
+}
+
+void MainWindow::ChangeCapsState()
+{
+    if(CapsActive)
+        CapsActive=false;
+    else CapsActive=true,ui->CapsButton->setStyleSheet(CapsOn);
+
+}
+
+
 void MainWindow::keyReleaseEvent(QKeyEvent *ke)
 {
     int key=ke->key();
@@ -275,5 +298,40 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
     if(!index_of_button(ind,key))return;
 
     get(key)->setStyleSheet(default_button);
-    qDebug()<<"-"<<ke->key();
+    if(ke->key()==16777252)
+        ChangeCapsState();
+    else
+        qDebug()<<"-"<<ke->key()<<" "<<key;
+}
+
+void MainWindow::on_checkBox_stateChanged(int arg1)//0 - no 2- yes
+{
+    if(arg1==0)
+    {
+        HideUnusedKeys();
+    }
+    else
+    {
+        ShowUnusedKeys();
+    }
+
+    qDebug()<<arg1;
+}
+
+void MainWindow::HideUnusedKeys()
+{
+    for(int i=0;i<36;i++)
+    {
+        if(get(but[i])->text()=="")
+            get(but[i])->setHidden(true);
+    }
+}
+
+void MainWindow::ShowUnusedKeys()
+{
+    for(int i=0;i<36;i++)
+    {
+        //if(get(b[i])->text()=="")
+            get(but[i])->setHidden(false);
+    }
 }
