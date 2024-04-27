@@ -144,6 +144,158 @@ void MainWindow::clearKeyboard()
     }
 }
 
+int MainWindow::key_to_ind(int key)
+{
+    if(key==96)
+        return 1;
+
+    if(key==49)
+        return 2;
+    if(key==50)
+        return 3;
+    if(key==51)
+        return 4;
+    if(key==52)
+        return 5;
+    if(key==53)
+        return 6;
+    if(key==54)
+        return 7;
+    if(key==55)
+        return 8;
+    if(key==56)
+        return 9;
+    if(key==57)
+        return 10;
+    if(key==48)
+        return 11;
+
+    if(key==45)
+        return 12;
+    if(key==61)
+        return 13;
+
+    if(key==81)
+        return 14;
+    if(key==87)
+        return 15;
+    if(key==69)
+        return 16;
+    if(key==82)
+        return 17;
+    if(key==84)
+        return 18;
+    if(key==89)
+        return 19;
+    if(key==85)
+        return 20;
+    if(key==73)
+        return 21;
+    if(key==79)
+        return 22;
+    if(key==80)
+        return 23;
+    if(key==91||key==123)
+        return 24;
+    if(key==93||key==125)
+        return 25;
+
+    if(key==65)
+        return 26;
+    if(key==83)
+        return 27;
+    if(key==68)
+        return 28;
+    if(key==70)
+        return 29;
+    if(key==71)
+        return 30;
+    if(key==72)
+        return 31;
+    if(key==74)
+        return 32;
+    if(key==75)
+        return 33;
+    if(key==76)
+        return 34;
+    if(key==59||key==58)
+        return 35;
+    if(key==39||key==34)
+        return 36;
+
+    if(key==90)
+        return 37;
+    if(key==88)
+        return 38;
+    if(key==67)
+        return 39;
+    if(key==86)
+        return 40;
+    if(key==66)
+        return 41;
+    if(key==78)
+        return 42;
+    if(key==77)
+        return 43;
+    if(key==44||key==60)
+        return 44;
+    if(key==46||key==62)
+        return 45;
+    if(key==47||key==63)
+        return 46;
+
+    if(key==Qt::Key_CapsLock)
+        return 47;
+    if(key==Qt::Key_Shift)
+        return 48;
+    if(key==Qt::Key_Space)
+        return 49;
+
+    return 1;
+}
+
+
+
+
+
+
+void MainWindow::keyPressEvent(QKeyEvent *ke)
+{
+    qDebug()<<"+"<<ke->key();
+    getButton(key_to_ind(ke->key()))->setStyleSheet(pressed_button);
+}
+
+void MainWindow::keyReleaseEvent(QKeyEvent *ke)
+{
+    qDebug()<<"-"<<ke->key();
+    getButton(key_to_ind(ke->key()))->setStyleSheet(default_button);
+
+    if(ke->key()==Qt::Key_CapsLock)
+    {
+        if(Caps_on!=true)
+        {
+            getButton(key_to_ind(ke->key()))->setStyleSheet(CapsOn);
+            Caps_on=true;
+        }
+        else
+            Caps_on=false;
+    }
+
+    if(ke->key()==Qt::Key_Shift)
+    {
+        if(Shift_on!=true)
+        {
+            Shift_on=true;
+        }
+        else
+            Shift_on=false;
+    }
+}
+
+
+
+
+
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     //qDebug()<<index;

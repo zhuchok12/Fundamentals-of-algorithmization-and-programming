@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QKeyEvent>
+
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -17,14 +20,20 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    //Virtual keyboard methods
     void setBelarussian();
     QPushButton* getButton(int ind);
     void clearKeyboard();
+    int key_to_ind(int key);
+
 
 private slots:
-    void on_comboBox_currentIndexChanged(int index);
+    //Physic keyboard methods
+    virtual void keyReleaseEvent(QKeyEvent *ke) override;
+    virtual void keyPressEvent(QKeyEvent *ke) override;
 
-    void on_checkBox_stateChanged(int arg1);
+    void on_comboBox_currentIndexChanged(int index);//Change language
+    void on_checkBox_stateChanged(int arg1);//Hide useless button
 
 private:
     Ui::MainWindow *ui;
