@@ -29,6 +29,7 @@ public:
     QPushButton* getButton(int ind);
     void clearKeyboard();
     int key_to_ind(int key);
+    void setKeyboard(int delta);
 
     //Text
     void genText();
@@ -42,6 +43,8 @@ public:
     //Languages
     void setBelarussian();
     void setDeutsch();
+    void setHebrew();
+    void setArabic();
 
 private slots:
     //Physic keyboard methods

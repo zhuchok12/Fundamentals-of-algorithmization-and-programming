@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     setBelarussian();
 
+
     timer = new QTimer();
 }
 
@@ -23,12 +24,33 @@ void MainWindow::setBelarussian()
 {
     alphabet="Ё            ЙЦУКЕНГШЎЗХ'ФЫВАПРОЛДЖЭЯЧСМІТЬБЮ ё            йцукенгшўзх'фывапролджэячсмітьбю ";
 
+    //qDebug()<<alphabet.size();
     clearKeyboard();
 }
 
 void MainWindow::setDeutsch()
 {
     alphabet="           ß QWERTZUIOPÜ ASDFGHJKLÖÄYXCVBNM              ß qwertzuiopü asdfghjklöäyxcvbnm   ";
+
+    //qDebug()<<alphabet.size();
+    clearKeyboard();
+}
+
+void MainWindow::setHebrew()
+{
+    alphabet="               קראטוןםפ  ";
+    alphabet+="שדגכע חלךף";
+    alphabet+=" ";
+    alphabet+="זסבהנמצתץ";
+    alphabet+=" ";
+
+    clearKeyboard();
+}
+
+void MainWindow::setArabic()
+{
+    alphabet="ذ١٢٣٤٥٦٧٨٩   ضصثقفغعهخحجدشسيبلاتنمكطئءؤرﻻىةوزظ";
+    alphabet+="ذ            ضصثقفغعهخحجدشسيبلاتنمكطئءؤرﻻىةوزظ";
 
     clearKeyboard();
 }
@@ -141,13 +163,15 @@ QPushButton *MainWindow::getButton(int ind)
 
 void MainWindow::clearKeyboard()
 {
-    for(int i=1;i<=49;i++)
-    {
-        getButton(i)->setStyleSheet(default_button);
-        if(i<=46)
-        getButton(i)->setText(alphabet[i-1]);
-    }
     Caps_on=Shift_on=false;
+
+    if(ui->comboBox->currentIndex()!=1)
+        setKeyboard(delta);
+    else
+        setKeyboard(0);
+
+    for(int i=1;i<=49;i++)
+        getButton(i)->setStyleSheet(default_button);
 }
 
 int MainWindow::key_to_ind(int key)
@@ -260,30 +284,44 @@ int MainWindow::key_to_ind(int key)
     return 0;
 }
 
+void MainWindow::setKeyboard(int delta)
+{
+    for(int i=1;i<=46;i++)
+    {
+        getButton(i)->setText(alphabet[i-1+delta]);
+    }
+}
+
 void MainWindow::genText()
 {
     std::mt19937 gen(time(0));
     size=600+gen()%401;
     text=" ";
+    int k=2;
+    if(ui->comboBox->currentIndex()==1)
+        k=1;
     while(text[0]==' ')
     {
-        text[0]=alphabet[gen()%92];
+        text[0]=alphabet[gen()%(delta*k)];
     }
+    qDebug()<<text;
+
+
     for(int i=1;i<size-1;i++)
     {
-        text+=alphabet[gen()%92];
+        text+=alphabet[gen()%(k*delta)];
         if(text.back()==text[i-1]&&text.back()==' ')
         {
             while(text.back()==' ')
-                text.back()=alphabet[gen()%92];
+                text.back()=alphabet[gen()%(k*delta)];
         }
     }
     text+=" ";
     while(text.back()==' ')
     {
-        text.back()=alphabet[gen()%92];
+        text.back()=alphabet[gen()%(k*delta)];
     }
-    //qDebug()<<text;
+
 }
 
 void MainWindow::setTaskText()
@@ -303,6 +341,7 @@ void MainWindow::setTaskText()
 
 void MainWindow::change(QChar &q)
 {
+    if(ui->comboBox->currentIndex()!=1)
     for(int i=0;i<46;i++)
     {
         if(q==alphabet[i])
@@ -315,8 +354,10 @@ void MainWindow::Finish()
     disconnect(timer, SIGNAL(timeout()), this, SLOT(update_gui()));
     timer->stop();
     ui->StartButton->setText("Start");
-    if(text.size()==0)
-        ui->label->clear();
+
+    ui->label->clear();
+    ui->textBrowser->clear();
+
     clearKeyboard();
     QMessageBox::information(this,"Keyboard Trainer","You finished the test and did great work!");
 
@@ -333,7 +374,6 @@ void MainWindow::GiveResult()
         ui->Result->setPixmap(QPixmap(":main/resource/clown.jpg"));
     //ui->Result->setPixmap(QPixmap(":main/resource/chief happy.png"));
 }
-
 
 void MainWindow::check(int key)
 {
@@ -386,6 +426,9 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
         if(ke->key()==Qt::Key_Shift)
         {
             Shift_on=true;
+
+            if(ui->comboBox->currentIndex()!=1)
+                setKeyboard(0);
         }
 }
 
@@ -400,14 +443,25 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
         {
             getButton(key_to_ind(ke->key()))->setStyleSheet(CapsOn);
             Caps_on=true;
+
+            if(ui->comboBox->currentIndex()!=1)
+                setKeyboard(0);
         }
         else
+        {
             Caps_on=false;
+
+            if(ui->comboBox->currentIndex()!=1)
+                setKeyboard(delta);
+        }
     }
     else
     if(ke->key()==Qt::Key_Shift)
     {
-            Shift_on=false;
+        Shift_on=false;
+
+        if(ui->comboBox->currentIndex()!=1)
+            setKeyboard(delta);
     }
     else if(ui->StartButton->text()=="Stop test")
     {
@@ -423,13 +477,16 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     if(ui->StartButton->text()=="Stop test")
         Finish();
-    //qDebug()<<index;
-    if(index==0)//Belarussian
-    {
+
+    if(index==0)
         setBelarussian();
-    }
     if(index==1)
+        setHebrew();
+    if(index==2)
         setDeutsch();
+    if(index==3)
+        setArabic();
+
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)

@@ -31,9 +31,14 @@
      <rect>
       <x>0</x>
       <y>0</y>
-      <width>111</width>
-      <height>25</height>
+      <width>181</width>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+     </font>
     </property>
     <property name="focusPolicy">
      <enum>Qt::NoFocus</enum>
@@ -45,7 +50,17 @@
     </item>
     <item>
      <property name="text">
+      <string>Hebrew</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
       <string>Deutch</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Arabic</string>
      </property>
     </item>
    </widget>
@@ -902,13 +917,13 @@
      <rect>
       <x>0</x>
       <y>50</y>
-      <width>121</width>
-      <height>121</height>
+      <width>171</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>85</pointsize>
+      <pointsize>80</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -929,7 +944,7 @@
      <rect>
       <x>0</x>
       <y>40</y>
-      <width>130</width>
+      <width>180</width>
       <height>3</height>
      </rect>
     </property>
@@ -943,10 +958,10 @@
    <widget class="Line" name="line_6">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>180</x>
       <y>40</y>
       <width>3</width>
-      <height>140</height>
+      <height>200</height>
      </rect>
     </property>
     <property name="focusPolicy">
@@ -960,8 +975,8 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>180</y>
-      <width>130</width>
+      <y>240</y>
+      <width>180</width>
       <height>3</height>
      </rect>
     </property>
@@ -975,15 +990,15 @@
    <widget class="QTextBrowser" name="textBrowser">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>200</x>
       <y>40</y>
-      <width>1451</width>
-      <height>141</height>
+      <width>1401</width>
+      <height>201</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>85</pointsize>
+      <pointsize>80</pointsize>
      </font>
     </property>
     <property name="focusPolicy">
@@ -1009,7 +1024,7 @@
    <widget class="QPushButton" name="OpenFileButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>200</x>
       <y>0</y>
       <width>111</width>
       <height>25</height>
@@ -1026,8 +1041,8 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>200</y>
-      <width>131</width>
+      <y>250</y>
+      <width>180</width>
       <height>51</height>
      </rect>
     </property>
@@ -1222,9 +1237,9 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>200</y>
-      <width>1451</width>
+      <x>200</x>
+      <y>250</y>
+      <width>1391</width>
       <height>51</height>
      </rect>
     </property>
@@ -1253,7 +1268,7 @@
      <enum>Qt::NoFocus</enum>
     </property>
     <property name="text">
-     <string>  </string>
+     <string/>
     </property>
     <property name="flat">
      <bool>true</bool>
@@ -1318,9 +1333,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>260</y>
+      <y>310</y>
       <width>1591</width>
-      <height>361</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="text">
