@@ -45,6 +45,7 @@ public:
     void setDeutsch();
     void setHebrew();
     void setArabic();
+    void setChinese();
 
 private slots:
     //Physic keyboard methods

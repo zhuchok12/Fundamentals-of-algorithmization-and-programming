@@ -45,7 +45,7 @@
     </property>
     <item>
      <property name="text">
-      <string>Belarussian</string>
+      <string>Belarusian</string>
      </property>
     </item>
     <item>
@@ -61,6 +61,11 @@
     <item>
      <property name="text">
       <string>Arabic</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Chinese</string>
      </property>
     </item>
    </widget>

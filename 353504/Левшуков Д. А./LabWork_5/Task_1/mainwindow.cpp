@@ -43,6 +43,7 @@ void MainWindow::setHebrew()
     alphabet+=" ";
     alphabet+="זסבהנמצתץ";
     alphabet+=" ";
+    alphabet=alphabet+alphabet;
 
     clearKeyboard();
 }
@@ -51,6 +52,14 @@ void MainWindow::setArabic()
 {
     alphabet="ذ١٢٣٤٥٦٧٨٩   ضصثقفغعهخحجدشسيبلاتنمكطئءؤرﻻىةوزظ";
     alphabet+="ذ            ضصثقفغعهخحجدشسيبلاتنمكطئءؤرﻻىةوزظ";
+
+    clearKeyboard();
+}
+
+void MainWindow::setChinese()
+{
+    alphabet="             手田水口廿卜山戈人心  日尸木火土竹十大中  重内金女月弓    ";
+    alphabet=alphabet+alphabet;
 
     clearKeyboard();
 }
@@ -165,9 +174,9 @@ void MainWindow::clearKeyboard()
 {
     Caps_on=Shift_on=false;
 
-    if(ui->comboBox->currentIndex()!=1)
-        setKeyboard(delta);
-    else
+    //if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
+    //    setKeyboard(delta);
+    //else
         setKeyboard(0);
 
     for(int i=1;i<=49;i++)
@@ -298,7 +307,7 @@ void MainWindow::genText()
     size=600+gen()%401;
     text=" ";
     int k=2;
-    if(ui->comboBox->currentIndex()==1)
+    ////if(ui->comboBox->currentIndex()==1&&ui->comboBox->currentIndex()==4)
         k=1;
     while(text[0]==' ')
     {
@@ -341,7 +350,7 @@ void MainWindow::setTaskText()
 
 void MainWindow::change(QChar &q)
 {
-    if(ui->comboBox->currentIndex()!=1)
+    ////if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
     for(int i=0;i<46;i++)
     {
         if(q==alphabet[i])
@@ -416,9 +425,6 @@ void MainWindow::check(int key)
 }
 
 
-
-
-
 void MainWindow::keyPressEvent(QKeyEvent *ke)
 {
     qDebug()<<"+"<<ke->key();
@@ -427,7 +433,7 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
         {
             Shift_on=true;
 
-            if(ui->comboBox->currentIndex()!=1)
+            //if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
                 setKeyboard(0);
         }
 }
@@ -444,14 +450,14 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
             getButton(key_to_ind(ke->key()))->setStyleSheet(CapsOn);
             Caps_on=true;
 
-            if(ui->comboBox->currentIndex()!=1)
+            ////if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
                 setKeyboard(0);
         }
         else
         {
             Caps_on=false;
 
-            if(ui->comboBox->currentIndex()!=1)
+            ////if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
                 setKeyboard(delta);
         }
     }
@@ -460,7 +466,7 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
     {
         Shift_on=false;
 
-        if(ui->comboBox->currentIndex()!=1)
+        ////if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
             setKeyboard(delta);
     }
     else if(ui->StartButton->text()=="Stop test")
@@ -468,8 +474,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
         check(ke->key());
     }
 }
-
-
 
 
 
@@ -486,6 +490,8 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
         setDeutsch();
     if(index==3)
         setArabic();
+    if(index==4)
+        setChinese();
 
 }
 
@@ -503,7 +509,6 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
                 getButton(i)->show();
         }
 }
-
 
 void MainWindow::on_StartButton_clicked()
 {
