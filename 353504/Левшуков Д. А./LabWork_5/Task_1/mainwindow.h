@@ -4,7 +4,12 @@
 #include <QMainWindow>
 #include <QPushButton>
 #include <QKeyEvent>
-
+#include <ctime>
+#include <random>
+#include <QTimer>
+#include <QTime>
+#include <QThread>
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -21,11 +26,22 @@ public:
     ~MainWindow();
 
     //Virtual keyboard methods
-    void setBelarussian();
     QPushButton* getButton(int ind);
     void clearKeyboard();
     int key_to_ind(int key);
 
+    //Text
+    void genText();
+    void setTaskText();
+    void change(QChar& q);
+
+    void Finish();
+
+    void GiveResult();
+
+    //Languages
+    void setBelarussian();
+    void setDeutsch();
 
 private slots:
     //Physic keyboard methods
@@ -34,7 +50,9 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);//Change language
     void on_checkBox_stateChanged(int arg1);//Hide useless button
+    void on_StartButton_clicked();//Start button
 
+    void update_gui();
 private:
     Ui::MainWindow *ui;
 
@@ -42,12 +60,28 @@ private:
     const QString default_button="background-color: rgb(143, 240, 164);color: rgb(0, 0, 0);";
     const QString pressed_button="background-color: rgb(246, 97, 81);color: rgb(0, 0, 0);";
     const QString CapsOn="background-color: rgb(248, 228, 92);color: rgb(0, 0, 0);";
-
+    const QString Wrong="color: rgb(255, 0, 0);";
+    const QString Correct="color:rgb(0,255,0);";
+    const QString Just="color:rgb(255,255,255);";
     //Alphabet
     QString alphabet;
     const short int delta=46;//Upper+46==lower
 
+    //Button
     bool Shift_on,Caps_on;
+
+    //Text
+    QString text;
+    void check(int key);
+    int er,cor;
+    short size;
+
+    //Time
+    QTimer * timer;
+    int ms;
+
+    //Chars per second
+    int chars=0;
 
 };
 #endif // MAINWINDOW_H

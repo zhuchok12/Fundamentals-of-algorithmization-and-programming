@@ -10,6 +10,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     setBelarussian();
+
+    timer = new QTimer();
 }
 
 MainWindow::~MainWindow()
@@ -19,14 +21,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::setBelarussian()
 {
-    alphabet="Ё            ЙЦУКЕНГШЎЗХ ФЫВАПРОЛДЖЭЯЧСМІТЬБЮ ё            йцукенгшўзх фывапролджэячсмітьбю ";
-
-    Caps_on=false;
-    Shift_on=false;
+    alphabet="Ё            ЙЦУКЕНГШЎЗХ'ФЫВАПРОЛДЖЭЯЧСМІТЬБЮ ё            йцукенгшўзх'фывапролджэячсмітьбю ";
 
     clearKeyboard();
+}
 
+void MainWindow::setDeutsch()
+{
+    alphabet="           ß QWERTZUIOPÜ ASDFGHJKLÖÄYXCVBNM              ß qwertzuiopü asdfghjklöäyxcvbnm   ";
 
+    clearKeyboard();
 }
 
 QPushButton *MainWindow::getButton(int ind)
@@ -132,6 +136,7 @@ QPushButton *MainWindow::getButton(int ind)
     //Shift
     if(ind==49)
         return ui->Space;
+    return Button(0);
 }
 
 void MainWindow::clearKeyboard()
@@ -142,11 +147,12 @@ void MainWindow::clearKeyboard()
         if(i<=46)
         getButton(i)->setText(alphabet[i-1]);
     }
+    Caps_on=Shift_on=false;
 }
 
 int MainWindow::key_to_ind(int key)
 {
-    if(key==96)
+    if(key==96||key==126)
         return 1;
 
     if(key==49)
@@ -170,7 +176,7 @@ int MainWindow::key_to_ind(int key)
     if(key==48)
         return 11;
 
-    if(key==45)
+    if(key==45||key==95)
         return 12;
     if(key==61)
         return 13;
@@ -251,9 +257,123 @@ int MainWindow::key_to_ind(int key)
     if(key==Qt::Key_Space)
         return 49;
 
-    return 1;
+    return 0;
 }
 
+void MainWindow::genText()
+{
+    std::mt19937 gen(time(0));
+    size=600+gen()%401;
+    text=" ";
+    while(text[0]==' ')
+    {
+        text[0]=alphabet[gen()%92];
+    }
+    for(int i=1;i<size-1;i++)
+    {
+        text+=alphabet[gen()%92];
+        if(text.back()==text[i-1]&&text.back()==' ')
+        {
+            while(text.back()==' ')
+                text.back()=alphabet[gen()%92];
+        }
+    }
+    text+=" ";
+    while(text.back()==' ')
+    {
+        text.back()=alphabet[gen()%92];
+    }
+    //qDebug()<<text;
+}
+
+void MainWindow::setTaskText()
+{
+    qDebug()<<ui->label->text();
+    if(text.size()==0)
+    {
+        Finish();
+        return;
+    }
+    ui->label->setText(text[0]);
+    QString s="";
+    for(int i=1;i<text.size();i++)s+=text[i];
+    ui->textBrowser->setText(s);
+    update();
+}
+
+void MainWindow::change(QChar &q)
+{
+    for(int i=0;i<46;i++)
+    {
+        if(q==alphabet[i])
+            q=alphabet[i+delta],qDebug()<<i+delta;
+    }
+}
+
+void MainWindow::Finish()
+{
+    disconnect(timer, SIGNAL(timeout()), this, SLOT(update_gui()));
+    timer->stop();
+    ui->StartButton->setText("Start");
+    if(text.size()==0)
+        ui->label->clear();
+    clearKeyboard();
+    QMessageBox::information(this,"Keyboard Trainer","You finished the test and did great work!");
+
+    GiveResult();
+}
+
+void MainWindow::GiveResult()
+{
+    if(ui->accuracy->text().toDouble()>80&&ui->chars_per_second->text().toDouble()>=1)
+    {
+        ui->Result->setPixmap(QPixmap(":main/resource/chief happy.png"));
+    }
+    else
+        ui->Result->setPixmap(QPixmap(":main/resource/clown.jpg"));
+    //ui->Result->setPixmap(QPixmap(":main/resource/chief happy.png"));
+}
+
+
+void MainWindow::check(int key)
+{
+    QString q=getButton(key_to_ind(key))->text();
+    chars++;
+    QChar c;
+    if(q==' '||q=="")
+    {
+        ui->label->setStyleSheet(Wrong);
+        er++;
+        return;
+    }else
+        if(q!="Space")
+        {
+            c=q[0];
+            if((Shift_on&&!Caps_on)||(!Shift_on&&Caps_on))
+            {
+                qDebug()<<Shift_on<<" "<<Caps_on;
+            }
+            else
+                change(c);
+        }
+        else c=' ';
+    qDebug()<<c<<" "<<ui->label->text();
+    if(c==ui->label->text())
+    {
+        ui->label->setStyleSheet(Correct);
+        text.erase(text.begin(),text.begin()+1);
+        setTaskText();
+        ui->label->setStyleSheet(Just);
+        cor++;
+    }
+    else
+    {
+        ui->label->setStyleSheet(Wrong);
+        er++;
+        return;
+    }
+
+}
 
 
 
@@ -263,6 +383,10 @@ void MainWindow::keyPressEvent(QKeyEvent *ke)
 {
     qDebug()<<"+"<<ke->key();
     getButton(key_to_ind(ke->key()))->setStyleSheet(pressed_button);
+        if(ke->key()==Qt::Key_Shift)
+        {
+            Shift_on=true;
+        }
 }
 
 void MainWindow::keyReleaseEvent(QKeyEvent *ke)
@@ -280,15 +404,14 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
         else
             Caps_on=false;
     }
-
+    else
     if(ke->key()==Qt::Key_Shift)
     {
-        if(Shift_on!=true)
-        {
-            Shift_on=true;
-        }
-        else
             Shift_on=false;
+    }
+    else if(ui->StartButton->text()=="Stop test")
+    {
+        check(ke->key());
     }
 }
 
@@ -298,11 +421,15 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
 
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
+    if(ui->StartButton->text()=="Stop test")
+        Finish();
     //qDebug()<<index;
     if(index==0)//Belarussian
     {
         setBelarussian();
     }
+    if(index==1)
+        setDeutsch();
 }
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
@@ -320,3 +447,62 @@ void MainWindow::on_checkBox_stateChanged(int arg1)
         }
 }
 
+
+void MainWindow::on_StartButton_clicked()
+{
+    if(ui->StartButton->text()=="Start")
+    {
+    ui->StartButton->setText("Stop test");
+
+    er=cor=0;
+
+    ui->label->setStyleSheet(Just);
+    ui->progressBar->setValue(0);
+    ui->Result->clear();
+
+    genText();
+    setTaskText();
+
+    ms=0;
+    connect(timer, SIGNAL(timeout()), this, SLOT(update_gui()));
+    timer->start(1);
+
+
+    }
+    else
+    {
+        Finish();
+    }
+
+}
+
+void MainWindow::update_gui()
+{
+    ms++;
+    ui->ms->display(ms%1000);
+    int s=ms/1000;
+    int m=s/60;
+    if(s%60==0)
+        chars=0;
+
+    int ch=m/60;
+    ui->h->display(ch);
+    ui->m->display(m%60);
+    ui->s->display(s%60);
+
+    if(s!=0)
+    {
+        long double chps=(long double)chars/((long double)s);
+        ui->chars_per_second->setText(QString::fromStdString(std::to_string(chps)));
+    }
+
+    ui->progressBar->setValue((size-text.size())/6);
+
+    if(cor+er!=0)
+    {
+        long double ac=cor;
+        ac/=(cor+er);
+        ui->accuracy->setText(QString::fromStdString(std::to_string(ac)));
+    }
+
+}

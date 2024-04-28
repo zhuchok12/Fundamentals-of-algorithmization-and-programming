@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/main">
+        <file>resource/clown.jpg</file>
+        <file>resource/chief happy.png</file>
+    </qresource>
+</RCC>
