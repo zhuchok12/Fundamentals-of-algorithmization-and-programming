@@ -8,8 +8,10 @@
 #include <random>
 #include <QTimer>
 #include <QTime>
-#include <QThread>
+#include <QFileDialog>
 #include <QMessageBox>
+#include <QTextStream>
+#include <QFile>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,6 +50,9 @@ public:
     void setChinese();
     void setFrench();
 
+    //File check
+    void correct_file(QString &file);
+
 private slots:
     //Physic keyboard methods
     virtual void keyReleaseEvent(QKeyEvent *ke) override;
@@ -58,6 +63,8 @@ private slots:
     void on_StartButton_clicked();//Start button
 
     void update_gui();
+    void on_OpenFileButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 

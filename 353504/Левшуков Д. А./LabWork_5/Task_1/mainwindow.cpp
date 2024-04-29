@@ -24,7 +24,7 @@ void MainWindow::setBelarussian()
 {
     alphabet="Ё            ЙЦУКЕНГШЎЗХ'ФЫВАПРОЛДЖЭЯЧСМІТЬБЮ ё            йцукенгшўзх'фывапролджэячсмітьбю ";
 
-    //qDebug()<<alphabet.size();
+    qDebug()<<alphabet[24];
     clearKeyboard();
 }
 
@@ -69,6 +69,102 @@ void MainWindow::setFrench()
     alphabet="             AZERTYUIOP¨ QSDFGHJKLM WXCVBN           è çà  azertyuiop^ qsdfghjklmùwxcvbn    ";
     qDebug()<<alphabet.size();
     clearKeyboard();
+}
+
+void MainWindow::correct_file(QString &file)
+{
+    QString extension;
+    for(int i=file.size()-3;i<file.size();i++)
+        extension+=file[i];
+
+    if(extension==".by")
+        setBelarussian();
+    if(extension==".fr")
+        setFrench();
+    if(extension==".ch")
+        setChinese();
+    if(extension==".he")
+        setHebrew();
+    if(extension==".de")
+        setDeutsch();
+    if(extension==".ar")
+        setArabic();
+
+    QFile File(file);
+    if (!File.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QMessageBox::warning(this,"Bad file","Crashed file");
+        return;
+    }
+
+    QTextStream in(&File);
+
+    bool wrong=false;
+    int lines=0;
+    QString s;
+
+    while (!in.atEnd()) {
+
+        lines++;
+        if(lines==2)
+        {
+            qDebug()<<"LINES";
+            wrong==true;
+            break;
+        }
+
+        s = in.readLine();
+
+        for(auto& i:s)
+        {
+            short j=0;
+            QString b=i;
+            qDebug()<<b;
+            for(;j<delta*2;j++)
+                if(alphabet[j]==i)
+                    break;
+
+            if(j!=delta*2)
+                continue;
+            else
+            {
+                wrong=true;
+                break;
+            }
+        }
+
+
+    }
+
+    File.close();
+
+
+    if(wrong)
+    {
+        QMessageBox::warning(this,"Bad file","Incorrect file contents");
+        on_comboBox_currentIndexChanged(ui->comboBox->currentIndex());
+        return;
+    }
+
+
+    if(extension==".by")
+        ui->comboBox->setCurrentIndex(0);
+    if(extension==".fr")
+        ui->comboBox->setCurrentIndex(5);
+    if(extension==".ch")
+        ui->comboBox->setCurrentIndex(4);
+    if(extension==".he")
+        ui->comboBox->setCurrentIndex(1);
+    if(extension==".de")
+        ui->comboBox->setCurrentIndex(2);
+    if(extension==".ar")
+        ui->comboBox->setCurrentIndex(3);
+
+    text=s;
+    file="";
+
+    QMessageBox::information(this,"Succesful","File upload. Push start button to start test");
+    //ui->comboBox->
+
 }
 
 QPushButton *MainWindow::getButton(int ind)
@@ -452,6 +548,8 @@ void MainWindow::Finish()
     QMessageBox::information(this,"Keyboard Trainer","You finished the test and did great work!");
 
     GiveResult();
+
+    text="";
 }
 
 void MainWindow::GiveResult()
@@ -601,6 +699,7 @@ void MainWindow::on_StartButton_clicked()
 {
     if(ui->StartButton->text()=="Start")
     {
+
     ui->StartButton->setText("Stop test");
 
     er=cor=0;
@@ -609,6 +708,7 @@ void MainWindow::on_StartButton_clicked()
     ui->progressBar->setValue(0);
     ui->Result->clear();
 
+    if(text=="")
     genText();
     setTaskText();
 
@@ -655,3 +755,24 @@ void MainWindow::update_gui()
     }
 
 }
+
+void MainWindow::on_OpenFileButton_clicked()
+{
+    if(ui->StartButton->text()=="Stop test")
+    {
+        QMessageBox::warning(this,"Bro...","Firstly finish task");
+        return;
+    }
+
+    QString filename=QFileDialog::getOpenFileName(this,tr("Open Task"), "", tr("Task Files (*.by *.ch *.fr *.he *.de *.ar)"));
+
+    if(filename=="")
+    {
+        QMessageBox::information(this,"AHAHAHAHA","You don't open file");
+        return;
+    }
+
+    //check
+    correct_file(filename);
+}
+
