@@ -46,6 +46,7 @@ public:
     void setHebrew();
     void setArabic();
     void setChinese();
+    void setFrench();
 
 private slots:
     //Physic keyboard methods
@@ -70,6 +71,7 @@ private:
     //Alphabet
     QString alphabet;
     const short int delta=46;//Upper+46==lower
+    QChar c;
 
     //Button
     bool Shift_on,Caps_on;

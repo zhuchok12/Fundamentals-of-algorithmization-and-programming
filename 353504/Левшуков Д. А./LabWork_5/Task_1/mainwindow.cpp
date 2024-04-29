@@ -64,6 +64,13 @@ void MainWindow::setChinese()
     clearKeyboard();
 }
 
+void MainWindow::setFrench()
+{
+    alphabet="             AZERTYUIOP¨ QSDFGHJKLM WXCVBN           è çà  azertyuiop^ qsdfghjklmùwxcvbn    ";
+    qDebug()<<alphabet.size();
+    clearKeyboard();
+}
+
 QPushButton *MainWindow::getButton(int ind)
 {
     if(ind==1)
@@ -174,10 +181,7 @@ void MainWindow::clearKeyboard()
 {
     Caps_on=Shift_on=false;
 
-    //if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
-    //    setKeyboard(delta);
-    //else
-        setKeyboard(0);
+    setKeyboard(delta);
 
     for(int i=1;i<=49;i++)
         getButton(i)->setStyleSheet(default_button);
@@ -307,7 +311,7 @@ void MainWindow::genText()
     size=600+gen()%401;
     text=" ";
     int k=2;
-    ////if(ui->comboBox->currentIndex()==1&&ui->comboBox->currentIndex()==4)
+    if(ui->comboBox->currentIndex()==1&&ui->comboBox->currentIndex()==4)
         k=1;
     while(text[0]==' ')
     {
@@ -318,6 +322,84 @@ void MainWindow::genText()
 
     for(int i=1;i<size-1;i++)
     {
+        if(text.back()==QString("¨"))
+        {
+            qDebug()<<i;
+            int rnd=gen()%11;
+            switch(rnd)
+            {
+            case 0:
+                text+="a";
+                break;
+            case 1:
+                text+="e";
+                break;
+            case 2:
+                text+="u";
+                break;
+            case 3:
+                text+="i";
+                break;
+            case 4:
+                text+="o";
+                break;
+            case 5:
+                text+="y";
+                break;
+            case 6:
+                text+="A";
+                break;
+            case 7:
+                text+="E";
+                break;
+            case 8:
+                text+="U";
+                break;
+            case 9:
+                text+="I";
+                break;
+            case 10:
+                text+="O";
+                break;
+            }
+        }else
+            if(text.back()==QString('^'))
+        {
+            int rnd=gen()%10;
+            switch(rnd)
+            {
+            case 0:
+                text+="a";
+                break;
+            case 1:
+                text+="e";
+                break;
+            case 2:
+                text+="u";
+                break;
+            case 3:
+                text+="i";
+                break;
+            case 4:
+                text+="o";
+                break;
+            case 5:
+                text+="A";
+                break;
+            case 6:
+                text+="E";
+                break;
+            case 7:
+                text+="U";
+                break;
+            case 8:
+                text+="I";
+                break;
+            case 9:
+                text+="O";
+                break;
+            }
+        }else
         text+=alphabet[gen()%(k*delta)];
         if(text.back()==text[i-1]&&text.back()==' ')
         {
@@ -326,7 +408,7 @@ void MainWindow::genText()
         }
     }
     text+=" ";
-    while(text.back()==' ')
+    while(text.back()==' '||text.back()==QChar('¨')||text.back()==QChar('^'))
     {
         text.back()=alphabet[gen()%(k*delta)];
     }
@@ -350,7 +432,6 @@ void MainWindow::setTaskText()
 
 void MainWindow::change(QChar &q)
 {
-    ////if(ui->comboBox->currentIndex()!=3&&ui->comboBox->currentIndex()!=1)
     for(int i=0;i<46;i++)
     {
         if(q==alphabet[i])
@@ -380,15 +461,18 @@ void MainWindow::GiveResult()
         ui->Result->setPixmap(QPixmap(":main/resource/chief happy.png"));
     }
     else
+        if(ui->accuracy->text().toDouble()==2||ui->chars_per_second->text().toDouble()==2)
+            ui->Result->setPixmap(QPixmap(":main/resource/2.png"));
+    else
         ui->Result->setPixmap(QPixmap(":main/resource/clown.jpg"));
-    //ui->Result->setPixmap(QPixmap(":main/resource/chief happy.png"));
 }
 
 void MainWindow::check(int key)
 {
     QString q=getButton(key_to_ind(key))->text();
     chars++;
-    QChar c;
+    QChar c1=c;
+    c='|';
     if(q==' '||q=="")
     {
         ui->label->setStyleSheet(Wrong);
@@ -398,15 +482,17 @@ void MainWindow::check(int key)
         if(q!="Space")
         {
             c=q[0];
+
             if((Shift_on&&!Caps_on)||(!Shift_on&&Caps_on))
             {
                 qDebug()<<Shift_on<<" "<<Caps_on;
             }
-            else
+            else if(c!='^')
                 change(c);
         }
         else c=' ';
     qDebug()<<c<<" "<<ui->label->text();
+
     if(c==ui->label->text())
     {
         ui->label->setStyleSheet(Correct);
@@ -476,7 +562,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *ke)
 }
 
 
-
 void MainWindow::on_comboBox_currentIndexChanged(int index)
 {
     if(ui->StartButton->text()=="Stop test")
@@ -492,6 +577,8 @@ void MainWindow::on_comboBox_currentIndexChanged(int index)
         setArabic();
     if(index==4)
         setChinese();
+    if(index==5)
+        setFrench();
 
 }
 

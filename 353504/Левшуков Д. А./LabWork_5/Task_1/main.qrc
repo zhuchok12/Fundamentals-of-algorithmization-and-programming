@@ -2,5 +2,6 @@
     <qresource prefix="/main">
         <file>resource/clown.jpg</file>
         <file>resource/chief happy.png</file>
+        <file>resource/2.png</file>
     </qresource>
 </RCC>

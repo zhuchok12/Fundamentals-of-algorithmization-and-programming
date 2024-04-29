@@ -68,6 +68,11 @@
       <string>Chinese</string>
      </property>
     </item>
+    <item>
+     <property name="text">
+      <string>French</string>
+     </property>
+    </item>
    </widget>
    <widget class="QCheckBox" name="checkBox">
     <property name="geometry">
