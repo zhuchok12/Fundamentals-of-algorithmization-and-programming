@@ -3,9 +3,9 @@
 my_string::my_string()
 {
     data_=nullptr;
-    reserve(1);
     capacity_=0;
     size_=0;
+    reserve(1);
 }
 
 my_string::my_string(const my_string &other)
@@ -46,6 +46,12 @@ my_string::my_string(const char *other)
     data_[size_] = '\0';
 }
 
+my_string::~my_string()
+{
+    data_=std::make_unique<char[]>(0);
+    size_=capacity_=0;
+}
+
 char &my_string::operator[](int i)
 {
     return data_[i];
@@ -74,6 +80,7 @@ void my_string::reserve(int size)
         return;
 
     auto tmp=std::make_unique<char[]>(size);
+
     for(int i=0;i<this->size_;i++)
         tmp[i]=data_[i];
 
@@ -146,6 +153,7 @@ char &my_string::at(int i)
 
 char *my_string::data()
 {
+    //qDebug()<<data_.get();
     return data_.get();
 }
 
@@ -265,9 +273,11 @@ void *my_string::memcpy(void *s1, const void *s2, size_t n)
 
     char* cs1 = (char*)s1;
     char* cs2 = (char*)s2;
+    //qDebug()<<cs1[0]<<" "<<(int)cs1[0];
     for(int i = 0; i < n; ++i)
     {
         cs1[i] = cs2[i];
+        //qDebug()<<cs1[i]<<" "<<(int)cs1[i]<<" "<<i;
     }
 
     return s1;
@@ -294,7 +304,7 @@ char *my_string::strcpy(char *s1, const char *s2)
 {
     int i=0;
 
-    while(s2[i]!='0')
+    while(s2[i]!='\0')
     {
         s1[i]=s2[i];
         i++;
@@ -307,16 +317,18 @@ char *my_string::strcpy(char *s1, const char *s2)
 
 char *my_string::strncpy(char *s1, const char *s2, size_t n)
 {
+    int n1=n;
     int i=0;
-    while(n--&&s2[i]!=0)
+    while(n1--&&s2[i]!=0)
     {
         s1[i]=s2[i];
         i++;
     }
-    while(n--)
+    while(n1>=0)
     {
         s1[i]=0;
         i++;
+        n1--;
     }
 
     s1[i]=0;
@@ -326,30 +338,161 @@ char *my_string::strncpy(char *s1, const char *s2, size_t n)
 
 char *my_string::strcat(char *s1, const char *s2)
 {
-    int ind=s1.size();
-
-    while (s2[ind-s1.size()]!='\0')
+    size_t size1 = my_string::strlen(s1);
+    size_t i = 0;
+    while (s2[i])
     {
-        s1[ind] = s2[ind-s1.size()];
-        ind++;
+        s1[size1+i] = s2[i];
+        ++i;
+        qDebug()<<s1;
     }
-    s1[ind] = '\0';
+    s1[size1 + i] = '\0';
     return s1;
 }
 
 char *my_string::strncat(char *s1, const char *s2, size_t n)
 {
-    int ind=s1.size();
-
-    while (s2[ind-s1.size()]!='\0'&&n--)
+    int size1 = my_string::strlen(s1);
+    int i = 0, n1=n;
+    while (s2[i]&&n1--)
     {
-        s1[ind] = s2[ind-s1.size()];
+        s1[size1+i] = s2[i];
+        ++i;
+        //qDebug()<<s1;
+    }
+    s1[size1 + i] = '\0';
+    return s1;
+}
+
+int my_string::memcmp(const void *s1, const void *s2, size_t n)
+{
+    const auto *it1=(const char*)s1;
+    const auto *it2=(const char*)s2;
+
+    while(n--&&*it1==*it2)
+    {
+        it1++;
+        it2++;
+    }
+
+    if(*it1==*it2)
+        return 0;
+
+    if(*it1>*it2)
+        return 1;
+
+    return -1;
+}
+
+int my_string::strcmp(const char *s1, const char *s2)
+{
+    while(*s1==*s2&&*s1!='\0')
+    {
+        s1++;
+        s2++;
+    }
+
+    if (*s1 > *s2)
+    {
+        return 1;
+    }
+
+    if (*s1 < *s2)
+    {
+        return -1;
+    }
+
+    return 0;
+
+}
+
+int my_string::strcoll(const char *s1, const char *s2)
+{
+    while(*s1!='\0'||*s2!='\0')
+    {
+
+        if(*s1=='\0')
+            return -1;
+
+        if(*s2=='\0')
+            return 1;
+
+        if(*s1>*s2)
+            return 1;
+
+        if(*s2>*s1)
+            return -1;
+
+
+        s1++;
+        s2++;
+
+    }
+
+    return 0;
+}
+
+int my_string::strncmp(const char *s1, const char *s2, size_t n)
+{
+    while(*s1==*s2&&*s1!='\0'&&n--)
+    {
+        s1++;
+        s2++;
+    }
+
+    if (*s1 > *s2)
+    {
+        return 1;
+    }
+
+    if (*s1 < *s2)
+    {
+        return -1;
+    }
+
+    return 0;
+
+}
+
+size_t my_string::strxfrm(char *s1, const char *s2, size_t n)
+{
+    int ind=0;
+
+    while(*s2!='\0'&&n--)
+    {
+        *s1=*s2;
         ind++;
     }
-    while(n--)
-        s1[ind++]=0;
-    s1[ind] = '\0';
-    return s1;
+
+    *s1='\0';
+    return ind;
+}
+
+char *my_string::strtok(char *s1, const char *s2)
+{
+
+}
+
+void *my_string::memset(void *s, int c, size_t n)
+{
+    char * cs=(char *)s;
+    for(int i=0;i<n;i++)
+        cs[i]=i;
+    return s;
+}
+
+char *my_string::strerror(int errnum)
+{
+
+}
+
+size_t my_string::strlen(const char *s)
+{
+    int i=0;
+    while(s[i++]!='\0');
+    i--;
+    return i;
+
 }
 
 template<typename... Args>

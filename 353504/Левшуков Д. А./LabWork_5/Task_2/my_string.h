@@ -1,7 +1,8 @@
 #ifndef MY_STRING_H
 #define MY_STRING_H
 
-#include<memory>
+#include <QDebug>
+#include <memory>
 #include "iterator.h"
 #include <initializer_list>
 
@@ -74,21 +75,21 @@ public:
     void pop_back();
 
     //C functions
-    void* memcpy(void* s1, const void* s2, size_t n);//+
-    void* memmove(void* s1, const void* s2, size_t n);//+
-    char* strcpy(char* s1, const char* s2);//+
-    char* strncpy(char* s1, const char* s2, size_t n);//+
-    char* strcat(char* s1, const char* s2);//+
-    char* strncat(char* s1, const char* s2, size_t n);//+
-    int memcmp(const void* s1, const void* s2, size_t n);//
-    int strcmp(const char* s1, const char* s2);//
-    int strcoll(const char* s1, const char* s2);//
-    int strncmp(const char* s1, const char* s2, size_t n);//
-    size_t strxfrm(char* s1, const char* s2, size_t n);//
-    char* strtok(char* s1, const char* s2);//
-    void* memset(void* s, int c, size_t n);//
-    char* strerror(int errnum);//
-    size_t strlen(const char* s);//
+    static void* memcpy(void* s1, const void* s2, size_t n);//+
+    static void* memmove(void* s1, const void* s2, size_t n);//+
+    static char* strcpy(char* s1, const char* s2);//+
+    static char* strncpy(char* s1, const char* s2, size_t n);//+
+    static char* strcat(char* s1, const char* s2);//+
+    static char* strncat(char* s1, const char* s2, size_t n);//+
+    static int memcmp(const void* s1, const void* s2, size_t n);//+
+    static int strcmp(const char* s1, const char* s2);//+
+    static int strcoll(const char* s1, const char* s2);//+
+    static int strncmp(const char* s1, const char* s2, size_t n);//+
+    static size_t strxfrm(char* s1, const char* s2, size_t n);//+
+    static char* strtok(char* s1, const char* s2);//+
+    static void* memset(void* s, int c, size_t n);//+
+    static char* strerror(int errnum);//
+    static size_t strlen(const char* s);//+
 
 
 private:
