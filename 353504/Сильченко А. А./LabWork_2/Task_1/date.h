@@ -1,34 +1,59 @@
-#ifndef DATA_H
-#define DATA_H
+#ifndef DATE_H
+#define DATE_H
 
-#include<string>
-#include<QDate>
-#include<ctime>
+#include <string>
 
-class Date
-{
-public:
-    Date(short int d, short int m, long long y);
-    Date();
-    Date today();
-    std::string NextDay();
-    std::string PreviousDay();
-    int DaysTillYourBirthday(Date birthdaydate);
-    long long Duration(Date a);
-    bool Init(std::string s);
-    std::string get_date();
-    bool LeapYear();
-    short int Days(short int m);
-    short int get_day();
-    short int get_month();
-    long long get_year();
-    bool LeapYear(long long year);
-    short Days(short m, long long y);
-    void set_year(long long y);
+class Date {
 private:
-    short int day,month;
-    long long year;
-    std::string date_to_string(Date a);
+    int n = 0;
+    int day;
+    int month;
+    int year;
+
+public:
+    Date (int _day, int _month, int _year) {
+        day=_day;
+        month=_month;
+        year=_year;
+    }
+    int operator - (Date& rv) {
+        return GetNumberDaysFromBegin() - rv.GetNumberDaysFromBegin();
+    }
+    std::string to_str();
+
+    bool IsCorrectInput();
+
+    bool IsLeap();
+
+    Date NextDay ();
+
+    Date PreviousDay();
+
+    int GetNumberDaysInMonth(int i);
+
+    int GetNumberDaysFromBegin();
+
+    short WeekNumber ();
+
+    double my_ceil(double week) {
+        int int_part = (int)week;
+
+        if (week==int_part) {
+            return int_part;
+        } else {
+            return int_part+1;
+        }
+    }
+    int GetDay();
+
+    int GetMonth();
+
+    int GetYear();
+
+    int GetN();
+
+    void SetN(int _n);
+
 };
 
-#endif // DATA_H
+#endif // DATE_H

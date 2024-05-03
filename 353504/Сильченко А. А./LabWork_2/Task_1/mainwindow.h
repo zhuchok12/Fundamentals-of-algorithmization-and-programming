@@ -2,17 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "array.h"
-#include "date.h"
-#include <QThread>
-#include <QTableWidgetItem>
-#include <QShortcut>
 #include <QFileDialog>
-#include <fstream>
-#include <iostream>
-#include <string>
-#include <QMessageBox>
-#include <QItemDelegate>
+#include "date.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,45 +14,56 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-
+private:
+    Date d = Date(0,0,0);
 public:
+    int bimage=0;
+    std::vector<Date> date_list;
+    std::vector<Date> current_date_list;
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void FileRead();
-    void ShowTable();
-    void Today();
-    void FileUpdate(int ind, std::string s, Date nw);
-    void FileAdd(std::string s);
+    int LAST_INDEX = 0;
+
+    Date parse_date_from_str(std::string s) {
+        int d, m, y;
+
+        std::vector<std::string> segments;
+        int pos = 0;
+        while(pos < s.size()){
+            pos = s.find(".");
+            segments.push_back(s.substr(0,pos));
+            s.erase(0,pos+1);
+        }
+
+        d = stoi(segments[0]);
+        m = stoi(segments[1]);
+        y = stoi(segments[2]);
+
+        return Date(d, m, y);
+    }
+
 private slots:
-    void on_OpenFileButton_clicked();
+    void on_pushButton_clicked();
 
-    void on_DateOfBirthday_textChanged();
+    void on_pushButton_set_date_clicked();
 
-    void on_Table_itemChanged(QTableWidgetItem *item);
+    // void on_groupBox_clicked();
 
-    void on_Add_textChanged();
+    void on_on_buttonCreateSave_clicked_clicked();
+
+    void on_tableWidget_itemSelectionChanged();
+
+    void on_on_buttonCreateAdd_clicked_clicked();
+
+    void show_vector_in_table(std::vector<Date>);
+
+    void on_pushButton_Save_to_File_clicked();
+
+    void on_pushAlarm_clicked();
 
 private:
     Ui::MainWindow *ui;
-    array *data=new array;
-    Date birthday;
-    Date current;
-    QString file="";
-    Date t;
-    QShortcut *ctrlo;
-    bool showing;
-    std::string s,file_inside;
-    char ch;
 };
-class NonEditTableColumnDelegate : public QItemDelegate
-{
-    Q_OBJECT
-public:
-    NonEditTableColumnDelegate(QObject * parent = 0) : QItemDelegate(parent) {}
-    virtual QWidget * createEditor ( QWidget *, const QStyleOptionViewItem &,
-                                  const QModelIndex &) const
-    {
-        return 0;
-    }
-};
+
+
 #endif // MAINWINDOW_H

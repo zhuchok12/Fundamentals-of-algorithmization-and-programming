@@ -6,133 +6,340 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1015</width>
-    <height>664</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="OpenFileButton">
+   <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>30</y>
-      <width>88</width>
-      <height>25</height>
+      <x>40</x>
+      <y>290</y>
+      <width>341</width>
+      <height>32</height>
      </rect>
     </property>
     <property name="text">
-     <string>Open</string>
-    </property>
-   </widget>
-   <widget class="QTableWidget" name="Table">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>631</width>
-      <height>351</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="DateOfBirthday">
-    <property name="geometry">
-     <rect>
-      <x>790</x>
-      <y>110</y>
-      <width>104</width>
-      <height>70</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Writedate">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>40</y>
-      <width>161</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>writedate</string>
+     <string>Открыть файл</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>695</x>
-      <y>116</y>
-      <width>151</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>label</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="birth">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>360</y>
-      <width>141</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Birth</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="Today">
-    <property name="geometry">
-     <rect>
       <x>30</x>
-      <y>340</y>
-      <width>121</width>
-      <height>81</height>
+      <y>90</y>
+      <width>351</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
-     <string>today</string>
+     <string/>
     </property>
-   </widget>
-   <widget class="QTextEdit" name="Add">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>230</y>
-      <width>104</width>
-      <height>70</height>
-     </rect>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>830</x>
-      <y>320</y>
-      <width>161</width>
-      <height>91</height>
+      <x>440</x>
+      <y>10</y>
+      <width>111</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>label2</string>
+     <string>Текущая дата:</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>270</y>
+      <width>391</width>
+      <height>271</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Дата</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>След. день</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Пред. день</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Разница </string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QLineEdit" name="line_main_date">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>10</y>
+      <width>113</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_set_date">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>40</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Установить дату</string>
+    </property>
+   </widget>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>401</width>
+      <height>251</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="pushButton_Save_to_File">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>30</y>
+       <width>181</width>
+       <height>32</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Сохранить в файл</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_SaveFileMessage">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>240</y>
+       <width>391</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_2">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>189</y>
+       <width>401</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="on_buttonCreateSave_clicked">
+        <property name="text">
+         <string>Сохранить</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="on_buttonCreateAdd_clicked">
+        <property name="text">
+         <string>Добавить</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+    <widget class="QWidget" name="horizontalLayoutWidget_3">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>381</width>
+       <height>91</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QLabel" name="label_day">
+          <property name="text">
+           <string>День</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_month">
+          <property name="text">
+           <string>Месяц</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_year">
+          <property name="text">
+           <string>Год</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QLineEdit" name="line_create_day"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="line_create_month"/>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="line_create_year"/>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="horizontalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>100</y>
+      <width>301</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="label_next_day">
+         <property name="text">
+          <string>Следующий день</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_prev_day">
+         <property name="text">
+          <string>Предыдущий день</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_is_leap">
+         <property name="text">
+          <string>Високосный</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_week_num">
+         <property name="text">
+          <string>Номер недели</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QLabel" name="label_next_date">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_prev_date">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_leap_date">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_week_date">
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="pushAlarm">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>530</y>
+      <width>231</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Нажать, когда всё плохо</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>360</y>
-      <width>171</width>
-      <height>71</height>
+      <x>45</x>
+      <y>336</y>
+      <width>331</width>
+      <height>181</height>
      </rect>
     </property>
     <property name="text">
-     <string>Label3</string>
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>60</x>
+      <y>360</y>
+      <width>291</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -141,7 +348,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1015</width>
+     <width>800</width>
      <height>22</height>
     </rect>
    </property>

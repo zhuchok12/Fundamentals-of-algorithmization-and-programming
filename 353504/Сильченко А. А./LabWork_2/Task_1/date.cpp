@@ -1,265 +1,149 @@
 #include "date.h"
 
-Date::Date(short int d, short int m, long long y)
-{
-    day=d;
-    month=m;
-    year=y;
-}
-
-
-Date::Date()
-{
-    day=-1;
-    month=-1;
-    year=-8;
-}
-
-
-Date Date::today()
-{
-    //qDebug()<<QDate::currentDate().day()<<"."<<QDate::currentDate().month()<<"."<<QDate::currentDate().year();
-    short int d=ceil(time(nullptr)/86400),y=1970,m=1;
-    //qDebug()<<time(nullptr)<<" sec "<<d<<" days ";
-    Date a;
-    while(d>=365-1+LeapYear(y))
+std::string Date::to_str() {
+    if(IsCorrectInput())
     {
-        d-=365+LeapYear(y);
-        y++;
-    }
-    while(d>Days(m,y))
-    {
-        d-=Days(m,y);
-        m++;
-    }
-
-    return {d,m,y};
-
-}
-
-
-std::string Date::NextDay()
-{
-    Date Next={day,month,year};
-    Next.day++;
-    if(Next.day>Days(Next.month))
-        Next.month++,Next.day=1;
-    if(Next.month>12)
-        Next.year++,Next.month=1;
-
-    return date_to_string(Next);
-}
-
-
-
-std::string Date::PreviousDay()
-{
-    Date Prev={day,month,year};
-    Prev.day--;
-    if(Prev.day<=0)
-    {
-        Prev.month--;
-        if(Prev.month<=0)
-            Prev.month=12,Prev.year--;
-        Prev.day=Days(Prev.month);
-    }
-    return date_to_string(Prev);
-}
-
-
-int Date::DaysTillYourBirthday(Date birthdaydate)
-{
-    return Duration(birthdaydate);
-}
-
-
-long long Date::Duration(Date b)
-{
-    Date a(day,month,year);
-
-    int mn=1;
-    long long duration=0;
-    if((b.year>a.year)||(b.year==a.year&&(b.month>a.month||(b.month==a.month&&a.day<b.day))))
-    {
-        mn=-1;
-        std::swap(a,b);
-    }
-    duration-=b.day-1;
-    b.day=1;
-    //qDebug()<<"IN dur"<<a.day<<" "<<a.month<<" "<<a.year<<" & "<<b.day<<" "<<b.month<<" "<<b.year<<"duration = "<<duration;
-    while(a.month>b.month)
-    {
-        b.month++;
-        duration+=Days(b.month,b.year);
-    }
-    //qDebug()<<"IN dur"<<a.day<<" "<<a.month<<" "<<a.year<<" & "<<b.day<<" "<<b.month<<" "<<b.year<<"duration = "<<duration;
-    while(a.month<b.month)
-    {
-        b.month--;
-        duration-=Days(b.month,b.year);
-    }
-    //qDebug()<<"IN dur"<<a.day<<" "<<a.month<<" "<<a.year<<" & "<<b.day<<" "<<b.month<<" "<<b.year<<"duration = "<<duration;
-    while(a.year!=b.year)
-    {
-        b.year++;
-        duration+=365+LeapYear(b.year);
-    }
-    duration+=a.day-1;
-    //qDebug()<<"IN dur"<<a.day<<" "<<a.month<<" "<<a.year<<" & "<<b.day<<" "<<b.month<<" "<<b.year<<"duration = "<<duration;
-
-    return duration*mn;
-}
-
-
-bool Date::Init(std::string s)
-{
-    qDebug()<<"Try init:"<<s;
-    if(s.size()<6||s[2]!='.'||s[5]!='.')
-        return false;
-
-    int siz=s.size();
-    for(int i=0;i<siz;++i)
-    {
-        if(i==2||i==5)continue;
-        if(!isdigit(s[i]))
-        {
-            return false;
-        }
-    }
-    day=(s[0]-'0')*10+s[1]-'0';
-    month=(s[3]-'0')*10+s[4]-'0';
-    /*
-    if(s.back()=='C')
-        year=stoll(s.substr(6,s.size()-8))*(-1);
+    if(day<10&&month<10)
+        return '0'+std::to_string(day) + "." +'0'+ std::to_string(month) + "." + std::to_string(year);
+    else if(day<10)
+        return '0'+std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
+    else if(month<10)
+        return std::to_string(day) + "." + '0'+std::to_string(month) + "." + std::to_string(year);
     else
-*/
+    return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
+    }
+    else
+        return "-";
 
-    if(s.size()-7>3)return false;
-    year=stoull(s.substr(6));
-
-    //qDebug()<<year;
-    if(day==0||month==0||month>12||day>Days(month))
-        return false;//day=month=year=-8888;
+}
+bool Date::IsCorrectInput() {
+    if ((month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) && (day<1 || day>31)) {
+        return false;
+    } else if ((month==4 || month==6 || month==9 || month==11) && (day<1 || day>30)) {
+        return false;
+    } else if (month==2 && year==IsLeap() && (day<1 || day>29)) {
+        return false;
+    } else if (month==2 && year!=IsLeap() && (day<1 || day>28)) {
+        return false;
+    } else if (month<1 || month>12) {
+        return false;
+    } else if (year<0) {
+        return false;
+    }
     return true;
 }
-
-
-std::string Date::get_date()
-{
-    std::string g="00.00.";
-    long long x=day;
-    short int i=1;
-
-    while(x!=0)
-    {
-        g[i]=(char)(x%10)+'0';
-        x/=10;
-        i--;
+bool Date::IsLeap() {
+    if ((year%100==0 && year%400==0) || (year%4==0 && year%100!=0)) {
+        return true;
+    } else {
+        return false;
     }
-    //qDebug()<<g;
-
-    x=month;
-    i=4;
-    while(x!=0)
-    {
-        g[i]=(char)(x%10)+'0';
-        x/=10;
-        i--;
+}
+Date Date::NextDay () {
+    int next_day=day+1;
+    int next_month=month;
+    int next_year=year;
+    if (month==2 && day==28) {
+        if (IsLeap()) {
+            next_day=29;
+            next_month=month;
+            next_year=year;
+        } else {
+            next_day=1;
+            next_month=month+1;
+            next_year=year;
+        }
     }
-    /*
-    if(year<0)
-        year*=(-1),g+=std::to_string(year),g+="BC";
-    else
-*/
-    //qDebug()<<g;
-    g+=std::to_string(year);
-    //qDebug()<<year;
-    //qDebug()<<g;
-    return g;
+    else if (month==2 && day==29) {
+        next_day=1;
+        next_month=month+1;
+        next_year=year;
+    }
+    else if (((month==1 || month==3 || month==5 || month==7 || month==8 || month==10) && day==31) || ((month==4 || month==6 || month==9 || month==11) && day==30)) {
+        next_day=1;
+        next_month=month+1;
+        next_year=year;
+    } else if (month==12 && day==31) {
+        next_day=1;
+        next_month=1;
+        next_year=year+1;
+    }
+    return Date(next_day, next_month, next_year);
+}
+Date Date::PreviousDay() {
+    int previous_day=day-1;
+    int previous_month=month;
+    int previous_year=year;
+    if (month==3 && day==1) {
+        if (IsLeap()) {
+            previous_day=29;
+            previous_month=month-1;
+            previous_year=year;
+        } else {
+            previous_day=28;
+            previous_month=month-1;
+            previous_year=year;
+        }
+    }
+    else if ((month==2 || month==4 || month==6 || month==9 || month==11) && day==1) {
+        previous_day=31;
+        previous_month=month-1;
+        previous_year=year;
+    } else if ((month==5 || month==7 || month==8 || month==10 || month==12) && day==1) {
+        previous_day=30;
+        previous_month=month-1;
+        previous_year=year;
+    } else if (month==1 && day==1) {
+        previous_day=31;
+        previous_month=12;
+        previous_year=year-1;
+    }
+    return Date(previous_day, previous_month, previous_year);
 }
 
-
-std::string Date::date_to_string(Date a)
-{
-    std::string g="00.00.";
-    long long x=a.day;
-    short int i=1;
-
-    while(x!=0)
-    {
-        g[i]=(char)(x%10)+'0';
-        x/=10;
-        i--;
-    }
-
-    x=a.month;
-    i=4;
-    while(x!=0)
-    {
-        g[i]=(char)(x%10)+'0';
-        x/=10;
-        i--;
-    }
-    g+=std::to_string(a.year);
-    return g;
-}
-
-
-bool Date::LeapYear()
-{
-    return ((year%4==0&&year%100!=0)||year%400==0);
-}
-
-
-bool Date::LeapYear(long long year)
-{
-    return ((year%4==0&&year%100!=0)||year%400==0);
-}
-
-
-short int Date::Days(short int m)
-{
-    if(m==1||m==3||m==5||m==7||m==8||m==10||m==12)
+int Date::GetNumberDaysInMonth(int i) {
+    if (i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12) {
         return 31;
-    if(m==2)
-        return 28+LeapYear();
-    return 30;
-    //{31,28,31,30,31,30,31,31,30,31,30,31};
-    //  1  2  3  4  5  6  7  8  9 10 11 12
+    } else if (i==4 || i==6 || i==9 || i==11) {
+        return 30;
+    } else if (i==2) {
+        if(IsLeap()) {
+            return 29;
+        } else {
+            return 28;
+        }
+    }
 }
 
-
-short int Date::Days(short int m,long long y)
-{
-    if(m==1||m==3||m==5||m==7||m==8||m==10||m==12)
-        return 31;
-    if(m==2)
-        return 28+LeapYear(y);
-    return 30;
-    //{31,28,31,30,31,30,31,31,30,31,30,31};
-    //  1  2  3  4  5  6  7  8  9 10 11 12
+int Date::GetNumberDaysFromBegin() {
+    int years_day = 365 * (year - 1) + (year - 1) / 4 - (year - 1) / 100 + (year - 1) / 400;
+    int month_day=0;
+    for (int i=1;i<month;i++) {
+        month_day+=GetNumberDaysInMonth(i);
+    }
+    return years_day+month_day+day;
 }
 
+short Date::WeekNumber () {
+    int sum_day=0;
+    for (int i=1;i<month;i++) {
+        sum_day += GetNumberDaysInMonth(i);
+    }
+    return my_ceil((sum_day/7));
+}
 
-short Date::get_day()
-{
+int Date::GetDay() {
     return day;
 }
-
-
-short Date::get_month()
-{
+int Date::GetMonth() {
     return month;
 }
-
-
-long long Date::get_year()
-{
+int Date::GetYear() {
     return year;
 }
-
-
-void Date::set_year(long long y)
-{
-    year=y;
+int Date::GetN() {
+    return n;
+}
+void Date::SetN(int _n) {
+    n = _n;
 }
