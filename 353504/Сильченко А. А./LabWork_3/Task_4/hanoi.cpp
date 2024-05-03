@@ -4,7 +4,6 @@ QRectF hanoi::boundingRect() const{
     return QRectF();
 }
 
-
 void hanoi::otr_col(int n){
     if (n <= 10){
          hanoi::n = n;
