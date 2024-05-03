@@ -2,12 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "func.h"
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 class MainWindow : public QMainWindow
@@ -17,10 +14,16 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
 private slots:
-    void on_pushButton_clicked();
+    void openDirectoryDialog();
 
 private:
     Ui::MainWindow *ui;
+
+    unsigned long long countFoldersRecursively(const QString& directoryPath);
+    unsigned long long countFilesRecursively(const QString& directoryPath);
 };
+
 #endif // MAINWINDOW_H
+
