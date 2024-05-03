@@ -42,7 +42,7 @@ rule CUSTOM_COMMAND
 # Rule for re-running cmake.
 
 rule RERUN_CMAKE
-  command = /home/tanya/Qt/Tools/CMake/bin/cmake --regenerate-during-build -S"/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/Task_2" -B"/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug"
+  command = /home/tanya/Qt/Tools/CMake/bin/cmake --regenerate-during-build -S/home/tanya/Task_2 -B"/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug"
   description = Re-running CMake...
   generator = 1
 

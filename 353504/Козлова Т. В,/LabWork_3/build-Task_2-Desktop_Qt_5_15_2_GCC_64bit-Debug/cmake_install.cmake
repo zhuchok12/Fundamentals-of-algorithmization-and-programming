@@ -1,4 +1,4 @@
-# Install script for directory: /home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/Task_2
+# Install script for directory: /home/tanya/Task_2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

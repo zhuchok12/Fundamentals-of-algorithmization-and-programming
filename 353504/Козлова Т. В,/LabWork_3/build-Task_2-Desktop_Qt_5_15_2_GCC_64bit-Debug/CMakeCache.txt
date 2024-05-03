@@ -21,7 +21,7 @@ Ackermann_BINARY_DIR:STATIC=/home/tanya/Fundamentals-of-algorithmization-and-pro
 Ackermann_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
-Ackermann_SOURCE_DIR:STATIC=/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/Task_2
+Ackermann_SOURCE_DIR:STATIC=/home/tanya/Task_2
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/x86_64-linux-gnu-addr2line
@@ -365,7 +365,7 @@ CMAKE_GENERATOR_PLATFORM:INTERNAL=
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this
 // project
-CMAKE_HOME_DIRECTORY:INTERNAL=/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/Task_2
+CMAKE_HOME_DIRECTORY:INTERNAL=/home/tanya/Task_2
 //ADVANCED property for variable: CMAKE_INSTALL_BINDIR
 CMAKE_INSTALL_BINDIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_INSTALL_DATADIR
