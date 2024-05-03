@@ -28,4 +28,5 @@ QString Converter::decimalPartToBinary(double decimalPart)
         binaryDecimalPart.append(QString::number(bit));
     }
     return binaryDecimalPart;
+    
 }
