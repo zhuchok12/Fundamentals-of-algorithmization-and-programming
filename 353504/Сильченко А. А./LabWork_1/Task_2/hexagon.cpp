@@ -1,35 +1,35 @@
 #include "hexagon.h"
 
+Hexagon::Hexagon(Figure *parent) : Figure(parent){
+    centerX = 0;
+    centerY = 0;
+    mouseX = 0;
+    mouseY = 0;
+}
 
-void Hexagon::setP(QMouseEvent *m)
-{
-    MouseNow=m->pos();
-    points.clear();
-    double xp,yp,xn,yn,deltax,deltay; //p - press, n - now, h^2
-    xp=MousePress.x();
-    yp=MousePress.y();
-    xn=MouseNow.x();
-    yn=MouseNow.y();
-    //Range between xp and xn is down of trapecy(TRAPECII)
-    deltax=xn-xp;
-    deltay=yn-yp;
-    //qDebug()<<"Deltas: "<<deltax<<" "<<deltay;
-    //qDebug()<<MousePress.x()<<" "<<MousePress.y()<<" "<<MouseNow.x()<<" "<<MouseNow.y();
-    //points.push_back({xp,yp});
-    //points.push_back({xp,yp-deltay});
-    //h2=
-    //double h=qSqrt()
-    double xc=(xp+xn)/2,yc=(yp+yn)/2;
-    //points.push_back({xc-deltax/2*qSin(M_PI/3*2)+2,xc-deltay/2*qCos(M_PI/3*2)+2});
-    //points.push_back({xn,yn});
-    //points.push_back({xn,yn+deltay});
-    //points.push_back({xc-deltax/2*qSin(M_PI/3*5)+5,xc-deltay/2*qCos(M_PI/3*5)+5});
-
-    for(int i=0;i<6;i++)
-    {
-        points.push_back({xc-deltax*qSin(M_PI/3*i)+i,yc-deltay*qCos(M_PI/3*i)+i});//120*i
-        //qDebug()<<points.back();
+void Hexagon::draw(QPainter *painter){
+    QPolygon polygon;
+    int sideLength = qMax(mouseX, mouseY);
+    for (int i = 0; i < 6; ++i) {
+        double angle = 60 * i - 30;  // Угол в градусах
+        double radian = qDegreesToRadians(angle);  // Угол в радианах
+        int dx = sideLength * cos(radian);
+        int dy = sideLength * sin(radian);
+        polygon << QPoint(centerX + dx, centerY + dy);
     }
-    //points.push_back({xc,yc});
+    painter->drawPolygon(polygon);
+}
 
+void Hexagon::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) {
+    draw(painter);
+}
+
+void Hexagon::findSquare(){
+    int sideLength = qMax(mouseX, mouseY);
+    S = 3 * qSqrt(3) / 2 * sideLength * sideLength;
+}
+
+void Hexagon::findPerimetr(){
+    int sideLength = qMax(mouseX, mouseY);
+    P = 6 * qAbs(sideLength);
 }
