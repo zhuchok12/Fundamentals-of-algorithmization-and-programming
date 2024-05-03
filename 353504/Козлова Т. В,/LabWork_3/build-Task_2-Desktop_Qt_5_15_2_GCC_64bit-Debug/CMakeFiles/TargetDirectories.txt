@@ -1,0 +1,9 @@
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/Ackermann.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/install.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/install/local.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/install/strip.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/Ackermann_autogen_timestamp_deps.dir
+/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_2-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/Ackermann_autogen.dir

@@ -1,0 +1,11 @@
+# ninja log v5
+0	54	1714693058150027966	build.ninja	23fac5fcda1b5927
+0	146	1714693058298021523	Reverse_autogen/timestamp	a00ab05ed4bf6af5
+0	146	1714693058298021523	Reverse_autogen/mocs_compilation.cpp	a00ab05ed4bf6af5
+0	146	1714693058298021523	/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_3-Desktop_Qt_5_15_2_GCC_64bit-Debug/Reverse_autogen/timestamp	a00ab05ed4bf6af5
+0	146	1714693058298021523	/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/Козлова Т. В,/LabWork_3/build-Task_3-Desktop_Qt_5_15_2_GCC_64bit-Debug/Reverse_autogen/mocs_compilation.cpp	a00ab05ed4bf6af5
+146	164	1714693058318020653	CMakeFiles/Reverse.dir/reverse.cpp.o	32fd158fe7c3e0e3
+147	1029	1714693059181983011	CMakeFiles/Reverse.dir/Reverse_autogen/mocs_compilation.cpp.o	8530043274c732c8
+147	1103	1714693059257979689	CMakeFiles/Reverse.dir/main.cpp.o	eb977ea9ba5989ac
+148	1210	1714693059365974969	CMakeFiles/Reverse.dir/mainwindow.cpp.o	e77c496aaf2816d8
+1211	1539	1714693059689960807	Reverse	2e2b86821093a7cc

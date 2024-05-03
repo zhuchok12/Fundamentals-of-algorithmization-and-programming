@@ -1,0 +1,71 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"id" : "Reverse_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "Reverse_autogen::@6890427a1f51a3e7e1df",
+	"isGeneratorProvided" : true,
+	"name" : "Reverse_autogen",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1,
+				2
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/\u041a\u043e\u0437\u043b\u043e\u0432\u0430 \u0422. \u0412,/LabWork_3/build-Task_3-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/Reverse_autogen",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/\u041a\u043e\u0437\u043b\u043e\u0432\u0430 \u0422. \u0412,/LabWork_3/build-Task_3-Desktop_Qt_5_15_2_GCC_64bit-Debug/CMakeFiles/Reverse_autogen.rule",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "/home/tanya/Fundamentals-of-algorithmization-and-programming/353504/\u041a\u043e\u0437\u043b\u043e\u0432\u0430 \u0422. \u0412,/LabWork_3/build-Task_3-Desktop_Qt_5_15_2_GCC_64bit-Debug/Reverse_autogen/timestamp.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}
