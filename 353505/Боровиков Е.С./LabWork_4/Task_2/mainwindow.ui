@@ -17,9 +17,9 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>70</x>
+      <x>20</x>
       <y>140</y>
-      <width>502</width>
+      <width>842</width>
       <height>80</height>
      </rect>
     </property>
@@ -27,28 +27,28 @@
      <item>
       <widget class="QPushButton" name="setBtn">
        <property name="text">
-        <string>Set array</string>
+        <string>Вывести массив</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="mergeBtn">
        <property name="text">
-        <string>Merge</string>
+        <string>Merge(сортировка слиянием)</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="heapBtn">
        <property name="text">
-        <string>Heap</string>
+        <string>Heap(сортировка кучей)</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="quickBtn">
        <property name="text">
-        <string>Quick</string>
+        <string>Quick(быстра сортировка)</string>
        </property>
       </widget>
      </item>
