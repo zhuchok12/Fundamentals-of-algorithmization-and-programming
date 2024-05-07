@@ -145,7 +145,8 @@ QGraphicsRectItem* VirtualKeyboard::atIndex(int index)
         return nullptr;
     }
 
-    if (index >= TOP_ROW_KEYS * 2 + MID_ROW_KEYS + BOT_ROW_KEYS) {
+    if (index >= TOP_ROW_KEYS * 2 + MID_ROW_KEYS + BOT_ROW_KEYS)
+    {
         index -= TOP_ROW_KEYS * 2 + MID_ROW_KEYS + BOT_ROW_KEYS;
         switch (index) {
             case 0:
@@ -155,11 +156,15 @@ QGraphicsRectItem* VirtualKeyboard::atIndex(int index)
         }
         return nullptr;
     }
-    else if (index >= TOP_ROW_KEYS * 2 + MID_ROW_KEYS) {
+    else if (index >= TOP_ROW_KEYS * 2 + MID_ROW_KEYS)
+    {
         return _botRowBtn.at(index - TOP_ROW_KEYS * 2 - MID_ROW_KEYS);
-    } else if (index >= TOP_ROW_KEYS * 2) {
+    }
+    else if (index >= TOP_ROW_KEYS * 2)
+    {
         return _midRowBtn.at(index - TOP_ROW_KEYS * 2);
-    } else if (index >= TOP_ROW_KEYS) {
+    } else if (index >= TOP_ROW_KEYS)
+    {
         return _topRowBtn.at(index - TOP_ROW_KEYS);
     }
     return _highestRowBtn.at(index);
