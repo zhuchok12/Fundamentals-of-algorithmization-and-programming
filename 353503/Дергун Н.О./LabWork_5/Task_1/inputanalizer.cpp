@@ -94,7 +94,6 @@ bool InputAnalizer::eventFilter(QObject *target, QEvent *event)
     return QObject::eventFilter(target, event);
 }
 
-
 int InputAnalizer::provideIndex(QString keyText)
 {
     if (keyText == QString(" ")) {
@@ -109,8 +108,10 @@ int InputAnalizer::provideIndex(QString keyText)
             return i;
         }
     }
-    for (int j = 0; j < 6; ++j) {
-        for (int i = 0; i < ROW_LENGTH; ++i) {
+    for (int j = 0; j < 6; ++j)
+    {
+        for (int i = 0; i < ROW_LENGTH; ++i)
+        {
             if (keyText == QString(_keyboardLayout.at(j).at(i)) || keyText == QString(_keyboardLayout.at(j).at(i)).toUpper()) {
                 return i;
             }
@@ -121,7 +122,8 @@ int InputAnalizer::provideIndex(QString keyText)
 
 void InputAnalizer::setColor(QString keyText)
 {
-    if (!keyText.isEmpty()) {
+    if (!keyText.isEmpty())
+    {
         keyText = (keyText.at(0) == '\r' ? QString("\n") : keyText);
     }
     int index = provideIndex(keyText);
@@ -146,7 +148,8 @@ void InputAnalizer::setColor(QString keyText)
     emit textChanged(_lastChar);
 
     if (_checkText.isEmpty()) {
-        if (keyText.at(0) != ' ') {
+        if (keyText.at(0) != ' ')
+        {
             ++_wordsCntr;
         }
         finishCheck();

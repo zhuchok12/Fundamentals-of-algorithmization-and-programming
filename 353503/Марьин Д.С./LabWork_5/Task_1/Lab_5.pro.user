@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 12.0.1, 2024-05-05T01:57:00. -->
+<!-- Written by QtCreator 12.0.1, 2024-05-07T11:51:25. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -97,8 +97,8 @@
    <value type="qlonglong" key="ProjectExplorer.Target.ActiveRunConfiguration">0</value>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.0">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Debug</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Debug</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Debug</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -136,8 +136,8 @@
     <value type="int" key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration">2</value>
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.1">
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Release</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Release</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Release</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -177,8 +177,8 @@
    </valuemap>
    <valuemap type="QVariantMap" key="ProjectExplorer.Target.BuildConfiguration.2">
     <value type="int" key="EnableQmlDebugging">0</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Profile</value>
-    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Profile</value>
+    <value type="QString" key="ProjectExplorer.BuildConfiguration.BuildDirectory.shadowDir">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Profile</value>
     <valuemap type="QVariantMap" key="ProjectExplorer.BuildConfiguration.BuildStepList.0">
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.0">
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
@@ -242,13 +242,13 @@
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
     <value type="bool" key="PE.EnvironmentAspect.PrintOnRun">false</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/Task_2/testString.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/Task_2/testString.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/Users/daniil_mariyn/Qt/Projects/Lab_5/Lab_5.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/Users/daniil_mariyn/Qt/Projects/Lab_5/Lab_5.pro</value>
     <value type="bool" key="ProjectExplorer.RunConfiguration.Customized">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
-    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/daniil_mariyn/Downloads/Labs/Fundamentals-of-algorithmization-and-programming/353503/Дергун Н.О./LabWork_5/build-testString-Qt_6_6_1_for_macOS-Debug</value>
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">/Users/daniil_mariyn/Qt/Projects/build-Lab_5-Qt_6_6_1_for_macOS-Debug/Lab_5.app/Contents/MacOS</value>
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>
